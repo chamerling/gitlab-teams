@@ -14,6 +14,9 @@ export default new Vuex.Store({
     apiEndpoint: process.env.VUE_APP_GITLAB || localStorage.getItem('apiEndpoint') || 'https://gitlab.com',
     apiToken: process.env.VUE_APP_API_TOKEN || localStorage.getItem('apiToken'),
     mergeRequests: [],
+    teams: [
+      { name: 'Jackass' }
+    ],
     team: {
       name: 'Jackass',
       usernames: ['laublet', 'chamerling', 'chenry'],
@@ -21,6 +24,9 @@ export default new Vuex.Store({
     }
   },
   getters: {
+    getTeams(state) {
+      return state.teams;
+    },
     getMergeRequest(state, iid) {
       return _.find(state.mergeRequests, { iid });
     },
