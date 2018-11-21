@@ -1,18 +1,28 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <merge-requests :merge-requests="mergeRequests" v-if="mergeRequests.length"/>
+    <div v-else class="text-xs-center">
+      <v-progress-circular
+        :size="50"
+        color="primary"
+        indeterminate
+      ></v-progress-circular>
+    </div>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import MergeRequests from '@/components/MergeRequests.vue'
 
 export default {
-  name: "home",
+  name: 'home',
   components: {
-    HelloWorld
+    MergeRequests
+  },
+  computed: {
+    mergeRequests() {
+      return this.$store.state.mergeRequests;
+    }
   }
-};
+}
 </script>
