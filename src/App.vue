@@ -12,7 +12,7 @@
         <v-list>
           <v-list-tile v-for="team in teams" :key="team.name" avatar @click="">
             <v-list-tile-avatar>
-              <v-avatar color="orange" size="36">
+              <v-avatar color="orange darken-1" size="36">
                 <span class="white--text headline">J</span>
               </v-avatar>
             </v-list-tile-avatar>
@@ -33,7 +33,7 @@
         </v-list-tile>
       </v-list>
       </v-navigation-drawer>
-      <v-toolbar dark flat fixed app clipped-left>
+      <v-toolbar dark flat fixed app clipped-left dense color="orange darken-4">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <v-toolbar-title>Gitlab Teams</v-toolbar-title>
         <v-spacer></v-spacer>
