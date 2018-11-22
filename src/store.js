@@ -1,19 +1,22 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import _ from 'lodash';
-import gitlab from './gitlab';
-import createLogger from 'vuex/dist/logger';
+import Vue from "vue";
+import Vuex from "vuex";
+import _ from "lodash";
+import gitlab from "./gitlab";
+import createLogger from "vuex/dist/logger";
 import teams from "@/teams.json";
 
-const plugins = process.env.NODE_ENV !== 'production' ? [createLogger()] : [];
+const plugins = process.env.NODE_ENV !== "production" ? [createLogger()] : [];
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   plugins,
   state: {
-    apiEndpoint: process.env.VUE_APP_GITLAB || localStorage.getItem('apiEndpoint') || 'https://gitlab.com',
-    apiToken: process.env.VUE_APP_API_TOKEN || localStorage.getItem('apiToken'),
+    apiEndpoint:
+      process.env.VUE_APP_GITLAB ||
+      localStorage.getItem("apiEndpoint") ||
+      "https://gitlab.com",
+    apiToken: process.env.VUE_APP_API_TOKEN || localStorage.getItem("apiToken"),
     mergeRequests: [],
     teams,
     team: {}
@@ -31,11 +34,14 @@ export default new Vuex.Store({
   },
   mutations: {
     addMergeRequest(state, mergeRequest) {
-      state.mergeRequests.push(mergeRequest)
+      state.mergeRequests.push(mergeRequest);
     },
 
     removeMergeRequest(state, mergeRequest) {
-      state.mergeRequests.splice(_.findIndex(state.mergeRequests, mr => mr.iid === mergeRequest.iid), 1);
+      state.mergeRequests.splice(
+        _.findIndex(state.mergeRequests, mr => mr.iid === mergeRequest.iid),
+        1
+      );
     },
 
     cleanMergeRequests(state) {
@@ -57,19 +63,19 @@ export default new Vuex.Store({
       state.team = team;
     },
 
-    updatePipeline(state, {mergeRequest, pipeline}) {
+    updatePipeline(state, { mergeRequest, pipeline }) {
       const mr = _.find(state.mergeRequests, { iid: mergeRequest.iid });
 
       if (mr) {
-        Vue.set(mr, 'pipeline', pipeline);
+        Vue.set(mr, "pipeline", pipeline);
       }
     },
 
     updateSettings(state, settings) {
       state.apiEndpoint = settings.apiEndpoint;
       state.apiToken = settings.apiToken;
-      localStorage.setItem('apiEndpoint', state.apiEndpoint);
-      localStorage.setItem('apiToken', state.apiToken);
+      localStorage.setItem("apiEndpoint", state.apiEndpoint);
+      localStorage.setItem("apiToken", state.apiToken);
       gitlab.get().unwatchMergeRequests();
       gitlab.init(this);
     },
@@ -80,52 +86,57 @@ export default new Vuex.Store({
   },
   actions: {
     fetchUsers({ state, commit }) {
-      return gitlab.get().client.fetchUsers(state.team.usernames).then(users => {
-        commit('setUsers', users);
-      });
+      return gitlab
+        .get()
+        .client.fetchUsers(state.team.usernames)
+        .then(users => {
+          commit("setUsers", users);
+        });
     },
 
     cleanMergeRequests({ commit }) {
-      commit('cleanMergeRequests');
+      commit("cleanMergeRequests");
     },
 
     addMergeRequest({ commit }, mr) {
-      commit('addMergeRequest', mr);
+      commit("addMergeRequest", mr);
     },
 
     removeMergeRequest({ commit }, mr) {
-      commit('removeMergeRequest', mr)
+      commit("removeMergeRequest", mr);
     },
 
     updateMergeRequest({ commit }, mr) {
-      commit('updateMergeRequest', mr);
+      commit("updateMergeRequest", mr);
     },
 
     updatePipeline({ commit }, mr, pipeline) {
-      commit('updatePipeline', mr, pipeline);
+      commit("updatePipeline", mr, pipeline);
     },
 
     updateSettings({ commit, dispatch }, settings) {
-      commit('updateSettings', settings);
-      dispatch('launchWatchers');
+      commit("updateSettings", settings);
+      dispatch("launchWatchers");
     },
 
     loadUser({ dispatch }) {
-      dispatch('cleanMergeRequests');
+      dispatch("cleanMergeRequests");
       gitlab.get().watchMergeRequests({});
     },
 
     loadTeam({ commit, dispatch }, teamName) {
-      dispatch('cleanMergeRequests');
-      commit('setCurrentTeam', teamName);
-      dispatch('launchWatchers');
+      dispatch("cleanMergeRequests");
+      commit("setCurrentTeam", teamName);
+      dispatch("launchWatchers");
     },
 
     launchWatchers({ dispatch, state }) {
       gitlab.get().unwatchMergeRequests();
 
-      dispatch('fetchUsers').then(() => {
-        gitlab.get().watchMergeRequestsForUsers({ userIds: state.team.users.map(user => user.id) });
+      dispatch("fetchUsers").then(() => {
+        gitlab.get().watchMergeRequestsForUsers({
+          userIds: state.team.users.map(user => user.id)
+        });
       });
     }
   }

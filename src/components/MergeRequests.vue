@@ -7,20 +7,21 @@
 </template>
 
 <script>
-import MergeRequestItem from '@/components/MergeRequestItem.vue';
+import MergeRequestItem from "@/components/MergeRequestItem.vue";
+import _ from "lodash";
 
 export default {
-  name: 'MergeRequests',
+  name: "MergeRequests",
   props: {
     mergeRequests: Array
   },
   computed: {
     orderedMergeRequests() {
-      return _.orderBy(this.mergeRequests, 'created_at', 'desc');
+      return _.orderBy(this.mergeRequests, "created_at", "desc");
     }
   },
   components: {
     MergeRequestItem
   }
-}
+};
 </script>

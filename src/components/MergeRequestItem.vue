@@ -36,33 +36,33 @@
 
 <script>
 export default {
-  name: 'MergeRequestItem',
+  name: "MergeRequestItem",
   props: {
     mr: Object
   },
   methods: {
     getPipelineColor(pipeline) {
       const colors = {
-        pending: 'warning',
-        failed: 'error',
-        success: 'success',
-        running: 'primary'
+        pending: "warning",
+        failed: "error",
+        success: "success",
+        running: "primary"
       };
 
-      return colors[pipeline.status] || 'primary';
+      return colors[pipeline.status] || "primary";
     },
 
     getPipelineIcon(pipeline) {
       const icons = {
-        pending: 'pause_circle_outline',
-        failed: 'error_outline',
-        success: 'check_circle_outline',
-        running: 'timelapse'
-      }
-      return icons[pipeline.status] || 'help';
+        pending: "pause_circle_outline",
+        failed: "error_outline",
+        success: "check_circle_outline",
+        running: "timelapse"
+      };
+      return icons[pipeline.status] || "help";
     }
   }
-}
+};
 </script>
 
 <style lang="stylus" scoped>
@@ -80,4 +80,3 @@ export default {
     padding-right: 3px
   }
 </style>
-

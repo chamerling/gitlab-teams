@@ -68,14 +68,12 @@ export default {
   }),
   methods: {
     openSettings() {
-      this.$router.push({ name: 'settings' });
+      this.$router.push({ name: "settings" });
     },
     openTeam(team) {
-      this.$router.push({ name: 'team', params: { name: team.name }})
+      this.$router.push({ name: "team", params: { name: team.name } });
     },
-    createTeam() {
-
-    },
+    createTeam() {},
     goBack() {
       this.$router.go(-1);
     }
@@ -93,17 +91,18 @@ export default {
       this.openSettings();
     }
   }
-}
+};
 </script>
 <style>
-.fade-enter-active, .fade-leave-active {
+.fade-enter-active,
+.fade-leave-active {
   transition-duration: 0.2s;
   transition-property: opacity;
   transition-timing-function: ease;
 }
 
-.fade-enter, .fade-leave-active {
-  opacity: 0
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
 }
 </style>
-

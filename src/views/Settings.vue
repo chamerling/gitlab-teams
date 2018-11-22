@@ -17,14 +17,13 @@
 </template>
 
 <script>
-
 export default {
-  name: 'settings',
+  name: "settings",
   data() {
     return {
       apiToken: null,
       apiEndpoint: null
-    }
+    };
   },
   mounted() {
     this.apiToken = this.$store.state.apiToken;
@@ -32,11 +31,13 @@ export default {
   },
   methods: {
     submit() {
-      this.$store.dispatch('updateSettings', { apiToken: this.apiToken, apiEndpoint: this.apiEndpoint });
-      this.$router.push('/');
+      this.$store.dispatch("updateSettings", {
+        apiToken: this.apiToken,
+        apiEndpoint: this.apiEndpoint
+      });
+      this.$router.push("/");
     }
   },
-  components: {
-  }
-}
+  components: {}
+};
 </script>

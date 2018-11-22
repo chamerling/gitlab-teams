@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios from "axios";
 
 export default class Client {
   constructor(baseURL, privateToken) {
@@ -9,7 +9,7 @@ export default class Client {
     return axios.create({
       baseURL,
       headers: {
-        'Private-Token': privateToken
+        "Private-Token": privateToken
       }
     });
   }
@@ -19,10 +19,12 @@ export default class Client {
   }
 
   fetchUser(username) {
-    return this.client.get(`/api/v4/users?username=${username}`).then(result => result.data[0]);
+    return this.client
+      .get(`/api/v4/users?username=${username}`)
+      .then(result => result.data[0]);
   }
 
-  fetchMergeRequests({state = 'opened', author_id}) {
+  fetchMergeRequests({ state = "opened", author_id }) {
     // TODO: Use axios query params
     let endpoint = `/api/v4/merge_requests?state=${state}`;
 
@@ -34,14 +36,18 @@ export default class Client {
   }
 
   fetchMergeRequest(projectId, id) {
-    return this.client.get(`/api/v4/projects/${projectId}/merge_requests/${id}`);
+    return this.client.get(
+      `/api/v4/projects/${projectId}/merge_requests/${id}`
+    );
   }
 
   fetchPipelines(projectId, refId) {
-    return this.client.get(`/api/v4/projects/${projectId}/pipelines?ref=${refId}`);
+    return this.client.get(
+      `/api/v4/projects/${projectId}/pipelines?ref=${refId}`
+    );
   }
 
   getCurrentUser() {
-    return this.client.get('/api/v4/user');
+    return this.client.get("/api/v4/user");
   }
 }

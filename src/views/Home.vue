@@ -12,11 +12,11 @@
 </template>
 
 <script>
-import MergeRequests from '@/components/MergeRequests.vue';
-import store from '@/store';
+import MergeRequests from "@/components/MergeRequests.vue";
+import store from "@/store";
 
 export default {
-  name: 'home',
+  name: "home",
   components: {
     MergeRequests
   },
@@ -26,12 +26,12 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    store.dispatch('loadUser');
+    store.dispatch("loadUser");
     next();
   },
   beforeRouteUpdate(to, from, next) {
-    store.dispatch('loadUser');
+    store.dispatch("loadUser");
     next();
   }
-}
+};
 </script>
