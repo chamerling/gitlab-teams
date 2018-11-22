@@ -12,7 +12,8 @@
 </template>
 
 <script>
-import MergeRequests from '@/components/MergeRequests.vue'
+import MergeRequests from '@/components/MergeRequests.vue';
+import store from '@/store';
 
 export default {
   name: 'team',
@@ -23,6 +24,14 @@ export default {
     mergeRequests() {
       return this.$store.state.mergeRequests;
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    store.dispatch('loadTeam', to.params.name);
+    next();
+  },
+  beforeRouteUpdate(to, from, next) {
+    store.dispatch('loadTeam', to.params.name);
+    next();
   }
 }
 </script>

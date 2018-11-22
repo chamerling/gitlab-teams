@@ -66,6 +66,12 @@ export default new Vuex.Store({
       }
     },
 
+    setCurrentTeam(state, teamName) {
+      const team = _.find(state.teams, { name: teamName });
+
+      state.team = team;
+    },
+
     updatePipeline(state, {mergeRequest, pipeline}) {
       const mr = _.find(state.mergeRequests, { iid: mergeRequest.iid });
 
@@ -94,6 +100,10 @@ export default new Vuex.Store({
       });
     },
 
+    cleanMergeRequests({ commit }) {
+      commit('cleanMergeRequests');
+    },
+
     addMergeRequest({ commit }, mr) {
       commit('addMergeRequest', mr);
     },
@@ -115,9 +125,19 @@ export default new Vuex.Store({
       dispatch('launchWatchers');
     },
 
-    launchWatchers({ dispatch, state, commit }) {
+    loadUser({ dispatch }) {
+      dispatch('cleanMergeRequests');
+      gitlab.get().watchMergeRequests({});
+    },
+
+    loadTeam({ commit, dispatch }, teamName) {
+      dispatch('cleanMergeRequests');
+      commit('setCurrentTeam', teamName);
+      dispatch('launchWatchers');
+    },
+
+    launchWatchers({ dispatch, state }) {
       gitlab.get().unwatchMergeRequests();
-      commit('cleanMergeRequests');
 
       dispatch('fetchUsers').then(() => {
         gitlab.get().watchMergeRequestsForUsers({ userIds: state.team.users.map(user => user.id) });

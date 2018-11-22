@@ -91,8 +91,6 @@ export default {
   mounted() {
     if (!this.isConfigured) {
       this.openSettings();
-    } else {
-      this.$store.dispatch('launchWatchers');
     }
   }
 }
