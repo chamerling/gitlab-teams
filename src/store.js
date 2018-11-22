@@ -15,8 +15,18 @@ export default new Vuex.Store({
     apiToken: process.env.VUE_APP_API_TOKEN || localStorage.getItem('apiToken'),
     mergeRequests: [],
     teams: [
-      { name: 'Jackass' }
+      {
+        name: "Jackass",
+        icon: "💩",
+        usernames: ["laublet", "chamerling", "chenry"]
+      },
+      {
+        name: "Random Puppies",
+        icon: "🐶",
+        usernames: ["akhouaji"]
+      }
     ],
+    // selected team
     team: {
       name: 'Jackass',
       usernames: ['laublet', 'chamerling', 'chenry'],
