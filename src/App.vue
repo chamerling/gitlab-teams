@@ -12,8 +12,8 @@
         <v-list>
           <v-list-tile v-for="team in teams" :key="team.name" avatar @click="">
             <v-list-tile-avatar>
-              <v-avatar color="orange darken-1" size="36">
-                <span class="white--text headline">J</span>
+              <v-avatar size="36">
+                <span class="white--text headline">{{team.icon}}</span>
               </v-avatar>
             </v-list-tile-avatar>
             <v-list-tile-title v-text="team.name"></v-list-tile-title>
