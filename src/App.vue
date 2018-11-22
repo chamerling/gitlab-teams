@@ -23,7 +23,7 @@
           <v-list-tile v-for="team in teams" :key="team.name" avatar @click="openTeam(team)">
             <v-list-tile-avatar>
               <v-avatar size="36">
-                <span class="white--text headline">{{team.icon}}</span>
+                <span class="white--text headline">{{team.icon || "🦊"}}</span>
               </v-avatar>
             </v-list-tile-avatar>
             <v-list-tile-title v-text="team.name"></v-list-tile-title>
