@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import _ from 'lodash';
 import gitlab from './gitlab';
 import createLogger from 'vuex/dist/logger';
+import teams from "@/teams.json";
 
 const plugins = process.env.NODE_ENV !== 'production' ? [createLogger()] : [];
 
@@ -14,24 +15,8 @@ export default new Vuex.Store({
     apiEndpoint: process.env.VUE_APP_GITLAB || localStorage.getItem('apiEndpoint') || 'https://gitlab.com',
     apiToken: process.env.VUE_APP_API_TOKEN || localStorage.getItem('apiToken'),
     mergeRequests: [],
-    teams: [
-      {
-        name: "Jackass",
-        icon: "💩",
-        usernames: ["laublet", "chamerling", "chenry"]
-      },
-      {
-        name: "Random Puppies",
-        icon: "🐶",
-        usernames: ["akhouaji"]
-      }
-    ],
-    // selected team
-    team: {
-      name: 'Jackass',
-      usernames: ['laublet', 'chamerling', 'chenry'],
-      users: []
-    }
+    teams,
+    team: {}
   },
   getters: {
     getTeams(state) {
