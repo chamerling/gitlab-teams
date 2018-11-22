@@ -47,7 +47,7 @@
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <v-toolbar-title>Gitlab Teams</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn icon @click="goBack" v-if="$route.name !== 'home'">
+        <v-btn icon @click="goBack" v-if="$route.name === 'settings'">
           <v-icon small>clear</v-icon>
         </v-btn>
       </v-toolbar>
@@ -68,7 +68,7 @@ export default {
   }),
   methods: {
     openSettings() {
-      this.$router.push('settings');
+      this.$router.push({ name: 'settings' });
     },
     openTeam(team) {
       this.$router.push({ name: 'team', params: { name: team.name }})
