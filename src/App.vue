@@ -8,6 +8,16 @@
         app
       >
       <v-list dense>
+        <v-list-tile @click="$router.push({ name: 'home' })">
+          <v-list-tile-action>
+            <v-icon>home</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              Home
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
         <v-subheader class="mt-3 grey--text text--darken-1">TEAMS</v-subheader>
         <v-list>
           <v-list-tile v-for="team in teams" :key="team.name" avatar @click="openTeam(team)">
