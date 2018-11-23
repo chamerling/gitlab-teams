@@ -121,7 +121,10 @@ export default new Vuex.Store({
 
     loadUser({ dispatch }) {
       dispatch("cleanMergeRequests");
-      gitlab.get().watchMergeRequests({});
+      const gl = gitlab.get();
+
+      gl.unwatchMergeRequests();
+      gl.watchMergeRequests({});
     },
 
     loadTeam({ commit, dispatch }, teamName) {
@@ -131,10 +134,12 @@ export default new Vuex.Store({
     },
 
     launchWatchers({ dispatch, state }) {
-      gitlab.get().unwatchMergeRequests();
+      const gl = gitlab.get();
+
+      gl.unwatchMergeRequests();
 
       dispatch("fetchUsers").then(() => {
-        gitlab.get().watchMergeRequestsForUsers({
+        gl.watchMergeRequestsForUsers({
           userIds: state.team.users.map(user => user.id)
         });
       });
