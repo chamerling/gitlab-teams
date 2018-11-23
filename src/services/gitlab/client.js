@@ -35,9 +35,9 @@ export default class Client {
     return this.client.get(endpoint);
   }
 
-  fetchMergeRequest(projectId, id) {
+  fetchMergeRequest(projectId, iid) {
     return this.client.get(
-      `/api/v4/projects/${projectId}/merge_requests/${id}`
+      `/api/v4/projects/${projectId}/merge_requests/${iid}`
     );
   }
 

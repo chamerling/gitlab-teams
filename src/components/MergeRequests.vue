@@ -1,6 +1,6 @@
 <template>
   <v-list two-line dark>
-    <div v-for="mergeRequest in orderedMergeRequests" :key="mergeRequest.iid">
+    <div v-for="mergeRequest in orderedMergeRequests" :key="mergeRequest.id">
       <merge-request-item :mr="mergeRequest"/>
     </div>
   </v-list>

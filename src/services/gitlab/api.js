@@ -33,7 +33,7 @@ export default class Api extends EventEmitter {
 
     const newMergeRequestSubscription = newMergeRequest$.subscribe(mr => {
       this.emit("new-merge-request", mr);
-      this.subscriptions.set(mr.iid, []);
+      this.subscriptions.set(mr.id, []);
 
       const pipelineSubscription = this.watchPipeline(mr).subscribe(
         pipeline => {
@@ -46,22 +46,21 @@ export default class Api extends EventEmitter {
         }
       );
 
-      const mergeRequestSubscription = this.watchMergeRequest(
-        mr.project_id,
-        mr.iid
-      ).subscribe(mergeRequest => {
-        this.emit("updated-merge-request", mergeRequest);
+      const mergeRequestSubscription = this.watchMergeRequest(mr).subscribe(
+        mergeRequest => {
+          this.emit("updated-merge-request", mergeRequest);
 
-        if (mergeRequest.state === "merged") {
-          this.emit("merged-merge-request", mergeRequest);
-          this.subscriptions
-            .get(mr.iid)
-            .forEach(subscription => subscription.unsubscribe());
-          this.subscriptions.delete(mr.iid);
+          if (mergeRequest.state === "merged") {
+            this.emit("merged-merge-request", mergeRequest);
+            this.subscriptions
+              .get(mr.id)
+              .forEach(subscription => subscription.unsubscribe());
+            this.subscriptions.delete(mr.id);
+          }
         }
-      });
+      );
       this.subscriptions
-        .get(mr.iid)
+        .get(mr.id)
         .push(
           ...[
             pipelineSubscription,
@@ -79,11 +78,9 @@ export default class Api extends EventEmitter {
     });
   }
 
-  watchMergeRequest(projectId, mergeRequestId) {
+  watchMergeRequest({ project_id, iid }) {
     return timer(0, this.pollingInterval).pipe(
-      switchMap(() =>
-        from(this.client.fetchMergeRequest(projectId, mergeRequestId))
-      ),
+      switchMap(() => from(this.client.fetchMergeRequest(project_id, iid))),
       pluck("data")
     );
   }

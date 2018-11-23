@@ -25,8 +25,8 @@ export default new Vuex.Store({
     getTeams(state) {
       return state.teams;
     },
-    getMergeRequest(state, iid) {
-      return _.find(state.mergeRequests, { iid });
+    getMergeRequest(state, id) {
+      return _.find(state.mergeRequests, { id });
     },
     isConfigured(state) {
       return !!state.apiToken;
@@ -39,7 +39,7 @@ export default new Vuex.Store({
 
     removeMergeRequest(state, mergeRequest) {
       state.mergeRequests.splice(
-        _.findIndex(state.mergeRequests, mr => mr.iid === mergeRequest.iid),
+        _.findIndex(state.mergeRequests, mr => mr.id === mergeRequest.id),
         1
       );
     },
@@ -49,7 +49,7 @@ export default new Vuex.Store({
     },
 
     updateMergeRequest(state, mergeRequest) {
-      const mr = _.find(state.mergeRequests, { iid: mergeRequest.iid });
+      const mr = _.find(state.mergeRequests, { id: mergeRequest.id });
       if (mr) {
         mr.user_notes_count = mergeRequest.user_notes_count;
         mr.upvotes = mergeRequest.upvotes;
@@ -64,7 +64,7 @@ export default new Vuex.Store({
     },
 
     updatePipeline(state, { mergeRequest, pipeline }) {
-      const mr = _.find(state.mergeRequests, { iid: mergeRequest.iid });
+      const mr = _.find(state.mergeRequests, { id: mergeRequest.id });
 
       if (mr) {
         Vue.set(mr, "pipeline", pipeline);
