@@ -73,10 +73,8 @@ export default class Api extends EventEmitter {
 
   unwatchMergeRequests() {
     this.subscriptions.forEach((value, key) => {
-      console.log('UNSUBSCRIBE', value);
       value.forEach(subscription => subscription.unsubscribe());
       this.subscriptions.delete(key);
-      console.log(this.subscriptions);
     });
   }
 
