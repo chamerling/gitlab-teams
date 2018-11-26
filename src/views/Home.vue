@@ -1,13 +1,6 @@
 <template>
   <div class="home">
     <merge-requests :merge-requests="mergeRequests" v-if="mergeRequests.length"/>
-    <div v-else class="text-xs-center">
-      <v-progress-circular
-        :size="50"
-        color="primary"
-        indeterminate
-      ></v-progress-circular>
-    </div>
   </div>
 </template>
 
