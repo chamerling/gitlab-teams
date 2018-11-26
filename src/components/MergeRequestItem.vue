@@ -46,7 +46,8 @@ export default {
         pending: "warning",
         failed: "error",
         success: "success",
-        running: "primary"
+        running: "primary",
+        canceled: "black"
       };
 
       return colors[pipeline.status] || "primary";
@@ -57,7 +58,8 @@ export default {
         pending: "pause_circle_outline",
         failed: "error_outline",
         success: "check_circle_outline",
-        running: "timelapse"
+        running: "timelapse",
+        canceled: "highlight_off"
       };
       return icons[pipeline.status] || "help";
     }
