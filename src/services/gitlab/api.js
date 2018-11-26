@@ -72,10 +72,11 @@ export default class Api extends EventEmitter {
   }
 
   unwatchMergeRequests() {
-    this.subscriptions.forEach((value, key) => {
-      value.forEach(subscription => subscription.unsubscribe());
-      this.subscriptions.delete(key);
-    });
+    this.subscriptions &&
+      this.subscriptions.forEach((value, key) => {
+        value.forEach(subscription => subscription.unsubscribe());
+        this.subscriptions.delete(key);
+      });
   }
 
   watchMergeRequest({ project_id, iid }) {

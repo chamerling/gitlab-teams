@@ -3,6 +3,7 @@ import Router from "vue-router";
 import Home from "./views/Home.vue";
 import Settings from "./views/Settings.vue";
 import Team from "./views/Team.vue";
+import User from "./views/User.vue";
 
 Vue.use(Router);
 
@@ -17,6 +18,11 @@ export default new Router({
       path: "/team/:name",
       name: "team",
       component: Team
+    },
+    {
+      path: "/user/:name",
+      name: "user",
+      component: User
     },
     {
       path: "/settings",

@@ -16,7 +16,7 @@ import MergeRequests from "@/components/MergeRequests.vue";
 import store from "@/store";
 
 export default {
-  name: "home",
+  name: "user",
   components: {
     MergeRequests
   },
@@ -26,11 +26,11 @@ export default {
     }
   },
   beforeRouteEnter(to, from, next) {
-    store.dispatch("loadCurrentUser");
+    store.dispatch("loadUser", to.params.name);
     next();
   },
   beforeRouteUpdate(to, from, next) {
-    store.dispatch("loadCurrentUser");
+    store.dispatch("loadUser", to.params.name);
     next();
   }
 };

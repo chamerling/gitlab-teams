@@ -19,7 +19,8 @@ export default new Vuex.Store({
     apiToken: process.env.VUE_APP_API_TOKEN || localStorage.getItem("apiToken"),
     mergeRequests: [],
     teams,
-    team: {}
+    team: {},
+    currentUser: null
   },
   getters: {
     getTeams(state) {
@@ -44,12 +45,13 @@ export default new Vuex.Store({
       );
     },
 
-    cleanMergeRequests(state) {
-      state.mergeRequests = [];
+    setMergeRequests(state, mergeRequests) {
+      state.mergeRequests = mergeRequests;
     },
 
     updateMergeRequest(state, mergeRequest) {
       const mr = _.find(state.mergeRequests, { id: mergeRequest.id });
+      // TODO use array.map like in https://stackoverflow.com/questions/50416063/update-data-using-vuex
       if (mr) {
         mr.user_notes_count = mergeRequest.user_notes_count;
         mr.upvotes = mergeRequest.upvotes;
@@ -82,8 +84,12 @@ export default new Vuex.Store({
 
     setUsers(state, users) {
       state.team.users = users;
+    },
+    setCurrentUser(state, user) {
+      state.currentUser = user;
     }
   },
+
   actions: {
     fetchUsers({ state, commit }) {
       return gitlab
@@ -94,8 +100,21 @@ export default new Vuex.Store({
         });
     },
 
+    fetchUser({ commit }, userName) {
+      return gitlab
+        .get()
+        .client.fetchUser(userName)
+        .then(user => {
+          commit("setCurrentUser", user);
+        });
+    },
+
+    // TODO: replace with commit("setMergeRequest", [])
     cleanMergeRequests({ commit }) {
-      commit("cleanMergeRequests");
+      const gl = gitlab.get();
+
+      gl.unwatchMergeRequests();
+      commit("setMergeRequests", []);
     },
 
     addMergeRequest({ commit }, mr) {
@@ -119,12 +138,22 @@ export default new Vuex.Store({
       dispatch("launchWatchers");
     },
 
-    loadUser({ dispatch }) {
-      dispatch("cleanMergeRequests");
+    loadCurrentUser({ dispatch }) {
       const gl = gitlab.get();
 
-      gl.unwatchMergeRequests();
+      dispatch("cleanMergeRequests");
       gl.watchMergeRequests({});
+    },
+
+    loadUser({ dispatch, state }, userName) {
+      const gl = gitlab.get();
+
+      dispatch("cleanMergeRequests");
+      dispatch("fetchUser", userName).then(() => {
+        gl.watchMergeRequestsForUsers({
+          userIds: [state.currentUser.id]
+        });
+      });
     },
 
     loadTeam({ commit, dispatch }, teamName) {
@@ -135,8 +164,6 @@ export default new Vuex.Store({
 
     launchWatchers({ dispatch, state }) {
       const gl = gitlab.get();
-
-      gl.unwatchMergeRequests();
 
       dispatch("fetchUsers").then(() => {
         gl.watchMergeRequestsForUsers({
