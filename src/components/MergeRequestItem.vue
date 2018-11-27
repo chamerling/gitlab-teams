@@ -10,9 +10,9 @@
       <v-list-tile-title>{{ mr.title }}</v-list-tile-title>
       <v-list-tile-sub-title>
         <div id="subtitle">
-          <v-tooltip bottom v-if="mr.pipeline">
-            <v-icon slot="activator" :color="getPipelineColor(mr.pipeline)">{{getPipelineIcon(mr.pipeline)}}</v-icon>
-            Pipeline {{mr.pipeline.status}}
+          <v-tooltip bottom v-if="pipeline">
+            <v-icon slot="activator" :color="getPipelineColor()">{{getPipelineIcon()}}</v-icon>
+            Pipeline {{pipeline.status}}
           </v-tooltip>
           {{ mr.created_at | moment("calendar")}}
         </div>
@@ -38,10 +38,11 @@
 export default {
   name: "MergeRequestItem",
   props: {
-    mr: Object
+    mr: Object,
+    pipeline: Object
   },
   methods: {
-    getPipelineColor(pipeline) {
+    getPipelineColor() {
       const colors = {
         pending: "warning",
         failed: "error",
@@ -50,10 +51,10 @@ export default {
         canceled: "black"
       };
 
-      return colors[pipeline.status] || "primary";
+      return colors[this.pipeline.status] || "primary";
     },
 
-    getPipelineIcon(pipeline) {
+    getPipelineIcon() {
       const icons = {
         pending: "pause_circle_outline",
         failed: "error_outline",
@@ -61,7 +62,7 @@ export default {
         running: "timelapse",
         canceled: "highlight_off"
       };
-      return icons[pipeline.status] || "help";
+      return icons[this.pipeline.status] || "help";
     }
   }
 };

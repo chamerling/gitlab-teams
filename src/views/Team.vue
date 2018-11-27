@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
 import MergeRequests from "@/components/MergeRequests.vue";
 import store from "@/store";
 
@@ -14,9 +15,9 @@ export default {
     MergeRequests
   },
   computed: {
-    mergeRequests() {
-      return this.$store.state.mergeRequests;
-    }
+    ...mapGetters({
+      mergeRequests: "getMergeRequests"
+    })
   },
   beforeRouteEnter(to, from, next) {
     store.dispatch("loadTeam", to.params.name);

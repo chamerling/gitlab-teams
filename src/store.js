@@ -17,7 +17,8 @@ export default new Vuex.Store({
       localStorage.getItem("apiEndpoint") ||
       "https://gitlab.com",
     apiToken: process.env.VUE_APP_API_TOKEN || localStorage.getItem("apiToken"),
-    mergeRequests: [],
+    mergeRequests: {},
+    pipelines: {}, // id is 'mergeRequestId'
     teams,
     team: {},
     currentUser: null
@@ -26,37 +27,34 @@ export default new Vuex.Store({
     getTeams(state) {
       return state.teams;
     },
-    getMergeRequest(state, id) {
-      return _.find(state.mergeRequests, { id });
+    getMergeRequest({ mergeRequests }, id) {
+      return mergeRequests[id];
+    },
+    getPipeline: ({ pipelines }) => mergeRequestId => {
+      return pipelines[mergeRequestId];
+    },
+    getMergeRequests({ mergeRequests }) {
+      return _.values(mergeRequests);
     },
     isConfigured(state) {
       return !!state.apiToken;
     }
   },
   mutations: {
-    addMergeRequest(state, mergeRequest) {
-      state.mergeRequests.push(mergeRequest);
+    addMergeRequest({ mergeRequests }, mergeRequest) {
+      Vue.set(mergeRequests, mergeRequest.id, mergeRequest);
     },
 
-    removeMergeRequest(state, mergeRequest) {
-      state.mergeRequests.splice(
-        _.findIndex(state.mergeRequests, mr => mr.id === mergeRequest.id),
-        1
-      );
+    removeMergeRequest({ mergeRequests }, mergeRequest) {
+      Vue.delete(mergeRequests, mergeRequest.id);
     },
 
     setMergeRequests(state, mergeRequests) {
       state.mergeRequests = mergeRequests;
     },
 
-    updateMergeRequest(state, mergeRequest) {
-      const mr = _.find(state.mergeRequests, { id: mergeRequest.id });
-      // TODO use array.map like in https://stackoverflow.com/questions/50416063/update-data-using-vuex
-      if (mr) {
-        mr.user_notes_count = mergeRequest.user_notes_count;
-        mr.upvotes = mergeRequest.upvotes;
-        mr.title = mergeRequest.title;
-      }
+    updateMergeRequest({ mergeRequests }, mergeRequest) {
+      Vue.set(mergeRequests, mergeRequest.id, mergeRequest);
     },
 
     setCurrentTeam(state, teamName) {
@@ -65,12 +63,16 @@ export default new Vuex.Store({
       state.team = team;
     },
 
-    updatePipeline(state, { mergeRequest, pipeline }) {
-      const mr = _.find(state.mergeRequests, { id: mergeRequest.id });
+    updatePipeline({ pipelines }, { mergeRequest, pipeline }) {
+      Vue.set(pipelines, mergeRequest.id, pipeline);
+    },
 
-      if (mr) {
-        Vue.set(mr, "pipeline", pipeline);
-      }
+    removePipeline({ pipelines }, { mergeRequest }) {
+      Vue.delete(pipelines, mergeRequest.id);
+    },
+
+    setPipelines(state, pipelines) {
+      state.pipelines = pipelines;
     },
 
     updateSettings(state, settings) {
@@ -85,6 +87,7 @@ export default new Vuex.Store({
     setUsers(state, users) {
       state.team.users = users;
     },
+
     setCurrentUser(state, user) {
       state.currentUser = user;
     }
@@ -109,12 +112,12 @@ export default new Vuex.Store({
         });
     },
 
-    // TODO: replace with commit("setMergeRequest", [])
     cleanMergeRequests({ commit }) {
       const gl = gitlab.get();
 
       gl.unwatchMergeRequests();
-      commit("setMergeRequests", []);
+      commit("setMergeRequests", {});
+      commit("setPipelines", {});
     },
 
     addMergeRequest({ commit }, mr) {
@@ -129,8 +132,8 @@ export default new Vuex.Store({
       commit("updateMergeRequest", mr);
     },
 
-    updatePipeline({ commit }, mr, pipeline) {
-      commit("updatePipeline", mr, pipeline);
+    updatePipeline({ commit }, { mergeRequest, pipeline }) {
+      commit("updatePipeline", { mergeRequest, pipeline });
     },
 
     updateSettings({ commit, dispatch }, settings) {
