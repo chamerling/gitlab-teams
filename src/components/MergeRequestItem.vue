@@ -14,7 +14,7 @@
             <v-icon slot="activator" :color="getPipelineColor()">{{getPipelineIcon()}}</v-icon>
             Pipeline {{pipeline.status}}
           </v-tooltip>
-          {{ mr.created_at | moment("calendar")}}
+          Created {{ mr.created_at | moment("calendar")}} - Updated {{ mr.updated_at | moment('calendar')}}
         </div>
       </v-list-tile-sub-title>
     </v-list-tile-content>
