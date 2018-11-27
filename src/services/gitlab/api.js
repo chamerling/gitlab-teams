@@ -37,10 +37,11 @@ export default class Api extends EventEmitter {
 
       const pipelineSubscription = this.watchPipeline(mr).subscribe(
         pipeline => {
-          if (pipeline && pipeline[0]) {
+          if (pipeline) {
+            // TODO: Update pipeline only when status changes
             this.emit("updated-pipeline", {
               mergeRequest: mr,
-              pipeline: pipeline[0]
+              pipeline: pipeline
             });
           }
         }
@@ -90,7 +91,7 @@ export default class Api extends EventEmitter {
     return timer(0, this.pollingInterval).pipe(
       switchMap(() =>
         from(
-          this.client.fetchPipelines(
+          this.client.fetchLastPipeline(
             mergeRequest.source_project_id,
             mergeRequest.source_branch
           )

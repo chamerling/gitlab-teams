@@ -47,6 +47,20 @@ export default class Client {
     );
   }
 
+  fetchPipeline(projectId, id) {
+    return this.client.get(`/api/v4/projects/${projectId}/pipelines/${id}`);
+  }
+
+  fetchLastPipeline(projectId, refId) {
+    return this.fetchPipelines(projectId, refId).then(result => {
+      if (!result.data || !result.data.length) {
+        return {};
+      }
+
+      return this.fetchPipeline(projectId, result.data[0].id);
+    });
+  }
+
   getCurrentUser() {
     return this.client.get("/api/v4/user");
   }
