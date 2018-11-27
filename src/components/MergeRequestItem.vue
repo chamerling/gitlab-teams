@@ -12,7 +12,10 @@
         <div id="subtitle">
           <v-tooltip bottom v-if="pipeline">
             <v-icon slot="activator" :color="getPipelineColor()">{{getPipelineIcon()}}</v-icon>
-            Pipeline {{pipeline.status}}
+            <span>Pipeline {{pipeline.status}} - </span>
+            <span v-if="pipeline.status === 'running'">Started {{ pipeline.updated_at | moment("calendar")}}</span>
+            <span v-else>Finished {{ pipeline.finished_at | moment("calendar")}}</span>
+
           </v-tooltip>
           Created {{ mr.created_at | moment("calendar")}} - Updated {{ mr.updated_at | moment('calendar')}}
         </div>
