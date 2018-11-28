@@ -20,7 +20,7 @@
         </v-list-tile>
         <v-subheader class="mt-3 grey--text text--darken-1">TEAMS</v-subheader>
         <v-list>
-          <v-list-tile v-for="team in teams" :key="team.name" avatar @click="openTeam(team)">
+          <v-list-tile :to="`/team/${team.name}`" active-class="orange darken-3" v-for="team in teams" :key="team.name" avatar>
             <v-list-tile-avatar>
               <v-avatar size="36">
                 <span class="white--text headline">{{team.icon || "🦊"}}</span>
@@ -71,9 +71,6 @@ export default {
   methods: {
     openSettings() {
       this.$router.push({ name: "settings" });
-    },
-    openTeam(team) {
-      this.$router.push({ name: "team", params: { name: team.name } });
     },
     createTeam() {
       this.$router.push({ name: "create-team" });
