@@ -62,6 +62,8 @@
   </div>
 </template>
 <script>
+import _ from "lodash";
+
 export default {
   data: () => ({
     drawer: null
@@ -85,7 +87,7 @@ export default {
       return this.$store.getters.isConfigured;
     },
     teams() {
-      return this.$store.getters.getTeams;
+      return _.orderBy(this.$store.getters.getTeams, [team => team.name.toLowerCase()], "asc");
     }
   },
   mounted() {
