@@ -28,6 +28,7 @@ export default class Api extends EventEmitter {
 
     const newMergeRequest$ = myMergeRequests$.pipe(
       flatMap(mr => mr),
+      // does not work if MR is closed then reopened
       distinct(mr => mr.id)
     );
 
@@ -51,7 +52,7 @@ export default class Api extends EventEmitter {
         mergeRequest => {
           this.emit("updated-merge-request", mergeRequest);
 
-          if (mergeRequest.state === "merged") {
+          if (["merged", "closed"].includes(mergeRequest.state)) {
             this.emit("merged-merge-request", mergeRequest);
             this.subscriptions
               .get(mr.id)
