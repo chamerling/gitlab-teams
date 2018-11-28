@@ -9,8 +9,9 @@
         autofocus
       ></v-text-field>
       <v-text-field
-        v-model="avatar"
+        v-model="icon"
         label="Avatar 🤖 🦊 🤡"
+        disabled
         required
       ></v-text-field>
       <v-autocomplete
@@ -71,7 +72,7 @@ export default {
   data: () => ({
     valid: true,
     name: null,
-    avatar: "🦊",
+    icon: "🦊",
     members: [],
     isLoading: false,
     items: [],
@@ -82,7 +83,7 @@ export default {
       if (this.$refs.form.validate()) {
         const team = {
           name: this.name,
-          icon: this.avatar,
+          icon: this.icon,
           usernames: this.members.map(member => member.username)
         }
 
@@ -100,10 +101,10 @@ export default {
   },
   watch: {
     search(val) {
-      if (!val || val === null) {
+      if (!val || val === null) {
         return;
       }
-      this.isLoading = true
+      this.isLoading = true;
 
       gitlab.get().client.searchUsers(val)
         .then(res => (this.items = res.data))
