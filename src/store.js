@@ -3,7 +3,6 @@ import Vuex from "vuex";
 import _ from "lodash";
 import gitlab from "./gitlab";
 import createLogger from "vuex/dist/logger";
-import teams from "@/teams.json";
 
 const plugins = process.env.NODE_ENV !== "production" ? [createLogger()] : [];
 
@@ -19,7 +18,7 @@ export default new Vuex.Store({
     apiToken: process.env.VUE_APP_API_TOKEN || localStorage.getItem("apiToken"),
     mergeRequests: {},
     pipelines: {}, // id is 'mergeRequestId'
-    teams,
+    teams: JSON.parse(localStorage.getItem("teams") || "[]"),
     team: {},
     currentUser: null
   },
@@ -61,6 +60,11 @@ export default new Vuex.Store({
       const team = _.find(state.teams, { name: teamName });
 
       state.team = team;
+    },
+
+    addTeam(state, team) {
+      state.teams.push(team);
+      localStorage.setItem("teams", JSON.stringify(state.teams));
     },
 
     updatePipeline({ pipelines }, { mergeRequest, pipeline }) {
@@ -163,6 +167,10 @@ export default new Vuex.Store({
       dispatch("cleanMergeRequests");
       commit("setCurrentTeam", teamName);
       dispatch("launchWatchers");
+    },
+
+    createTeam({ commit }, team) {
+      commit("addTeam", team);
     },
 
     launchWatchers({ dispatch, state }) {

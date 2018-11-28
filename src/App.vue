@@ -73,7 +73,9 @@ export default {
     openTeam(team) {
       this.$router.push({ name: "team", params: { name: team.name } });
     },
-    createTeam() {},
+    createTeam() {
+      this.$router.push({ name: "create-team" });
+    },
     goBack() {
       this.$router.go(-1);
     }
