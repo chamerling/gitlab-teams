@@ -24,6 +24,10 @@ export default class Client {
       .then(result => result.data[0]);
   }
 
+  searchUsers(text) {
+    return this.client.get(`/api/v4/users?search=${text}`);
+  }
+
   fetchMergeRequests({ state = "opened", author_id }) {
     // TODO: Use axios query params
     let endpoint = `/api/v4/merge_requests?state=${state}`;
