@@ -13,7 +13,7 @@ At startup, you will be asked to fill a form with your `API Token` and a `Gitlab
 
 These two settings are stored in your browser local storage and **are never sent to someone else than your Gitlab instance**.
 
-Once set, you will be able to create (well not implemented for now but defined in `./src/teams.json`) and navigate in your teams like a boss
+Once set, you will be able to create and navigate in your teams like a boss 💪. Merge requests will update automatically, pipelines also, and soon you will have notifications and many more.
 
 ![teams-view](./doc/teams-view.png "Teams View")
 
