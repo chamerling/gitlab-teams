@@ -38,6 +38,18 @@ npm run build
 npm run lint
 ```
 
+### Deploy
+
+App is deployed on https://chamerling.github.io/gitlab-teams with the help of gh-pages and with some little help from git worktree.
+To deploy a new version:
+
+1. Remove dist/*
+2. `npm run build`
+3. `cd dist`
+4. `git add .`
+5. `git commit -am 'VXYZ'`
+6. `git push origin gh-pages`
+
 ## License
 
 MIT
