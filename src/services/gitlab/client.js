@@ -68,4 +68,10 @@ export default class Client {
   getCurrentUser() {
     return this.client.get("/api/v4/user");
   }
+
+  fetchProject(projectId) {
+    return this.client
+      .get(`/api/v4/projects/${projectId}`)
+      .then(result => result.data);
+  }
 }

@@ -20,6 +20,7 @@ export default new Vuex.Store({
     pipelines: {}, // id is 'mergeRequestId'
     teams: JSON.parse(localStorage.getItem("teams") || "[]"),
     team: {},
+    projects: {},
     currentUser: null
   },
   getters: {
@@ -39,11 +40,20 @@ export default new Vuex.Store({
     getMergeRequests({ mergeRequests }) {
       return _.values(mergeRequests);
     },
+    getProject: ({ projects }) => id => projects[id],
     isConfigured(state) {
       return !!state.apiToken;
     }
   },
   mutations: {
+    addProject({ projects }, project) {
+      Vue.set(projects, project.id, project);
+    },
+
+    setProjects(state, projects) {
+      state.projects = projects;
+    },
+
     addMergeRequest({ mergeRequests }, mergeRequest) {
       Vue.set(mergeRequests, mergeRequest.id, mergeRequest);
     },
@@ -130,6 +140,21 @@ export default new Vuex.Store({
         });
     },
 
+    fetchProject({ commit, state }, projectId) {
+      if (state.projects[projectId]) {
+        return Promise.resolve(state.projects[projectId]);
+      }
+
+      return gitlab
+        .get()
+        .client.fetchProject(projectId)
+        .then(project => {
+          commit("addProject", project);
+
+          return project;
+        });
+    },
+
     cleanMergeRequests({ commit }) {
       const gl = gitlab.get();
 
@@ -159,6 +184,7 @@ export default new Vuex.Store({
       commit("resetTeams");
       commit("setMergeRequests", {});
       commit("setPipelines", {});
+      commit("setProjects", {});
       dispatch("launchWatchers");
     },
 

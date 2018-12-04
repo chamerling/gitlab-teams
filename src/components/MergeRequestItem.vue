@@ -15,9 +15,8 @@
             <span>Pipeline {{pipeline.status}} - </span>
             <span v-if="pipeline.status === 'running'">Started {{ pipeline.updated_at | moment("calendar")}}</span>
             <span v-else>Finished {{ pipeline.finished_at | moment("calendar")}}</span>
-
           </v-tooltip>
-          Created {{ mr.created_at | moment("calendar")}} - Updated {{ mr.updated_at | moment('calendar')}}
+          {{ getProject(mr.project_id).name }}!{{ mr.iid }} - Created {{ mr.created_at | moment("calendar")}} - Updated {{ mr.updated_at | moment('calendar')}}
         </div>
       </v-list-tile-sub-title>
     </v-list-tile-content>
@@ -38,11 +37,18 @@
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+
 export default {
   name: "MergeRequestItem",
   props: {
     mr: Object,
     pipeline: Object
+  },
+  computed: {
+    ...mapGetters({
+      getProject: "getProject"
+    })
   },
   methods: {
     getPipelineColor() {

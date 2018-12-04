@@ -8,7 +8,9 @@ function init(store) {
     apiToken: store.state.apiToken
   });
   gitlabApi.on("new-merge-request", mr => {
-    store.dispatch("addMergeRequest", mr);
+    store.dispatch("fetchProject", mr.project_id).then(() => {
+      store.dispatch("addMergeRequest", mr);
+    });
   });
 
   gitlabApi.on("updated-pipeline", ({ mergeRequest, pipeline }) => {
