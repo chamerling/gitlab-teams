@@ -1,9 +1,7 @@
 <template>
   <v-list-tile avatar :href="mr.web_url" target="_blank">
     <v-list-tile-avatar @click.prevent="$router.push({ name: 'user', params: {name: mr.author.username} })">
-      <v-avatar>
-        <img :src="mr.author.avatar_url"/>
-      </v-avatar>
+      <user-avatar :user="mr.author"/>
     </v-list-tile-avatar>
 
     <v-list-tile-content>
@@ -38,6 +36,7 @@
 
 <script>
 import { mapGetters } from "vuex";
+import UserAvatarPopover from "./UserAvatarPopover.vue";
 
 export default {
   name: "MergeRequestItem",
@@ -73,6 +72,9 @@ export default {
       };
       return icons[this.pipeline.status] || "help";
     }
+  },
+  components: {
+    "user-avatar": UserAvatarPopover
   }
 };
 </script>

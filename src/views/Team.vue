@@ -4,9 +4,7 @@
       <div id="user" class="ma-1" v-for="user in team.users" :key="user.id" @click="$router.push({ name: 'user', params: {name: user.username} })">
         <v-badge overlap>
           <span slot="badge">{{ userMergeRequests(user.username).length }}</span>
-          <v-avatar>
-            <img :src="user.avatar_url"/>
-          </v-avatar>
+          <user-avatar :user="user"/>
         </v-badge>
       </div>
     </v-layout>
@@ -17,12 +15,14 @@
 <script>
 import { mapGetters, mapState } from "vuex";
 import MergeRequests from "@/components/MergeRequests.vue";
+import UserAvatarPopover from "@/components/UserAvatarPopover.vue";
 import store from "@/store";
 
 export default {
   name: "team",
   components: {
-    MergeRequests
+    MergeRequests,
+    "user-avatar": UserAvatarPopover
   },
   computed: {
     ...mapState(["team"]),
