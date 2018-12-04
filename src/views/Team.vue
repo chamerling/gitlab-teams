@@ -1,9 +1,14 @@
 <template>
   <div class="home">
     <v-layout align-center justify-end row fill-height ma-2>
-      <v-avatar v-for="user in team.users" :key="user.id" @click="$router.push({ name: 'user', params: {name: user.username} })">
-        <img :src="user.avatar_url"/>
-      </v-avatar>
+      <div id="user" class="ma-1" v-for="user in team.users" :key="user.id" @click="$router.push({ name: 'user', params: {name: user.username} })">
+        <v-badge overlap>
+          <span slot="badge">{{ userMergeRequests(user.username).length }}</span>
+          <v-avatar>
+            <img :src="user.avatar_url"/>
+          </v-avatar>
+        </v-badge>
+      </div>
     </v-layout>
     <merge-requests :merge-requests="mergeRequests" v-if="mergeRequests.length"/>
   </div>
@@ -22,7 +27,8 @@ export default {
   computed: {
     ...mapState(["team"]),
     ...mapGetters({
-      mergeRequests: "getMergeRequests"
+      mergeRequests: "getMergeRequests",
+      userMergeRequests: "getMergeRequestsForUser"
     })
   },
   beforeRouteEnter(to, from, next) {
@@ -36,9 +42,8 @@ export default {
 };
 </script>
 <style lang="stylus" scoped>
-  #users {
-    display: flex;
-
+  #user {
+    cursor: pointer
   }
 </style>
 
