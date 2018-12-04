@@ -29,6 +29,10 @@ export default new Vuex.Store({
     getMergeRequest({ mergeRequests }, id) {
       return mergeRequests[id];
     },
+    getMergeRequestsForUser: ({ mergeRequests }) => username =>
+      Object.values(mergeRequests).filter(
+        mergeRequest => mergeRequest.author.username === username
+      ),
     getPipeline: ({ pipelines }) => mergeRequestId => {
       return pipelines[mergeRequestId];
     },
