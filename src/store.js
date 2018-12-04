@@ -56,6 +56,10 @@ export default new Vuex.Store({
       state.mergeRequests = mergeRequests;
     },
 
+    resetMergeRequests(state) {
+      state.mergeRequests = {};
+    },
+
     updateMergeRequest({ mergeRequests }, mergeRequest) {
       Vue.set(mergeRequests, mergeRequest.id, mergeRequest);
     },
@@ -69,6 +73,12 @@ export default new Vuex.Store({
     addTeam(state, team) {
       state.teams.push(team);
       localStorage.setItem("teams", JSON.stringify(state.teams));
+    },
+
+    resetTeams(state) {
+      localStorage.setItem("teams", JSON.stringify([]));
+      state.teams = {};
+      state.team = {};
     },
 
     updatePipeline({ pipelines }, { mergeRequest, pipeline }) {
@@ -146,6 +156,9 @@ export default new Vuex.Store({
 
     updateSettings({ commit, dispatch }, settings) {
       commit("updateSettings", settings);
+      commit("resetTeams");
+      commit("setMergeRequests", {});
+      commit("setPipelines", {});
       dispatch("launchWatchers");
     },
 
