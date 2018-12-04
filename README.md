@@ -43,7 +43,7 @@ npm run lint
 App is deployed on https://chamerling.github.io/gitlab-teams with the help of gh-pages and with some little help from git worktree.
 To deploy a new version:
 
-1. Remove dist/*
+1. `rm -fr dist/*`
 2. `npm run build`
 3. `cd dist`
 4. `git add .`
