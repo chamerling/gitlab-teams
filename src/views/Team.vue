@@ -1,11 +1,16 @@
 <template>
   <div class="home">
+    <v-layout align-center justify-end row fill-height ma-2>
+      <v-avatar v-for="user in team.users" :key="user.id" @click="$router.push({ name: 'user', params: {name: user.username} })">
+        <img :src="user.avatar_url"/>
+      </v-avatar>
+    </v-layout>
     <merge-requests :merge-requests="mergeRequests" v-if="mergeRequests.length"/>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import MergeRequests from "@/components/MergeRequests.vue";
 import store from "@/store";
 
@@ -15,6 +20,7 @@ export default {
     MergeRequests
   },
   computed: {
+    ...mapState(["team"]),
     ...mapGetters({
       mergeRequests: "getMergeRequests"
     })
@@ -29,3 +35,11 @@ export default {
   }
 };
 </script>
+<style lang="stylus" scoped>
+  #users {
+    display: flex;
+
+  }
+</style>
+
+
