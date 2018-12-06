@@ -21,6 +21,7 @@ export default new Vuex.Store({
     teams: JSON.parse(localStorage.getItem("teams") || "[]"),
     team: {},
     projects: {},
+    todos: {},
     currentUser: null
   },
   getters: {
@@ -41,13 +42,28 @@ export default new Vuex.Store({
       return _.values(mergeRequests);
     },
     getProject: ({ projects }) => id => projects[id],
+    getTodos({ todos }) {
+      return _.orderBy(Object.values(todos), "created_at", "desc");
+    },
     isConfigured(state) {
       return !!state.apiToken;
     }
   },
   mutations: {
+    addTodo({ todos }, todo) {
+      Vue.set(todos, todo.id, todo);
+    },
+
+    removeTodo({ todos }, todo) {
+      Vue.delete(todos, todo.id);
+    },
+
     addProject({ projects }, project) {
       Vue.set(projects, project.id, project);
+    },
+
+    setTodos(state, todos) {
+      state.todos = todos;
     },
 
     setProjects(state, projects) {
@@ -108,6 +124,8 @@ export default new Vuex.Store({
       state.apiToken = settings.apiToken;
       localStorage.setItem("apiEndpoint", state.apiEndpoint);
       localStorage.setItem("apiToken", state.apiToken);
+      // FIXME: This MUST not be here
+      gitlab.get().unwatchUser();
       gitlab.get().unwatchMergeRequests();
       gitlab.init(this);
     },
@@ -175,6 +193,26 @@ export default new Vuex.Store({
       commit("updateMergeRequest", mr);
     },
 
+    addTodo({ commit }, todo) {
+      commit("addTodo", todo);
+    },
+
+    removeTodo({ commit }, todo) {
+      commit("removeTodo", todo);
+    },
+
+    updateTodo({ commit }, todo) {
+      commit("updateTodo", todo);
+    },
+
+    markTodoAsDone({ dispatch }, todo) {
+      const gl = gitlab.get();
+
+      return gl.client.markTodoAsDone(todo).then(() => {
+        dispatch("removeTodo", todo);
+      });
+    },
+
     updatePipeline({ commit }, { mergeRequest, pipeline }) {
       commit("updatePipeline", { mergeRequest, pipeline });
     },
@@ -185,7 +223,9 @@ export default new Vuex.Store({
       commit("setMergeRequests", {});
       commit("setPipelines", {});
       commit("setProjects", {});
+      commit("setTodos", {});
       dispatch("launchWatchers");
+      dispatch("launchUserWatchers");
     },
 
     loadCurrentUser({ dispatch }) {
@@ -224,6 +264,12 @@ export default new Vuex.Store({
           userIds: state.team.users.map(user => user.id)
         });
       });
+    },
+
+    launchUserWatchers() {
+      const gl = gitlab.get();
+
+      gl.watchTodos();
     }
   }
 });

@@ -18,6 +18,16 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile @click="$router.push({ name: 'todo' })">
+          <v-list-tile-action>
+            <v-icon>list</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>
+              Todo
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
         <v-subheader class="mt-3 grey--text text--darken-1">TEAMS</v-subheader>
         <v-list>
           <v-list-tile :to="`/team/${team.name}`" active-class="grey darken-2" v-for="team in teams" :key="team.name" avatar>
@@ -96,6 +106,8 @@ export default {
   mounted() {
     if (!this.isConfigured) {
       this.openSettings();
+    } else {
+      this.$store.dispatch("launchUserWatchers");
     }
   }
 };

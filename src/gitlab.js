@@ -7,6 +7,7 @@ function init(store) {
     apiEndpoint: store.state.apiEndpoint,
     apiToken: store.state.apiToken
   });
+
   gitlabApi.on("new-merge-request", mr => {
     store.dispatch("fetchProject", mr.project_id).then(() => {
       store.dispatch("addMergeRequest", mr);
@@ -23,6 +24,10 @@ function init(store) {
 
   gitlabApi.on("merged-merge-request", mr => {
     store.dispatch("removeMergeRequest", mr);
+  });
+
+  gitlabApi.on("new-todo", todo => {
+    store.dispatch("addTodo", todo);
   });
 }
 

@@ -8,6 +8,7 @@ export default class Api extends EventEmitter {
     super();
     this.options = options;
     this.subscriptions = new Map();
+    this.userSubscriptions = [];
     this.pollingInterval = options.pollingInterval || 5000;
     this.client = new Client(options.apiEndpoint, options.apiToken);
   }
@@ -100,5 +101,28 @@ export default class Api extends EventEmitter {
       ),
       pluck("data")
     );
+  }
+
+  watchTodos() {
+    const todos$ = timer(0, this.pollingInterval).pipe(
+      switchMap(() => from(this.client.fetchTodos())),
+      pluck("data")
+    );
+
+    const newTodos$ = todos$.pipe(
+      flatMap(todo => todo),
+      distinct(todo => todo.id)
+    );
+
+    const newTodosSubscription = newTodos$.subscribe(todo => {
+      this.emit("new-todo", todo);
+    });
+
+    this.userSubscriptions.push(newTodosSubscription);
+  }
+
+  unwatchUser() {
+    this.userSubscriptions.forEach(subscription => subscription.unsubscribe());
+    this.userSubscriptions = [];
   }
 }
