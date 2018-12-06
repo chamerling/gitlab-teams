@@ -40,7 +40,6 @@ export default {
     menu: false
   }),
   mounted() {
-    console.log(this.user);
   }
 }
 </script>
