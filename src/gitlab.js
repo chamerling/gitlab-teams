@@ -1,12 +1,9 @@
-import Gitlab from "./services/gitlab";
+import Gitlab from "@/services/gitlab";
 
 let gitlabApi = null;
 
 function init(store) {
-  gitlabApi = new Gitlab.Api({
-    apiEndpoint: store.state.apiEndpoint,
-    apiToken: store.state.apiToken
-  });
+  gitlabApi = new Gitlab.Api(store);
 
   gitlabApi.on("new-merge-request", mr => {
     store.dispatch("fetchProject", mr.project_id).then(() => {

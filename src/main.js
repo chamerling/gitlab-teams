@@ -22,8 +22,10 @@ if (process.env.VUE_APP_GA) {
 
 gitlab.init(store);
 
-new Vue({
+const Application = new Vue({
   router,
   store,
   render: h => h(App)
 }).$mount("#app");
+
+window.Application = Application;

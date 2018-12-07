@@ -78,7 +78,7 @@
   </div>
 </template>
 <script>
-import _ from "lodash";
+import orderBy from "lodash/orderBy";
 
 export default {
   data: () => ({
@@ -100,7 +100,7 @@ export default {
       return this.$store.getters.isConfigured;
     },
     teams() {
-      return _.orderBy(this.$store.getters.getTeams, [team => team.name.toLowerCase()], "asc");
+      return orderBy(this.$store.getters.getTeams, [team => team.name.toLowerCase()], "asc");
     }
   },
   mounted() {

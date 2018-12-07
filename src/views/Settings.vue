@@ -1,43 +1,61 @@
 <template>
-  <div class="pa-3">
-    <v-form>
-      <v-text-field
-        v-model="apiToken"
-        label="API Token"
-        required
-      ></v-text-field>
-      <v-text-field
-        v-model="apiEndpoint"
-        label="Gitlab URL"
-        required
-      ></v-text-field>
-      <v-btn @click="submit">Submit</v-btn>
-    </v-form>
+  <div>
+    <v-tabs v-model="tabs" :grow="true">
+      <v-tabs-slider></v-tabs-slider>
+      <v-tab v-for="(item, idx) in authenticationMethods" :key="idx"> {{ item.text }} </v-tab>
+    </v-tabs>
+    <v-tabs-items v-model="tabs">
+      <v-tab-item v-for="(item, idx) in authenticationMethods" :key="idx">
+        <component :is="item.component" :on-save="save"></component>
+      </v-tab-item>
+    </v-tabs-items>
   </div>
 </template>
 
 <script>
+import { mapState } from "vuex";
+import PersonnalTokenSettings from "@/components/PersonalTokenSettings";
+import OAuthTokenSettings from "@/components/OAuthTokenSettings";
+import { constants } from "@/store/utils";
+import gitlab from "@/gitlab";
+
 export default {
   name: "settings",
+  components: {
+    "oauth-token-settings": OAuthTokenSettings,
+    "personal-token-settings": PersonnalTokenSettings
+  },
   data() {
     return {
-      apiToken: null,
-      apiEndpoint: null
+      tabs: undefined
     };
   },
-  mounted() {
-    this.apiToken = this.$store.state.apiToken;
-    this.apiEndpoint = this.$store.state.apiEndpoint;
-  },
-  methods: {
-    submit() {
-      this.$store.dispatch("updateSettings", {
-        apiToken: this.apiToken,
-        apiEndpoint: this.apiEndpoint
-      });
-      this.$router.push("/");
+  computed: {
+    ...mapState(["authenticationMethod"]),
+    authenticationMethods() {
+      return [
+        {
+          text: "Oauth",
+          component: OAuthTokenSettings,
+          authenticationMethod: constants.authenticationMethod.OAUTH
+        },
+        {
+          text: "Personnal token",
+          component: PersonnalTokenSettings,
+          authenticationMethod: constants.authenticationMethod.PERSONAL
+        }
+      ];
     }
   },
-  components: {}
+  methods: {
+    save() {
+      this.$store.commit("setAuthenticationMethod", this.authenticationMethods[this.tabs].authenticationMethod);
+      gitlab.get().updateClient();
+    }
+  },
+  beforeMount() {
+    const idx = this.authenticationMethods.findIndex(it => it.authenticationMethod === this.authenticationMethod);
+    this.tabs = idx >= 0 ? idx : 0;
+  }
 };
 </script>
