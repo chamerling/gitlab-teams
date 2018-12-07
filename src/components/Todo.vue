@@ -60,7 +60,7 @@
 
     <v-list-tile-action>
       <div id="actions">
-        <v-btn color="primary" fab small dark @click.prevent="markAsRead()">
+        <v-btn outline fab small dark @click.prevent="markAsRead()">
           <v-icon>check</v-icon>
         </v-btn>
       </div>
