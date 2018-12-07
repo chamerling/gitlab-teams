@@ -11,10 +11,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   plugins,
   state: {
-    apiEndpoint:
-      process.env.VUE_APP_GITLAB ||
-      localStorage.getItem("apiEndpoint") ||
-      "https://gitlab.com",
+    apiEndpoint: process.env.VUE_APP_DEFAULT_GITLAB || localStorage.getItem("apiEndpoint"),
     apiToken: process.env.VUE_APP_API_TOKEN || localStorage.getItem("apiToken"),
     mergeRequests: {},
     pipelines: {}, // id is 'mergeRequestId'
