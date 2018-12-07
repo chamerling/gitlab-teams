@@ -1,7 +1,10 @@
 <template>
-  <div class="todos">
-    <todo v-for="todo in todos" :item="todo" :key="todo.id"/>
-  </div>
+    <v-list two-line dark>
+      <template v-for="(todo, index) in todos">
+        <todo :item="todo" :key="todo.id"/>
+        <v-divider v-if="index + 1 < todos.length" :key="index" ></v-divider>
+      </template>
+    </v-list>
 </template>
 
 <script>
