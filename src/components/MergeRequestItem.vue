@@ -21,11 +21,11 @@
 
     <v-list-tile-action>
       <div id="actions">
-        <v-badge class="pr-2" small overlap left>
+        <v-badge class="pr-2" small overlap left color="orange">
           <span slot="badge">{{ mr.user_notes_count }}</span>
           <v-icon>chat</v-icon>
         </v-badge>
-        <v-badge overlap left>
+        <v-badge overlap left color="orange">
           <span slot="badge">{{ mr.upvotes }}</span>
           <v-icon>thumb_up</v-icon>
         </v-badge>
