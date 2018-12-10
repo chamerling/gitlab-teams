@@ -29,6 +29,10 @@ function init(store) {
   gitlabApi.on("new-todo", todo => {
     store.dispatch("addTodo", todo);
   });
+
+  gitlabApi.on("todo-length", length => {
+    store.dispatch("setTodoSize", length);
+  });
 }
 
 function get() {

@@ -23,8 +23,10 @@
             <v-icon>list</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
-            <v-list-tile-title>
-              Todo
+            <v-list-tile-title class="with-badge">
+              <span>Todo</span>
+              <v-spacer/>
+              <v-chip v-if="todosSize" color="orange" small text-color="white">{{todosSize}}</v-chip>
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
@@ -79,6 +81,7 @@
 </template>
 <script>
 import _ from "lodash";
+import { mapGetters } from "vuex";
 
 export default {
   data: () => ({
@@ -101,7 +104,10 @@ export default {
     },
     teams() {
       return _.orderBy(this.$store.getters.getTeams, [team => team.name.toLowerCase()], "asc");
-    }
+    },
+    ...mapGetters({
+      todosSize: "getTodosSize",
+    })
   },
   mounted() {
     if (!this.isConfigured) {
@@ -112,7 +118,7 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
 .fade-enter-active,
 .fade-leave-active {
   transition-duration: 0.2s;
@@ -123,5 +129,13 @@ export default {
 .fade-enter,
 .fade-leave-active {
   opacity: 0;
+}
+.with-badge {
+  display: flex;
+}
+
+.v-chip {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 </style>

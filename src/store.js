@@ -19,6 +19,7 @@ export default new Vuex.Store({
     team: {},
     projects: {},
     todos: {},
+    todoSize: 0,
     currentUser: null
   },
   getters: {
@@ -42,6 +43,9 @@ export default new Vuex.Store({
     getTodos({ todos }) {
       return _.orderBy(Object.values(todos), "created_at", "desc");
     },
+    getTodosSize({ todoSize, todos }) {
+      return todoSize || (Object.values(todos) || []).length;
+    },
     isConfigured(state) {
       return !!state.apiToken;
     }
@@ -53,6 +57,10 @@ export default new Vuex.Store({
 
     removeTodo({ todos }, todo) {
       Vue.delete(todos, todo.id);
+    },
+
+    setTodoSize(state, size) {
+      state.todoSize = size;
     },
 
     addProject({ projects }, project) {
@@ -202,12 +210,17 @@ export default new Vuex.Store({
       commit("updateTodo", todo);
     },
 
-    markTodoAsDone({ dispatch }, todo) {
+    markTodoAsDone({ dispatch, state }, todo) {
       const gl = gitlab.get();
 
       return gl.client.markTodoAsDone(todo).then(() => {
         dispatch("removeTodo", todo);
+        dispatch("setTodoSize", --state.todoSize);
       });
+    },
+
+    setTodoSize({ commit }, size) {
+      commit("setTodoSize", size);
     },
 
     updatePipeline({ commit }, { mergeRequest, pipeline }) {

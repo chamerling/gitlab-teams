@@ -1,6 +1,6 @@
 import Client from "./client";
 import { from, timer } from "rxjs";
-import { flatMap, switchMap, pluck, distinct } from "rxjs/operators";
+import { flatMap, switchMap, pluck, distinct, share, map } from "rxjs/operators";
 import EventEmitter from "eventemitter3";
 
 export default class Api extends EventEmitter {
@@ -105,20 +105,32 @@ export default class Api extends EventEmitter {
 
   watchTodos() {
     const todos$ = timer(0, this.pollingInterval).pipe(
-      switchMap(() => from(this.client.fetchTodos())),
-      pluck("data")
+      switchMap(() => from(this.client.fetchTodos()))
     );
 
-    const newTodos$ = todos$.pipe(
+    const sharedTodos$ = todos$.pipe(share());
+
+    const newTodos$ = sharedTodos$.pipe(
+      pluck("data"),
       flatMap(todo => todo),
       distinct(todo => todo.id)
+    );
+
+    const todoSize$ = sharedTodos$.pipe(
+      pluck("headers"),
+      map(headers => headers["x-total"])
     );
 
     const newTodosSubscription = newTodos$.subscribe(todo => {
       this.emit("new-todo", todo);
     });
 
+    const todosSizeSubscription = todoSize$.subscribe(length => {
+      this.emit("todo-length", length);
+    });
+
     this.userSubscriptions.push(newTodosSubscription);
+    this.userSubscriptions.push(todosSizeSubscription);
   }
 
   unwatchUser() {
