@@ -5,16 +5,21 @@
     </v-list-tile-avatar>
 
     <v-list-tile-content>
-      <v-list-tile-title>{{ mr.title }}</v-list-tile-title>
+      <v-list-tile-title id="title">
+        <v-tooltip bottom v-if="pipeline">
+          <v-icon slot="activator" :color="getPipelineColor()">{{getPipelineIcon()}}</v-icon>
+          <span>Pipeline {{pipeline.status}} - </span>
+          <span v-if="pipeline.status === 'running'">Started {{ pipeline.updated_at | moment("calendar")}}</span>
+          <span v-else>Finished {{ pipeline.finished_at | moment("calendar")}}</span>
+        </v-tooltip>
+        <span>{{ mr.title }}</span>
+      </v-list-tile-title>
+      <v-list-tile-sub-title>
+        Created {{ mr.created_at | moment("calendar")}} - Updated {{ mr.updated_at | moment('calendar')}}
+      </v-list-tile-sub-title>
       <v-list-tile-sub-title>
         <div id="subtitle">
-          <v-tooltip bottom v-if="pipeline">
-            <v-icon slot="activator" :color="getPipelineColor()">{{getPipelineIcon()}}</v-icon>
-            <span>Pipeline {{pipeline.status}} - </span>
-            <span v-if="pipeline.status === 'running'">Started {{ pipeline.updated_at | moment("calendar")}}</span>
-            <span v-else>Finished {{ pipeline.finished_at | moment("calendar")}}</span>
-          </v-tooltip>
-          {{ getProject(mr.project_id).name }}!{{ mr.iid }} - Created {{ mr.created_at | moment("calendar")}} - Updated {{ mr.updated_at | moment('calendar')}}
+          {{ getProject(mr.project_id).name }}!{{ mr.iid }} - {{ mr.source_branch }} into {{ mr.target_branch }}
         </div>
       </v-list-tile-sub-title>
     </v-list-tile-content>
@@ -103,7 +108,7 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  #subtitle {
+  #subtitle, #title {
     display: flex
     align-items: center
   }
