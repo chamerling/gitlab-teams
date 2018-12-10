@@ -60,7 +60,7 @@ export default new Vuex.Store({
     },
 
     setTodoSize(state, size) {
-      state.todoSize = size;
+      state.todoSize = parseInt(size);
     },
 
     addProject({ projects }, project) {
@@ -216,6 +216,15 @@ export default new Vuex.Store({
       return gl.client.markTodoAsDone(todo).then(() => {
         dispatch("removeTodo", todo);
         dispatch("setTodoSize", --state.todoSize);
+      });
+    },
+
+    markAllTodosAsDone({ commit, dispatch }) {
+      const gl = gitlab.get();
+
+      return gl.client.markAllTodosAsDone().then(() => {
+        dispatch("setTodoSize", 0);
+        commit("setTodos", {});
       });
     },
 

@@ -106,7 +106,7 @@ export default {
       return _.orderBy(this.$store.getters.getTeams, [team => team.name.toLowerCase()], "asc");
     },
     ...mapGetters({
-      todosSize: "getTodosSize",
+      todosSize: "getTodosSize"
     })
   },
   mounted() {

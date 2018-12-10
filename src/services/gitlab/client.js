@@ -82,4 +82,8 @@ export default class Client {
   markTodoAsDone(todo) {
     return this.client.post(`/api/v4/todos/${todo.id}/mark_as_done`);
   }
+
+  markAllTodosAsDone() {
+    return this.client.post(`/api/v4/todos/mark_as_done`);
+  }
 }
