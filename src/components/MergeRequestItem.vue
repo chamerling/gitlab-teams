@@ -21,14 +21,21 @@
 
     <v-list-tile-action>
       <div id="actions">
-        <v-badge class="pr-2" small overlap left color="orange">
+        <v-badge class="pr-2" overlap left color="orange">
           <span slot="badge">{{ mr.user_notes_count }}</span>
           <v-icon>chat</v-icon>
         </v-badge>
-        <v-badge overlap left color="orange">
+        <v-badge class="pr-2" overlap left color="orange">
           <span slot="badge">{{ mr.upvotes }}</span>
           <v-icon>thumb_up</v-icon>
         </v-badge>
+        <v-btn outline fab small dark
+          @click.prevent="merge()"
+          :disabled="merging || mr.work_in_progress || mr.merge_status !== 'can_be_merged'"
+          :loading="merging"
+        >
+          <v-icon>merge_type</v-icon>
+        </v-btn>
       </div>
     </v-list-tile-action>
   </v-list-tile>
@@ -40,6 +47,11 @@ import UserAvatarPopover from "./UserAvatarPopover.vue";
 
 export default {
   name: "MergeRequestItem",
+  data() {
+    return {
+      merging: false
+    }
+  },
   props: {
     mr: Object,
     pipeline: Object
@@ -71,6 +83,17 @@ export default {
         canceled: "highlight_off"
       };
       return icons[this.pipeline.status] || "help";
+    },
+
+    merge() {
+      this.merging = true;
+      this.$store.dispatch("merge", this.mr).then(() => {
+      }).catch(err => {
+        // TODO: MR can not be merged
+        console.log(err);
+      }).finally(() => {
+        this.merging = false;
+      });
     }
   },
   components: {

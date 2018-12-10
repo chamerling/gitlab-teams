@@ -186,6 +186,15 @@ export default new Vuex.Store({
       commit("setPipelines", {});
     },
 
+    merge({ dispatch }, mr) {
+      const gl = gitlab.get();
+
+      return gl.client.merge(mr).then(() => {
+        dispatch("removeMergeRequest", mr);
+        // TODO: Stop watchers for this MR
+      });
+    },
+
     addMergeRequest({ commit }, mr) {
       commit("addMergeRequest", mr);
     },

@@ -45,6 +45,12 @@ export default class Client {
     );
   }
 
+  merge({ project_id, iid }) {
+    return this.client.put(
+      `/api/v4/projects/${project_id}/merge_requests/${iid}/merge`
+    );
+  }
+
   fetchPipelines(projectId, refId) {
     return this.client.get(
       `/api/v4/projects/${projectId}/pipelines?ref=${refId}`
