@@ -17,7 +17,6 @@
         <span>Looks like you do not have anything to do...</span>
       </v-flex>
     </v-layout>
-    </v-container>
   </div>
 </template>
 
