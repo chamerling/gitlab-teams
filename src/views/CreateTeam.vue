@@ -95,8 +95,8 @@ export default {
       this.$refs.form.reset()
     },
     remove(item, data) {
-      // TODO: This does not update the view...
-      _.remove(this.members, member => member.id === item.id);
+      const index = this.members.findIndex(member => member.id === item.id);
+      if (index >= 0) this.members.splice(index, 1)
     }
   },
   watch: {
