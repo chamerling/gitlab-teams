@@ -60,7 +60,7 @@ export default {
 
   resetTeams(state) {
     localStorage.setItem("teams", JSON.stringify([]));
-    state.teams = {};
+    state.teams = [];
     state.team = {};
   },
 
