@@ -8,7 +8,7 @@
         app
       >
       <v-list dense>
-        <v-list-tile @click="$router.push({ name: 'home' })">
+        <v-list-tile v-if="isConfigured" @click="$router.push({ name: 'home' })">
           <v-list-tile-action>
             <v-icon>home</v-icon>
           </v-list-tile-action>
@@ -18,7 +18,7 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile @click="$router.push({ name: 'todo' })">
+        <v-list-tile v-if="isConfigured" @click="$router.push({ name: 'todo' })">
           <v-list-tile-action>
             <v-icon>list</v-icon>
           </v-list-tile-action>
@@ -41,7 +41,7 @@
             <v-list-tile-title v-text="team.name"></v-list-tile-title>
           </v-list-tile>
         </v-list>
-        <v-list-tile class="mt-3" @click="createTeam">
+        <v-list-tile v-if="isConfigured" class="mt-3" @click="createTeam">
           <v-list-tile-action>
             <v-icon color="grey darken-1">add_circle_outline</v-icon>
           </v-list-tile-action>
@@ -65,7 +65,7 @@
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <v-toolbar-title>Gitlab Teams</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn icon @click="goBack" v-if="$route.name === 'settings'">
+        <v-btn icon @click="goBack" v-if="isConfigured && $route.name === 'settings'">
           <v-icon small>clear</v-icon>
         </v-btn>
       </v-toolbar>
