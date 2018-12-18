@@ -9,5 +9,7 @@ export default {
   projects: {},
   todos: {},
   todoSize: 0,
+  issues: {},
+  issueSize: 0,
   currentUser: null
 };

@@ -133,6 +133,36 @@ export default class Api extends EventEmitter {
     this.userSubscriptions.push(todosSizeSubscription);
   }
 
+  watchIssues() {
+    const issues$ = timer(0, this.pollingInterval * 2).pipe(
+      switchMap(() => from(this.client.fetchIssues()))
+    );
+
+    const sharedIssues$ = issues$.pipe(share());
+
+    const newIssues$ = sharedIssues$.pipe(
+      pluck("data"),
+      flatMap(issue => issue),
+      distinct(issue => issue.id)
+    );
+
+    const issueSize$ = sharedIssues$.pipe(
+      pluck("headers"),
+      map(headers => headers["x-total"])
+    );
+
+    const newIssuesSubscription = newIssues$.subscribe(issue => {
+      this.emit("new-issue", issue);
+    });
+
+    const issuesSizeSubscription = issueSize$.subscribe(length => {
+      this.emit("issue-length", length);
+    });
+
+    this.userSubscriptions.push(newIssuesSubscription);
+    this.userSubscriptions.push(issuesSizeSubscription);
+  }
+
   unwatchUser() {
     this.userSubscriptions.forEach(subscription => subscription.unsubscribe());
     this.userSubscriptions = [];

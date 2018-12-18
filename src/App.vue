@@ -18,6 +18,16 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile v-if="isConfigured" @click="$router.push({ name: 'issues' })">
+          <v-list-tile-action>
+            <v-icon>bug_report</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title class="with-badge">
+              Issues
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
         <v-list-tile v-if="isConfigured" @click="$router.push({ name: 'todo' })">
           <v-list-tile-action>
             <v-icon>list</v-icon>

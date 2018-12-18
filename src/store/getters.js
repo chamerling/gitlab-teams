@@ -23,4 +23,10 @@ export const getTodos = ({ todos }) =>
 export const getTodosSize = ({ todoSize, todos }) =>
   todoSize || (Object.values(todos) || []).length;
 
+export const getIssues = ({ issues }) =>
+  _.orderBy(Object.values(issues), "created_at", "desc");
+
+export const getIssuesSize = ({ issueSize, issues }) =>
+  issueSize || (Object.values(issues) || []).length;
+
 export const isConfigured = state => !!state.apiToken;

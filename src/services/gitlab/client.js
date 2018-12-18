@@ -85,6 +85,10 @@ export default class Client {
     return this.client.get("/api/v4/todos");
   }
 
+  fetchIssues() {
+    return this.client.get("/api/v4/issues");
+  }
+
   markTodoAsDone(todo) {
     return this.client.post(`/api/v4/todos/${todo.id}/mark_as_done`);
   }

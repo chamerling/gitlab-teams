@@ -33,6 +33,16 @@ function init(store) {
   gitlabApi.on("todo-length", length => {
     store.dispatch("setTodoSize", length);
   });
+
+  gitlabApi.on("new-issue", issue => {
+    store.dispatch("fetchProject", issue.project_id).then(() => {
+      store.dispatch("addIssue", issue);
+    });
+  });
+
+  gitlabApi.on("issue-length", length => {
+    store.dispatch("setIssueSize", length);
+  });
 }
 
 function get() {

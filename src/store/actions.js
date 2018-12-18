@@ -96,6 +96,19 @@ export const setTodoSize = ({ commit }, size) => {
   commit("setTodoSize", size);
 };
 
+// issues
+export const addIssue = ({ commit }, issue) => {
+  commit("addIssue", issue);
+};
+
+export const removeIssue = ({ commit }, issue) => {
+  commit("removeIssue", issue);
+};
+
+export const setIssueSize = ({ commit }, size) => {
+  commit("setIssueSize", size);
+};
+
 export const updatePipeline = ({ commit }, { mergeRequest, pipeline }) => {
   commit("updatePipeline", { mergeRequest, pipeline });
 };
@@ -153,4 +166,5 @@ export const launchUserWatchers = () => {
   const gl = gitlab.get();
 
   gl.watchTodos();
+  gl.watchIssues();
 };

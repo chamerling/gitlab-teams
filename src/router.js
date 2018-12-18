@@ -4,6 +4,7 @@ import Home from "./views/Home.vue";
 import Settings from "./views/Settings.vue";
 import Team from "./views/Team.vue";
 import Todos from "./views/Todos.vue";
+import Issues from "./views/Issues.vue";
 import User from "./views/User.vue";
 import CreateTeam from "@/views/CreateTeam.vue";
 
@@ -21,6 +22,11 @@ export default new Router({
       path: "/todo",
       name: "todo",
       component: Todos
+    },
+    {
+      path: "/issues",
+      name: "issues",
+      component: Issues
     },
     {
       path: "/team/:name",
