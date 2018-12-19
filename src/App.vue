@@ -40,8 +40,19 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-subheader class="mt-3 grey--text text--darken-1">TEAMS</v-subheader>
         <v-list>
+          <v-list-tile v-if="isConfigured" class="mt-3">
+            <v-list-tile-content>
+              <v-list-tile-title>
+                <span class="grey--text text--darken-1">TEAMS</span>
+              </v-list-tile-title>
+            </v-list-tile-content>
+            <v-list-tile-action>
+              <v-btn icon ripple @click="createTeam">
+                <v-icon color="grey darken-1">add_circle_outline</v-icon>
+              </v-btn>
+            </v-list-tile-action>
+          </v-list-tile>
           <v-list-tile :to="`/team/${team.name}`" active-class="grey darken-2" v-for="team in teams" :key="team.name" avatar>
             <v-list-tile-avatar>
               <v-avatar size="36">
@@ -51,12 +62,6 @@
             <v-list-tile-title v-text="team.name"></v-list-tile-title>
           </v-list-tile>
         </v-list>
-        <v-list-tile v-if="isConfigured" class="mt-3" @click="createTeam">
-          <v-list-tile-action>
-            <v-icon color="grey darken-1">add_circle_outline</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title class="grey--text text--darken-1">Create Team</v-list-tile-title>
-        </v-list-tile>
         <v-list-tile @click="openSettings">
           <v-list-tile-action>
             <v-icon color="grey darken-1">settings</v-icon>
