@@ -152,6 +152,13 @@ export const createTeam = ({ commit }, team) => {
   commit("addTeam", team);
 };
 
+export const deleteTeam = ({ state, commit, dispatch }, team) => {
+  if (state.team && state.team.name === team.name) {
+    dispatch("cleanMergeRequests");
+  }
+  commit("removeTeam", team);
+};
+
 export const launchWatchers = ({ dispatch, state }) => {
   const gl = gitlab.get();
 

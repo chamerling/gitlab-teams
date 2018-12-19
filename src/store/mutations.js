@@ -58,6 +58,16 @@ export default {
     localStorage.setItem("teams", JSON.stringify(state.teams));
   },
 
+  removeTeam(state, team) {
+    const index = state.teams.findIndex(e => e.name === team.name);
+
+    if (index > -1) {
+      state.teams.splice(index, 1);
+    }
+
+    localStorage.setItem("teams", JSON.stringify(state.teams));
+  },
+
   resetTeams(state) {
     localStorage.setItem("teams", JSON.stringify([]));
     state.teams = [];

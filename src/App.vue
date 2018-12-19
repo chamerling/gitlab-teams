@@ -59,7 +59,21 @@
                 <span class="white--text headline">{{team.icon || "🦊"}}</span>
               </v-avatar>
             </v-list-tile-avatar>
-            <v-list-tile-title v-text="team.name"></v-list-tile-title>
+            <v-list-tile-content>
+              <v-list-tile-title v-text="team.name"></v-list-tile-title>
+            </v-list-tile-content>
+            <v-list-tile-action>
+              <v-menu offset-y min-width="150">
+                <v-btn icon ripple slot="activator">
+                  <v-icon color="grey darken-1">more_vert</v-icon>
+                </v-btn>
+                <v-list>
+                  <v-list-tile @click.prevent="deleteTeam(team)">
+                    <v-list-tile-title>Delete</v-list-tile-title>
+                  </v-list-tile>
+                </v-list>
+              </v-menu>
+            </v-list-tile-action>
           </v-list-tile>
         </v-list>
         <v-list-tile @click="openSettings">
@@ -108,6 +122,10 @@ export default {
     },
     createTeam() {
       this.$router.push({ name: "create-team" });
+    },
+    deleteTeam(team) {
+      this.$store.dispatch('deleteTeam', team);
+      this.$router.push({ name: "home" });
     },
     goBack() {
       this.$router.go(-1);
