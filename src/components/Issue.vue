@@ -14,6 +14,14 @@
       <v-list-tile-sub-title>
         <div id="subtitle">
           {{ getProject(item.project_id).name }}#{{ item.iid }}
+          <div class="ml-1" v-for="assignee in item.assignees" :key="assignee.id">
+            <v-tooltip bottom>
+            <v-avatar size="16" slot="activator">
+              <img :src="assignee.avatar_url" :alt="assignee.username">
+            </v-avatar>
+            <span>Assigned to {{assignee.name}}</span>
+            </v-tooltip>
+          </div>
           <v-chip v-for="label in item.labels" :key="label" color="orange" small text-color="white">{{ label }}</v-chip>
         </div>
       </v-list-tile-sub-title>
