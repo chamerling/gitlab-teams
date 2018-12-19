@@ -37,6 +37,10 @@
           <span slot="badge">{{ item.upvotes }}</span>
           <v-icon>thumb_up</v-icon>
         </v-badge>
+        <v-badge class="pr-2" overlap left color="orange">
+          <span slot="badge">{{ item.downvotes }}</span>
+          <v-icon>thumb_down</v-icon>
+        </v-badge>
       </div>
     </v-list-tile-action>
   </v-list-tile>
