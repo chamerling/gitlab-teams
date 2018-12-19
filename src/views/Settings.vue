@@ -1,24 +1,45 @@
 <template>
   <div class="pa-3">
-    <v-form ref="form" v-model="valid">
-      <v-text-field
-        v-model="apiToken"
-        label="API Token"
-        :rules="tokenRules"
-        required
-      ></v-text-field>
-      <v-text-field
-        v-model="apiEndpoint"
-        label="Gitlab URL"
-        :rules="urlRules"
-        required
-      ></v-text-field>
-      <v-btn
-        :disabled="!valid"
-        @click="submit">
-        Submit
-      </v-btn>
-    </v-form>
+    <v-container fluid fill-height>
+      <v-layout align-center justify-center>
+        <v-flex xs12 sm8 md8>
+          <v-card class="elevation-12">
+            <v-toolbar dark>
+              <v-toolbar-title class="white--text">GitLab API Configuration</v-toolbar-title>
+            </v-toolbar>
+            <v-card-text>
+              <div class="body-1 mb-3">
+                You must define the API Token and the GitLab URL you want to use. More information on how to set this is available <a href="https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html" target="_blank">on the GitLab documentation</a>.
+                Nothing is sent to any other server than the one you define here.
+                Everything is stored locally, right in your browser.
+              </div>
+              <v-form ref="form" v-model="valid">
+                <v-text-field
+                  v-model="apiToken"
+                  label="API Token"
+                  :rules="tokenRules"
+                  required
+                ></v-text-field>
+                <v-text-field
+                  v-model="apiEndpoint"
+                  label="Gitlab URL"
+                  :rules="urlRules"
+                  required
+                ></v-text-field>
+              </v-form>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                :disabled="!valid"
+                @click="submit">
+                Go!
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
