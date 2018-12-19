@@ -16,13 +16,20 @@
           {{ getProject(item.project_id).name }}#{{ item.iid }}
           <div class="ml-1" v-for="assignee in item.assignees" :key="assignee.id">
             <v-tooltip bottom>
-            <v-avatar size="16" slot="activator">
-              <img :src="assignee.avatar_url" :alt="assignee.username">
-            </v-avatar>
-            <span>Assigned to {{assignee.name}}</span>
+              <v-avatar size="16" slot="activator">
+                <img :src="assignee.avatar_url" :alt="assignee.username">
+              </v-avatar>
+              <span>Assigned to {{assignee.name}}</span>
             </v-tooltip>
           </div>
-          <v-chip v-for="label in item.labels" :key="label" color="orange" small text-color="white">{{ label }}</v-chip>
+          <v-tooltip v-if="item.milestone" bottom>
+            <v-chip slot="activator" color="primary" small text-color="white">{{ item.milestone.title }}</v-chip>
+            <span>Milestone</span>
+          </v-tooltip>
+          <v-tooltip v-for="label in item.labels" :key="label" bottom>
+            <v-chip slot="activator" color="orange" small text-color="white">{{ label }}</v-chip>
+            <span>Label</span>
+          </v-tooltip>
         </div>
       </v-list-tile-sub-title>
     </v-list-tile-content>
