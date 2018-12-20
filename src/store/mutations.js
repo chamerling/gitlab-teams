@@ -89,8 +89,8 @@ export default {
   updateSettings(state, settings) {
     state.apiEndpoint = settings.apiEndpoint;
     state.apiToken = settings.apiToken;
-    localStorage.setItem("apiEndpoint", state.apiEndpoint);
-    localStorage.setItem("apiToken", state.apiToken);
+    localStorage.setItem("apiEndpoint", state.apiEndpoint || "");
+    localStorage.setItem("apiToken", state.apiToken || "");
     // FIXME: This MUST not be here
     gitlab.get().unwatchUser();
     gitlab.get().unwatchMergeRequests();
@@ -120,5 +120,5 @@ export default {
 
   setIssueSize(state, size) {
     state.issueSize = parseInt(size);
-  },
+  }
 };

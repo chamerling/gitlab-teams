@@ -37,6 +37,25 @@
               </v-btn>
             </v-card-actions>
           </v-card>
+
+          <v-card v-if="isConfigured" class="elevation-12 mt-5">
+            <v-toolbar dark>
+              <v-toolbar-title class="white--text">Clean data</v-toolbar-title>
+            </v-toolbar>
+            <v-card-text>
+              <div class="body-1 mb-3">
+                Everything which has been stored locally in this browser will be deleted.
+                You will have to configure everything again in this case.
+              </div>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn
+                @click="cleanAll">
+                Clean
+              </v-btn>
+            </v-card-actions>
+          </v-card>
         </v-flex>
       </v-layout>
     </v-container>
@@ -56,23 +75,49 @@ export default {
         v => !!v || 'URL is required',
         v => /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(v) || 'URL is not valid'
       ],
-      apiToken: null,
-      apiEndpoint: null
+      localApiToken: null,
+      localApiEndpoint: null
     };
   },
+  computed: {
+    isConfigured() {
+      return this.$store.getters.isConfigured;
+    },
+    apiToken: {
+      get() {
+        return this.$store.state.apiToken
+      },
+      set(value) {
+        this.localApiToken = value;
+      }
+    },
+    apiEndpoint: {
+      get() {
+        return this.$store.state.apiEndpoint
+      },
+      set(value) {
+        this.localApiEndpoint = value;
+      }
+    }
+  },
   mounted() {
-    this.apiToken = this.$store.state.apiToken;
-    this.apiEndpoint = this.$store.state.apiEndpoint;
+    this.localApiToken = this.$store.state.apiToken;
+    this.localApiEndpoint = this.$store.state.apiEndpoint;
   },
   methods: {
     submit() {
       if (this.$refs.form.validate()) {
         this.$store.dispatch("updateSettings", {
-          apiToken: this.apiToken,
-          apiEndpoint: this.apiEndpoint
+          apiToken: this.localApiToken,
+          apiEndpoint: this.localApiEndpoint
         });
         this.$router.push("/");
       }
+    },
+    cleanAll() {
+      this.$store.dispatch("cleanAll");
+      this.localApiToken = this.$store.state.apiToken;
+      this.localApiEndpoint = this.$store.state.apiEndpoint;
     }
   },
   components: {}

@@ -175,3 +175,7 @@ export const launchUserWatchers = () => {
   gl.watchTodos();
   gl.watchIssues();
 };
+
+export const cleanAll = ({ dispatch }) => {
+  dispatch("updateSettings", { apiEndpoint: undefined, apiToken: undefined });
+};
