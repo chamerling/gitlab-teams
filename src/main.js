@@ -8,9 +8,10 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import gitlab from "./gitlab";
+import style from "./style";
 
 Vue.config.productionTip = false;
-Vue.use(Vuetify);
+Vue.use(Vuetify, { theme: style });
 Vue.use(VueMoment);
 
 if (process.env.VUE_APP_GA) {
