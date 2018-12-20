@@ -9,14 +9,14 @@
             </v-toolbar>
             <v-card-text>
               <div class="body-1 mb-3">
-                You must define the API Token and the GitLab URL you want to use. More information on how to set this is available <a href="https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html" target="_blank">on the GitLab documentation</a>.
+                You must define the 'Personal Access Token' (with <b>api</b> scope) and the 'GitLab URL' you want to use. More information on how to set this is available <a href="https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html" target="_blank">on the GitLab documentation</a>.
                 Nothing is sent to any other server than the one you define here.
                 Everything is stored locally, right in your browser.
               </div>
               <v-form ref="form" v-model="valid">
                 <v-text-field
                   v-model="apiToken"
-                  label="API Token"
+                  label="Personal Access Token"
                   :rules="tokenRules"
                   required
                 ></v-text-field>
