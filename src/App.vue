@@ -92,7 +92,7 @@
       </v-navigation-drawer>
       <v-toolbar dark flat fixed app clipped-left dense color="orange darken-4">
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <v-toolbar-title>Gitlab Teams</v-toolbar-title>
+        <v-toolbar-title>GitLab Teams</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon @click="goBack" v-if="isConfigured && $route.name === 'settings'">
           <v-icon small>clear</v-icon>

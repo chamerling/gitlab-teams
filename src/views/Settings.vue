@@ -22,7 +22,7 @@
                 ></v-text-field>
                 <v-text-field
                   v-model="apiEndpoint"
-                  label="Gitlab URL"
+                  label="GitLab URL"
                   :rules="urlRules"
                   required
                 ></v-text-field>

@@ -30,7 +30,7 @@
         <template slot="no-data">
           <v-list-tile>
             <v-list-tile-title>
-              Search Gitlab User...
+              Search GitLab User...
             </v-list-tile-title>
           </v-list-tile>
         </template>
