@@ -1,5 +1,7 @@
 # gitlab-teams
 
+[![Build Status](https://travis-ci.com/chamerling/gitlab-teams.svg?branch=master)](https://travis-ci.com/chamerling/gitlab-teams)
+
 View your defined Gitlab teams Merge Requests live-updated without effort i.e. the missing thing from Gitlab.
 
 This project is only a frontend app based on Vue and RxJS. This is still a WIP: No error handling, no tests, etc, but it works pretty well for now.
