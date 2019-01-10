@@ -1,66 +1,83 @@
 <template>
   <div class="pa-3">
-    <v-form ref="form" v-model="valid" lazy-validation>
-      <v-text-field
-        v-model="name"
-        label="Name"
-        :rules="[v => !!v || 'Name is required']"
-        required
-        autofocus
-      ></v-text-field>
-      <v-text-field
-        v-model="icon"
-        label="Avatar 🤖 🦊 🤡"
-        disabled
-        required
-      ></v-text-field>
-      <v-autocomplete
-        v-model="members"
-        :items="items"
-        :loading="isLoading"
-        :search-input.sync="search"
-        chips
-        item-text="name"
-        item-value="name"
-        label="Members"
-        multiple
-        cache-items
-        return-object
-      >
-        <template slot="no-data">
-          <v-list-tile>
-            <v-list-tile-title>
-              Search GitLab User...
-            </v-list-tile-title>
-          </v-list-tile>
-        </template>
-        <template slot="selection" slot-scope="data">
-          <v-chip
-            :selected="data.selected"
-            close
-            @input="remove(data.item, data)"
-          >
-            <v-avatar>
-              <img :src="data.item.avatar_url">
-            </v-avatar>
-          {{ data.item.name }}
-          </v-chip>
-        </template>
+    <v-container fluid fill-height>
+      <v-layout align-center justify-center>
+        <v-flex xs12 sm8 md8>
+          <v-card class="elevation-12">
+            <v-toolbar dark>
+              <v-toolbar-title class="white--text">Create a new team</v-toolbar-title>
+            </v-toolbar>
+            <v-card-text>
+              <v-form ref="form" v-model="valid" lazy-validation>
+                <v-text-field
+                  v-model="name"
+                  label="Name"
+                  :rules="[v => !!v || 'Name is required']"
+                  required
+                  autofocus
+                ></v-text-field>
+                <v-text-field
+                  v-model="icon"
+                  label="Avatar 🤖 🦊 🤡"
+                  disabled
+                  required
+                ></v-text-field>
+                <v-autocomplete
+                  v-model="members"
+                  :items="items"
+                  :loading="isLoading"
+                  :search-input.sync="search"
+                  chips
+                  item-text="name"
+                  item-value="name"
+                  label="Members"
+                  multiple
+                  cache-items
+                  return-object
+                >
+                  <template slot="no-data">
+                    <v-list-tile>
+                      <v-list-tile-title>
+                        Search GitLab User...
+                      </v-list-tile-title>
+                    </v-list-tile>
+                  </template>
+                  <template slot="selection" slot-scope="data">
+                    <v-chip
+                      :selected="data.selected"
+                      close
+                      @input="remove(data.item, data)"
+                    >
+                      <v-avatar>
+                        <img :src="data.item.avatar_url">
+                      </v-avatar>
+                    {{ data.item.name }}
+                    </v-chip>
+                  </template>
 
-        <template slot="item" slot-scope="data">
-          <v-list-tile-avatar>
-            <v-avatar>
-              <img :src="data.item.avatar_url"/>
-            </v-avatar>
-          </v-list-tile-avatar>
-          <v-list-tile-content>
-            <v-list-tile-title v-text="data.item.name"></v-list-tile-title>
-          </v-list-tile-content>
-        </template>
-      </v-autocomplete>
-      <v-btn :disabled="!valid" @click="create">Create</v-btn>
-      <v-btn @click="clear">Clear</v-btn>
-    </v-form>
+                  <template slot="item" slot-scope="data">
+                    <v-list-tile-avatar>
+                      <v-avatar>
+                        <img :src="data.item.avatar_url"/>
+                      </v-avatar>
+                    </v-list-tile-avatar>
+                    <v-list-tile-content>
+                      <v-list-tile-title v-text="data.item.name"></v-list-tile-title>
+                    </v-list-tile-content>
+                  </template>
+                </v-autocomplete>
+
+              </v-form>
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn :disabled="!valid" @click="create">Create</v-btn>
+              <v-btn @click="clear">Clear</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+      </v-layout>
+    </v-container>
   </div>
 </template>
 
