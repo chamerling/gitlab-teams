@@ -34,13 +34,23 @@
           <span slot="badge">{{ mr.upvotes }}</span>
           <v-icon>thumb_up</v-icon>
         </v-badge>
-        <v-btn outline fab small dark
+        <v-btn class="mr-3" outline fab small
           @click.prevent="merge()"
           :disabled="merging || mr.work_in_progress || mr.merge_status !== 'can_be_merged'"
           :loading="merging"
         >
           <v-icon>merge_type</v-icon>
         </v-btn>
+        <v-menu offset-y min-width="150">
+          <v-btn icon ripple slot="activator" @click.native.prevent>
+            <v-icon color="grey darken-1">more_vert</v-icon>
+          </v-btn>
+          <v-list>
+            <v-list-tile @click="copyLink()">
+              <v-list-tile-title>Copy link</v-list-tile-title>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
       </div>
     </v-list-tile-action>
   </v-list-tile>
@@ -88,6 +98,14 @@ export default {
         canceled: "highlight_off"
       };
       return icons[this.pipeline.status] || "help";
+    },
+
+    copyLink() {
+      const link = `${this.mr.title} - ${this.mr.web_url}`;
+
+      this.$copyText(link)
+        .then(copied => { /* TODO */ })
+        .catch(err => { /* TODO */ });
     },
 
     merge() {
