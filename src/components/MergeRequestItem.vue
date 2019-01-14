@@ -46,6 +46,9 @@
             <v-icon color="grey darken-1">more_vert</v-icon>
           </v-btn>
           <v-list>
+            <v-list-tile :href="mr.web_url" target="_blank">
+              <v-list-tile-title>Open</v-list-tile-title>
+            </v-list-tile>
             <v-list-tile @click="copyLink()">
               <v-list-tile-title>Copy link</v-list-tile-title>
             </v-list-tile>
