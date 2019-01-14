@@ -34,13 +34,17 @@
           <span slot="badge">{{ mr.upvotes }}</span>
           <v-icon>thumb_up</v-icon>
         </v-badge>
-        <v-btn class="mr-3" outline fab small
-          @click.prevent="merge()"
-          :disabled="merging || mr.work_in_progress || mr.merge_status !== 'can_be_merged'"
-          :loading="merging"
-        >
-          <v-icon>merge_type</v-icon>
-        </v-btn>
+        <v-tooltip bottom>
+          <v-btn class="mr-3" outline fab small
+            slot="activator"
+            @click.prevent="merge()"
+            :disabled="merging || mr.work_in_progress || mr.merge_status !== 'can_be_merged'"
+            :loading="merging"
+          >
+            <v-icon>merge_type</v-icon>
+          </v-btn>
+          <span>Merge it</span>
+        </v-tooltip>
         <v-menu offset-y min-width="150">
           <v-btn icon ripple slot="activator" @click.native.prevent>
             <v-icon color="grey darken-1">more_vert</v-icon>
