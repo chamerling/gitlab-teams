@@ -6,12 +6,7 @@
 
     <v-list-tile-content>
       <v-list-tile-title id="title">
-        <v-tooltip bottom v-if="pipeline">
-          <v-icon slot="activator" :color="getPipelineColor()">{{getPipelineIcon()}}</v-icon>
-          <span>Pipeline {{pipeline.status}} - </span>
-          <span v-if="pipeline.status === 'running'">Started {{ pipeline.updated_at | moment("calendar")}}</span>
-          <span v-else>Finished {{ pipeline.finished_at | moment("calendar")}}</span>
-        </v-tooltip>
+        <pipeline v-if="pipeline" :pipeline="pipeline"/>
         <span>{{ mr.title }}</span>
       </v-list-tile-title>
       <v-list-tile-sub-title>
@@ -65,7 +60,8 @@
 
 <script>
 import { mapGetters } from "vuex";
-import UserAvatarPopover from "./UserAvatarPopover.vue";
+import UserAvatarPopover from "@/components/UserAvatarPopover.vue";
+import PipelinePopover from "@/components/PipelinePopover.vue";
 
 export default {
   name: "MergeRequestItem",
@@ -84,29 +80,6 @@ export default {
     })
   },
   methods: {
-    getPipelineColor() {
-      const colors = {
-        pending: "warning",
-        failed: "error",
-        success: "success",
-        running: "primary",
-        canceled: "black"
-      };
-
-      return colors[this.pipeline.status] || "primary";
-    },
-
-    getPipelineIcon() {
-      const icons = {
-        pending: "pause_circle_outline",
-        failed: "error_outline",
-        success: "check_circle_outline",
-        running: "timelapse",
-        canceled: "highlight_off"
-      };
-      return icons[this.pipeline.status] || "help";
-    },
-
     copyLink() {
       const link = `${this.mr.title} - ${this.mr.web_url}`;
 
@@ -127,7 +100,8 @@ export default {
     }
   },
   components: {
-    "user-avatar": UserAvatarPopover
+    "user-avatar": UserAvatarPopover,
+    "pipeline": PipelinePopover
   }
 };
 </script>
