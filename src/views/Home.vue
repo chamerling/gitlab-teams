@@ -21,7 +21,7 @@ export default {
   data() {
     return {
       active: null
-    }
+    };
   },
   components: {
     MergeRequests

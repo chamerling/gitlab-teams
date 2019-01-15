@@ -126,7 +126,7 @@ export default {
       this.$router.push({ name: "create-team" });
     },
     deleteTeam(team) {
-      this.$store.dispatch('deleteTeam', team);
+      this.$store.dispatch("deleteTeam", team);
       this.$router.push({ name: "home" });
     },
     goBack() {
@@ -138,7 +138,11 @@ export default {
       return this.$store.getters.isConfigured;
     },
     teams() {
-      return _.orderBy(this.$store.getters.getTeams, [team => team.name.toLowerCase()], "asc");
+      return _.orderBy(
+        this.$store.getters.getTeams,
+        [team => team.name.toLowerCase()],
+        "asc"
+      );
     },
     ...mapGetters({
       todosSize: "getTodosSize"

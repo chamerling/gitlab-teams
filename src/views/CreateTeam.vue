@@ -83,7 +83,6 @@
 
 <script>
 import gitlab from "@/gitlab";
-import _ from "lodash";
 
 export default {
   data: () => ({
@@ -102,18 +101,18 @@ export default {
           name: this.name,
           icon: this.icon,
           usernames: this.members.map(member => member.username)
-        }
+        };
 
         this.$store.dispatch("createTeam", team);
         this.$router.push({ name: "team", params: { name: team.name } });
       }
     },
     clear() {
-      this.$refs.form.reset()
+      this.$refs.form.reset();
     },
-    remove(item, data) {
+    remove(item) {
       const index = this.members.findIndex(member => member.id === item.id);
-      if (index >= 0) this.members.splice(index, 1)
+      if (index >= 0) this.members.splice(index, 1);
     }
   },
   watch: {
@@ -123,7 +122,9 @@ export default {
       }
       this.isLoading = true;
 
-      gitlab.get().client.searchUsers(val)
+      gitlab
+        .get()
+        .client.searchUsers(val)
         .then(res => (this.items = res.data))
         .catch(console.log)
         .finally(() => (this.isLoading = false));

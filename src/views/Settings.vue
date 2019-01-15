@@ -68,12 +68,14 @@ export default {
   data() {
     return {
       valid: false,
-      tokenRules: [
-        v => !!v || 'Token is required'
-      ],
+      tokenRules: [v => !!v || "Token is required"],
       urlRules: [
-        v => !!v || 'URL is required',
-        v => /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(v) || 'URL is not valid'
+        v => !!v || "URL is required",
+        v =>
+          // eslint-disable-next-line
+          /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(
+            v
+          ) || "URL is not valid"
       ],
       localApiToken: null,
       localApiEndpoint: null
@@ -85,7 +87,7 @@ export default {
     },
     apiToken: {
       get() {
-        return this.$store.state.apiToken
+        return this.$store.state.apiToken;
       },
       set(value) {
         this.localApiToken = value;
@@ -93,7 +95,7 @@ export default {
     },
     apiEndpoint: {
       get() {
-        return this.$store.state.apiEndpoint
+        return this.$store.state.apiEndpoint;
       },
       set(value) {
         this.localApiEndpoint = value;

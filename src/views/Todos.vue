@@ -23,7 +23,6 @@
 <script>
 import { mapGetters } from "vuex";
 import Todo from "@/components/Todo.vue";
-import store from "@/store";
 
 export default {
   name: "todos",

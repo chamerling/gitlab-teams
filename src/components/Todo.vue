@@ -69,15 +69,12 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 import UserAvatarPopover from "./UserAvatarPopover.vue";
 
 export default {
   name: "Todo",
   props: {
     item: Object
-  },
-  computed: {
   },
   methods: {
     markAsRead: function() {

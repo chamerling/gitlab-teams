@@ -11,8 +11,8 @@
     <v-card>
       <v-card-text>
         <span>Pipeline {{pipeline.status}} - </span>
-        <span v-if="pipeline.status === 'running'">Started {{ pipeline.updated_at | moment("calendar")}}</span>
-        <span v-else>Finished {{ pipeline.finished_at | moment("calendar")}}</span>
+        <span v-if="pipeline.status === 'running'">Started {{ pipeline.updated_at | moment("calendar")}}</span>
+        <span v-else>Finished {{ pipeline.finished_at | moment("calendar")}}</span>
       </v-card-text>
       <!--
       <v-card-actions>
@@ -56,9 +56,6 @@ export default {
   },
   data: () => ({
     menu: false
-  }),
-  mounted() {
-  }
-}
+  })
+};
 </script>
-

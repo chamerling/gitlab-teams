@@ -6,17 +6,17 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+import { mapState } from "vuex";
 
 export default {
   name: "Snackbar",
   computed: {
     show: {
-    	get() {
-      	return this.$store.state.snackbar.show;
+      get() {
+        return this.$store.state.snackbar.show;
       },
       set(value) {
-      	this.$store.dispatch('showSnackbar', value);
+        this.$store.dispatch("showSnackbar", value);
       }
     },
     ...mapState(["snackbar"])

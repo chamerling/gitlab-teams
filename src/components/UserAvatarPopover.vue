@@ -39,8 +39,6 @@ export default {
   data: () => ({
     menu: false
   }),
-  mounted() {
-  }
-}
+  mounted() {}
+};
 </script>
-

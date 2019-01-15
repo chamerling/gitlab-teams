@@ -17,7 +17,6 @@
 <script>
 import { mapGetters } from "vuex";
 import Issue from "@/components/Issue.vue";
-import store from "@/store";
 
 export default {
   name: "issues",
@@ -30,7 +29,6 @@ export default {
       issuesSize: "getIssuesSize"
     })
   },
-  methods: {
-  }
+  methods: {}
 };
 </script>

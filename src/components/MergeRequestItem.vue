@@ -68,7 +68,7 @@ export default {
   data() {
     return {
       merging: false
-    }
+    };
   },
   props: {
     mr: Object,
@@ -84,24 +84,31 @@ export default {
       const link = `${this.mr.title} - ${this.mr.web_url}`;
 
       this.$copyText(link)
-        .then(() => this.$store.dispatch("displaySnackbarMessage", "Link copied"))
-        .catch(err => { /* TODO */ });
+        .then(() =>
+          this.$store.dispatch("displaySnackbarMessage", "Link copied")
+        )
+        .catch(() => {
+          /* TODO */
+        });
     },
 
     merge() {
       this.merging = true;
-      this.$store.dispatch("merge", this.mr).then(() => {
-      }).catch(err => {
-        // TODO: MR can not be merged
-        console.log(err);
-      }).finally(() => {
-        this.merging = false;
-      });
+      this.$store
+        .dispatch("merge", this.mr)
+        .then(() => {})
+        .catch(err => {
+          // TODO: MR can not be merged
+          console.log(err);
+        })
+        .finally(() => {
+          this.merging = false;
+        });
     }
   },
   components: {
     "user-avatar": UserAvatarPopover,
-    "pipeline": PipelinePopover
+    pipeline: PipelinePopover
   }
 };
 </script>

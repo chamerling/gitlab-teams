@@ -58,8 +58,8 @@ import { mapGetters } from "vuex";
 import UserAvatarPopover from "./UserAvatarPopover.vue";
 
 const states = {
-  opened: 'open',
-  closed: 'closed'
+  opened: "open",
+  closed: "closed"
 };
 
 export default {

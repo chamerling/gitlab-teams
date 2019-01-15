@@ -1,6 +1,13 @@
 import Client from "./client";
 import { from, timer } from "rxjs";
-import { flatMap, switchMap, pluck, distinct, share, map } from "rxjs/operators";
+import {
+  flatMap,
+  switchMap,
+  pluck,
+  distinct,
+  share,
+  map
+} from "rxjs/operators";
 import EventEmitter from "eventemitter3";
 
 export default class Api extends EventEmitter {
