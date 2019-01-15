@@ -112,7 +112,7 @@
 <script>
 import _ from "lodash";
 import { mapGetters } from "vuex";
-import Snackbar from "@/components/Snackbar.vue";
+import Snackbar from "@/components/ui/Snackbar.vue";
 
 export default {
   data: () => ({
