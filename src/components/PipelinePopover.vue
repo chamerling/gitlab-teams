@@ -21,7 +21,6 @@
       </v-card-actions>
       -->
     </v-card>
-    </v-card>
   </v-menu>
 </template>
 
