@@ -120,5 +120,14 @@ export default {
 
   setIssueSize(state, size) {
     state.issueSize = parseInt(size);
+  },
+
+  showSnackbar(state, value) {
+    state.snackbar.show = value;
+  },
+
+  displaySnackbarMessage(state, message) {
+    state.snackbar.message = message;
+    state.snackbar.show = true;
   }
 };

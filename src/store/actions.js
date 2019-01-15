@@ -179,3 +179,11 @@ export const launchUserWatchers = () => {
 export const cleanAll = ({ dispatch }) => {
   dispatch("updateSettings", { apiEndpoint: undefined, apiToken: undefined });
 };
+
+export const showSnackbar = ({ commit }, value) => {
+  commit("showSnackbar", value);
+};
+
+export const displaySnackbarMessage = ({ commit }, message) => {
+  commit("displaySnackbarMessage", message);
+};

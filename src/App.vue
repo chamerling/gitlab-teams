@@ -105,12 +105,14 @@
           </transition>
         </v-container>
       </v-content>
+      <snackbar/>
     </v-app>
   </div>
 </template>
 <script>
 import _ from "lodash";
 import { mapGetters } from "vuex";
+import Snackbar from "@/components/Snackbar.vue";
 
 export default {
   data: () => ({
@@ -148,6 +150,9 @@ export default {
     } else {
       this.$store.dispatch("launchUserWatchers");
     }
+  },
+  components: {
+    snackbar: Snackbar
   }
 };
 </script>
