@@ -51,6 +51,15 @@ export default class Client {
     );
   }
 
+  closeMergeRequest({ project_id, iid }) {
+    return this.client.put(
+      `/api/v4/projects/${project_id}/merge_requests/${iid}`,
+      {
+        state_event: "close"
+      }
+    );
+  }
+
   fetchPipelines(projectId, refId) {
     return this.client.get(
       `/api/v4/projects/${projectId}/pipelines?ref=${refId}`

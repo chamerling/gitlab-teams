@@ -33,7 +33,7 @@
           <v-btn class="mr-3" outline fab small
             slot="activator"
             @click.prevent="merge()"
-            :disabled="merging || mr.work_in_progress || mr.merge_status !== 'can_be_merged'"
+            :disabled="merging || closing || mr.work_in_progress || mr.merge_status !== 'can_be_merged'"
             :loading="merging"
           >
             <v-icon>merge_type</v-icon>
@@ -46,7 +46,10 @@
           </v-btn>
           <v-list>
             <v-list-tile :href="mr.web_url" target="_blank">
-              <v-list-tile-title>Open</v-list-tile-title>
+              <v-list-tile-title>View on GitLab</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile v-if="canBeClosed" @click="close()">
+              <v-list-tile-title>Close MR</v-list-tile-title>
             </v-list-tile>
             <v-list-tile @click="copyLink()">
               <v-list-tile-title>Copy link</v-list-tile-title>
@@ -67,7 +70,8 @@ export default {
   name: "MergeRequestItem",
   data() {
     return {
-      merging: false
+      merging: false,
+      closing: false
     };
   },
   props: {
@@ -75,6 +79,9 @@ export default {
     pipeline: Object
   },
   computed: {
+    canBeClosed() {
+      return this.mr.state === "opened";
+    },
     ...mapGetters({
       getProject: "getProject"
     })
@@ -103,6 +110,21 @@ export default {
         })
         .finally(() => {
           this.merging = false;
+        });
+    },
+
+    close() {
+      this.closing = true;
+      this.$store
+        .dispatch("closeMergeRequest", this.mr)
+        .catch(() =>
+          this.$store.dispatch(
+            "displaySnackbarMessage",
+            "Error while closing MR"
+          )
+        )
+        .finally(() => {
+          this.closing = false;
         });
     }
   },

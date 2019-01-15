@@ -50,6 +50,14 @@ export const merge = ({ dispatch }, mr) => {
   });
 };
 
+export const closeMergeRequest = ({ dispatch }, mr) => {
+  const gl = gitlab.get();
+
+  return gl.client.closeMergeRequest(mr).then(() => {
+    dispatch("removeMergeRequest", mr);
+  });
+};
+
 export const addMergeRequest = ({ commit }, mr) => {
   commit("addMergeRequest", mr);
 };
