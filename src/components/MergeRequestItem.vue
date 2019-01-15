@@ -84,7 +84,7 @@ export default {
       const link = `${this.mr.title} - ${this.mr.web_url}`;
 
       this.$copyText(link)
-        .then(copied => { /* TODO */ })
+        .then(() => this.$store.dispatch("displaySnackbarMessage", "Link copied"))
         .catch(err => { /* TODO */ });
     },
 
