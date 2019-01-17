@@ -1,5 +1,5 @@
 <template>
-  <v-list-tile avatar :href="mr.web_url" target="_blank">
+  <v-list-tile avatar>
     <v-list-tile-avatar @click.prevent="$router.push({ name: 'user', params: {name: mr.author.username} })">
       <user-avatar :user="mr.author"/>
     </v-list-tile-avatar>
@@ -54,6 +54,23 @@
             <v-list-tile @click="copyLink()">
               <v-list-tile-title>Copy link</v-list-tile-title>
             </v-list-tile>
+            <v-list-tile @click="showMore=true">
+              <v-list-tile-title>Show more...</v-list-tile-title>
+              <v-dialog v-model="showMore" max-width="800px" lazy>
+                <v-card>
+                  <v-card-title primary-title>
+                    <h3>{{ mr.title }}</h3>
+                  </v-card-title>
+                  <v-card-text>
+                    <merge-request-details :mr="mr"/>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="primary" flat @click="showMore=false">Close</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-list-tile>
           </v-list>
         </v-menu>
       </div>
@@ -65,11 +82,13 @@
 import { mapGetters } from "vuex";
 import UserAvatarPopover from "@/components/UserAvatarPopover.vue";
 import PipelinePopover from "@/components/PipelinePopover.vue";
+import MergeRequestDetails from "@/components/MergeRequestDetails.vue";
 
 export default {
   name: "MergeRequestItem",
   data() {
     return {
+      showMore: false,
       merging: false,
       closing: false
     };
@@ -130,7 +149,8 @@ export default {
   },
   components: {
     "user-avatar": UserAvatarPopover,
-    pipeline: PipelinePopover
+    pipeline: PipelinePopover,
+    "merge-request-details": MergeRequestDetails
   }
 };
 </script>

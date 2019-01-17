@@ -2,6 +2,7 @@ import axios from "axios";
 
 export default class Client {
   constructor(baseURL, privateToken) {
+    this.baseURL = baseURL;
     this.client = this._createClient(baseURL, privateToken);
   }
 
@@ -26,6 +27,12 @@ export default class Client {
 
   searchUsers(text) {
     return this.client.get(`/api/v4/users?search=${text}`);
+  }
+
+  getAvatarUrl(email) {
+    return this.client
+      .get(`/api/v4/avatar?email=${email}`)
+      .then(result => result.data);
   }
 
   fetchMergeRequests({ state = "opened", author_id }) {
@@ -58,6 +65,18 @@ export default class Client {
         state_event: "close"
       }
     );
+  }
+
+  getCommitsForMergeRequest({ project_id, iid }) {
+    return this.client
+      .get(`/api/v4/projects/${project_id}/merge_requests/${iid}/commits`)
+      .then(result => result.data);
+  }
+
+  getCommit({ project_id, sha }) {
+    return this.client
+      .get(`/api/v4/projects/${project_id}/repository/commits/${sha}`)
+      .then(result => result.data);
   }
 
   fetchPipelines(projectId, refId) {
