@@ -1,5 +1,5 @@
 <template>
-  <v-list-tile avatar>
+  <v-list-tile avatar :href="mr.web_url" target="_blank">
     <v-list-tile-avatar @click.prevent="$router.push({ name: 'user', params: {name: mr.author.username} })">
       <user-avatar :user="mr.author"/>
     </v-list-tile-avatar>
