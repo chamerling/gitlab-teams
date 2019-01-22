@@ -15,6 +15,18 @@
       <v-list-tile-sub-title>
         <div id="subtitle">
           {{ getProject(mr.project_id).name }}!{{ mr.iid }} - {{ mr.source_branch }} into {{ mr.target_branch }}
+          <div class="ml-1" v-if="mr.assignee">
+            <v-tooltip bottom>
+              <v-avatar size="16" slot="activator">
+                <img :src="mr.assignee.avatar_url" :alt="mr.assignee.username">
+              </v-avatar>
+              <span>Assigned to {{mr.assignee.name}}</span>
+            </v-tooltip>
+          </div>
+          <v-tooltip v-for="label in mr.labels" :key="label" bottom>
+            <v-chip slot="activator" color="orange" small text-color="white">{{ label }}</v-chip>
+            <span>Label</span>
+          </v-tooltip>
         </div>
       </v-list-tile-sub-title>
     </v-list-tile-content>
@@ -159,6 +171,10 @@ export default {
   #subtitle, #title {
     display: flex
     align-items: center
+
+    .v-chip--small {
+      height: 16px;
+    }
   }
 
   #actions {
