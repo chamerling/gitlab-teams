@@ -1,35 +1,38 @@
 <template>
   <div class="home">
-    <v-tabs v-model="active" dark slider-color="orange">
-      <v-tab ripple>
-        My Merge Requests
+    <v-tabs v-model="activeTab" dark slider-color="orange">
+      <!-- did not find something else than @click to work with default tab and not going into infinite loop with process 100% on Chrome at least -->
+      <v-tab key="open" @click="$router.push({ name: 'home' })">
+        Open
+      </v-tab>
+      <v-tab key="merged" to="/mrs/merged">
+        Merged
+      </v-tab>
+      <v-tab key="closed" to="/mrs/closed">
+        Closed
       </v-tab>
       <v-tab-item>
-        <merge-requests :merge-requests="mergeRequests" v-if="mergeRequests.length"/>
+        <router-view></router-view>
+      </v-tab-item>
+      <v-tab-item value="/mrs/merged">
+        <router-view></router-view>
+      </v-tab-item>
+      <v-tab-item value="/mrs/closed">
+        <router-view></router-view>
       </v-tab-item>
     </v-tabs>
   </div>
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-import MergeRequests from "@/components/MergeRequests.vue";
 import store from "@/store";
 
 export default {
   name: "home",
   data() {
     return {
-      active: null
+      activeTab: null
     };
-  },
-  components: {
-    MergeRequests
-  },
-  computed: {
-    ...mapGetters({
-      mergeRequests: "getMergeRequests"
-    })
   },
   beforeRouteEnter(to, from, next) {
     store.dispatch("loadCurrentUser");

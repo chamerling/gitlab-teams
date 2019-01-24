@@ -6,6 +6,7 @@ import Team from "./views/Team.vue";
 import Todos from "./views/Todos.vue";
 import Issues from "./views/Issues.vue";
 import User from "./views/User.vue";
+import MergeRequests from "./views/MergeRequests.vue";
 import CreateTeam from "@/views/CreateTeam.vue";
 
 Vue.use(Router);
@@ -15,8 +16,20 @@ export default new Router({
   routes: [
     {
       path: "/",
-      name: "home",
-      component: Home
+      component: Home,
+      children: [
+        {
+          // default children takes the inital parent name
+          path: "",
+          name: "home",
+          component: MergeRequests
+        },
+        {
+          path: "/mrs/:state",
+          name: "home.others",
+          component: MergeRequests
+        }
+      ]
     },
     {
       path: "/todo",
