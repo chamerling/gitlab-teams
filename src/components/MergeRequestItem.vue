@@ -45,7 +45,7 @@
           <v-btn class="mr-3" outline fab small
             slot="activator"
             @click.prevent="merge()"
-            :disabled="merging || closing || mr.work_in_progress || mr.merge_status !== 'can_be_merged' || mr.state !== 'opened'"
+            :disabled="merging || closing || mr.work_in_progress || mr.merge_status !== 'can_be_merged' || mr.state !== 'opened'"
             :loading="merging"
           >
             <v-icon>merge_type</v-icon>

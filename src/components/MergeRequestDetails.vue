@@ -17,8 +17,8 @@
               <span>{{ commit.title }}</span>
             </v-list-tile-title>
             <v-list-tile-sub-title>
-              <span class="green--text font-weight-medium">+{{ commit.stats.additions }}</span>
-              <span class="ml-2 red--text font-weight-medium">-{{ commit.stats.deletions }}</span>
+              <span class="green--text font-weight-medium">+{{ commit.stats.additions }}</span>
+              <span class="ml-2 red--text font-weight-medium">-{{  commit.stats.deletions }}</span>
             </v-list-tile-sub-title>
           </v-list-tile-content>
           <v-list-tile-action>
@@ -35,7 +35,6 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
 import gitlab from "@/gitlab";
 
 export default {
@@ -43,11 +42,11 @@ export default {
   props: {
     mr: Object
   },
-  data () {
+  data() {
     return {
       loaded: false,
       commits: []
-    }
+    };
   },
   methods: {
     copySha(commit) {
@@ -65,21 +64,31 @@ export default {
     },
 
     getAllCommitsDetails(commits) {
-      return Promise.all(commits.map(commit => this.getCommit({ project_id: this.mr.project_id, sha: commit.id })));
+      return Promise.all(
+        commits.map(commit =>
+          this.getCommit({ project_id: this.mr.project_id, sha: commit.id })
+        )
+      );
     },
 
     getCommit({ project_id, sha }) {
-      return gitlab.get().client.getCommit({ project_id, sha }).then(commit => {
-        return this.getAvatarUrl(commit).then(url => {
-          commit.avatar_url = url;
+      return gitlab
+        .get()
+        .client.getCommit({ project_id, sha })
+        .then(commit => {
+          return this.getAvatarUrl(commit).then(url => {
+            commit.avatar_url = url;
 
-          return commit;
+            return commit;
+          });
         });
-      })
     },
 
     getAvatarUrl(commit) {
-      return gitlab.get().client.getAvatarUrl(commit.author_email).then(url => url.avatar_url);
+      return gitlab
+        .get()
+        .client.getAvatarUrl(commit.author_email)
+        .then(url => url.avatar_url);
     }
   },
   mounted() {
