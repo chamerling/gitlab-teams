@@ -35,9 +35,9 @@ export default class Client {
       .then(result => result.data);
   }
 
-  fetchMergeRequests({ state = "opened", author_id }) {
+  fetchMergeRequests({ state = "opened", author_id, page = 1 }) {
     // TODO: Use axios query params
-    let endpoint = `/api/v4/merge_requests?state=${state}`;
+    let endpoint = `/api/v4/merge_requests?state=${state}&page=${page}`;
 
     if (author_id) {
       endpoint = `${endpoint}&scope=all&author_id=${author_id}`;

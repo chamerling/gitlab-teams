@@ -12,14 +12,15 @@
         Closed
       </v-tab>
       <v-tab-item>
-        <router-view></router-view>
+        <router-view/>
       </v-tab-item>
-      <v-tab-item value="/mrs/merged">
-        <router-view></router-view>
+      <!--<v-tab-item value="/mrs/merged">
+        <router-view v-if="activeTab === '/mrs/merged'"></router-view>
       </v-tab-item>
       <v-tab-item value="/mrs/closed">
-        <router-view></router-view>
+        <router-view v-if="activeTab === '/mrs/closed'"></router-view>
       </v-tab-item>
+      -->
     </v-tabs>
   </div>
 </template>

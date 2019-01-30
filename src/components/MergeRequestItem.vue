@@ -14,7 +14,7 @@
       </v-list-tile-sub-title>
       <v-list-tile-sub-title>
         <div id="subtitle">
-          {{ getProject(mr.project_id).name }}!{{ mr.iid }} - {{ mr.source_branch }} into {{ mr.target_branch }}
+          {{ getProject(mr.project_id) && getProject(mr.project_id).name }}!{{ mr.iid }} - {{ mr.source_branch }} into {{ mr.target_branch }}
           <div class="ml-1" v-if="mr.assignee">
             <v-tooltip bottom>
               <v-avatar size="16" slot="activator">
