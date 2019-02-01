@@ -99,6 +99,18 @@ export default class Client {
     });
   }
 
+  cancelPipeline(projectId, id) {
+    return this.client
+      .post(`/api/v4/projects/${projectId}/pipelines/${id}/cancel`)
+      .then(result => result.data);
+  }
+
+  retryPipeline(projectId, id) {
+    return this.client
+      .post(`/api/v4/projects/${projectId}/pipelines/${id}/retry`)
+      .then(result => result.data);
+  }
+
   getCurrentUser() {
     return this.client.get("/api/v4/user");
   }

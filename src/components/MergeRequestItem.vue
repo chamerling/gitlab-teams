@@ -6,8 +6,8 @@
 
     <v-list-tile-content>
       <v-list-tile-title id="title">
-        <pipeline v-if="pipeline" :pipeline="pipeline"/>
-        <span>{{ mr.title }}</span>
+        <pipeline v-if="pipeline" :pipeline="pipeline" :mr="mr"/>
+        <span class="ml-1">{{ mr.title }}</span>
       </v-list-tile-title>
       <v-list-tile-sub-title>
         Created {{ mr.created_at | moment("calendar")}} - Updated {{ mr.updated_at | moment('calendar')}}

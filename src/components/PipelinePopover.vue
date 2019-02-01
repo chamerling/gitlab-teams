@@ -9,28 +9,56 @@
   >
     <v-icon slot="activator" :color="getPipelineColor()" @click.native.prevent>{{getPipelineIcon()}}</v-icon>
     <v-card>
-      <v-card-text>
-        <span>Pipeline {{pipeline.status}} - </span>
+      <v-card-text id="card-text">
+        <v-icon :color="getPipelineColor()" class="mr-1">{{getPipelineIcon()}}</v-icon>
+        <span>Pipeline #{{pipeline.id}} {{pipeline.status}}</span>
+        <span class="ml-1 mr-1">-</span>
         <span v-if="pipeline.status === 'running'">Started {{ pipeline.updated_at | moment("calendar")}}</span>
         <span v-else>Finished {{ pipeline.finished_at | moment("calendar")}}</span>
       </v-card-text>
-      <!--
       <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn small color="success">Relaunch</v-btn>
+        <v-spacer/>
+        <v-tooltip top v-if="pipeline.status === 'failed' || pipeline.status === 'success' || pipeline.status === 'canceled'" s>
+          <v-btn slot="activator" flat icon small @click="retry()">
+            <v-icon>replay</v-icon>
+          </v-btn>
+          <span>Launch again</span>
+        </v-tooltip>
+        <v-tooltip top v-else>
+          <v-btn slot="activator" flat icon small @click="cancel()">
+            <v-icon>cancel</v-icon>
+          </v-btn>
+          <span>Cancel</span>
+        </v-tooltip>
+        <v-tooltip top>
+          <v-btn v-if="pipeline.web_url" small :href="pipeline.web_url" target="_blank" slot="activator">Open</v-btn>
+          <span>Open</span>
+        </v-tooltip>
       </v-card-actions>
-      -->
     </v-card>
   </v-menu>
 </template>
 
 <script>
+import gitlab from "@/gitlab";
+
 export default {
   name: "pipeline-popover",
   props: {
-    pipeline: Object
+    pipeline: Object,
+    mr: Object
   },
   methods: {
+    retry() {
+      gitlab.get().client.retryPipeline(this.mr.source_project_id, this.pipeline.id)
+        .then(() => this.$store.dispatch("displaySnackbarMessage", "Pipeline has been relaunched"))
+        .catch(() => this.$store.dispatch("displaySnackbarMessage", "Can not relaunch pipeline"));
+    },
+    cancel() {
+      gitlab.get().client.cancelPipeline(this.mr.source_project_id, this.pipeline.id)
+        .then(() => this.$store.dispatch("displaySnackbarMessage", "Pipeline has been canceled"))
+        .catch(() => this.$store.dispatch("displaySnackbarMessage", "Can not cancel pipeline"));
+    },
     getPipelineColor() {
       const colors = {
         pending: "warning",
@@ -59,3 +87,11 @@ export default {
   })
 };
 </script>
+
+<style lang="stylus" scoped>
+  #card-text {
+    display: flex
+    align-items: center
+  }
+</style>
+
