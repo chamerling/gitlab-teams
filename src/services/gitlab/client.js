@@ -136,4 +136,10 @@ export default class Client {
   markAllTodosAsDone() {
     return this.client.post(`/api/v4/todos/mark_as_done`);
   }
+
+  createTodoFromMergeRequest({ project_id, iid }) {
+    return this.client
+      .post(`/api/v4/projects/${project_id}/merge_requests/${iid}/todo`)
+      .then(result => result.data);
+  }
 }

@@ -60,6 +60,9 @@
             <v-list-tile :href="mr.web_url" target="_blank">
               <v-list-tile-title>View on GitLab</v-list-tile-title>
             </v-list-tile>
+            <v-list-tile @click="createTodo()">
+              <v-list-tile-title>Create Todo</v-list-tile-title>
+            </v-list-tile>
             <v-list-tile v-if="canBeClosed" @click="close()">
               <v-list-tile-title>Close MR</v-list-tile-title>
             </v-list-tile>
@@ -91,6 +94,7 @@
 </template>
 
 <script>
+import gitlab from "@/gitlab";
 import { mapGetters } from "vuex";
 import UserAvatarPopover from "@/components/UserAvatarPopover.vue";
 import PipelinePopover from "@/components/PipelinePopover.vue";
@@ -118,6 +122,12 @@ export default {
     })
   },
   methods: {
+    createTodo() {
+      // TODO: Dispatch so that we can update the TODO counter and list
+      gitlab.get().client.createTodoFromMergeRequest({ project_id: this.mr.project_id , iid: this.mr.iid })
+        .then(() => this.$store.dispatch("displaySnackbarMessage", "Todo has been created"))
+        .catch(() => this.$store.dispatch("displaySnackbarMessage", "Can not create Todo"));
+    },
     copyLink() {
       const link = `${this.mr.title} - ${this.mr.web_url}`;
 
