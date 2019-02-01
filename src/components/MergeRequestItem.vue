@@ -7,6 +7,10 @@
     <v-list-tile-content>
       <v-list-tile-title id="title">
         <pipeline v-if="pipeline" :pipeline="pipeline" :mr="mr"/>
+        <v-tooltip bottom v-if="mr.merge_when_pipeline_succeeds">
+          <v-icon slot="activator" class="ml-1" color="orange">merge_type</v-icon>
+          <span>Will be merged automatically</span>
+        </v-tooltip>
         <span class="ml-1">{{ mr.title }}</span>
       </v-list-tile-title>
       <v-list-tile-sub-title>
