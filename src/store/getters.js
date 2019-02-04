@@ -2,6 +2,8 @@ import _ from "lodash";
 
 export const getTeams = state => state.teams;
 
+export const getConnectedUser = state => state.connectedUser;
+
 export const getMergeRequest = ({ mergeRequests }, id) => mergeRequests[id];
 
 export const getMergeRequestsForUser = ({ mergeRequests }) => username =>

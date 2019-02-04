@@ -18,6 +18,15 @@ export const fetchUser = ({ commit }, userName) => {
     });
 };
 
+export const fetchConnectedUser = ({ commit }) => {
+  return gitlab
+    .get()
+    .client.fetchCurrentUser()
+    .then(user => {
+      commit("setConnectedUser", user);
+    });
+};
+
 export const fetchProject = ({ commit, state }, projectId) => {
   if (state.projects[projectId]) {
     return Promise.resolve(state.projects[projectId]);
@@ -128,6 +137,7 @@ export const updateSettings = ({ commit, dispatch }, settings) => {
   commit("setPipelines", {});
   commit("setProjects", {});
   commit("setTodos", {});
+  commit("setConnectedUser", null);
   dispatch("launchWatchers");
   dispatch("launchUserWatchers");
 };
@@ -177,9 +187,10 @@ export const launchWatchers = ({ dispatch, state }) => {
   });
 };
 
-export const launchUserWatchers = () => {
+export const launchUserWatchers = ({ dispatch }) => {
   const gl = gitlab.get();
 
+  dispatch("fetchConnectedUser");
   gl.watchTodos();
   gl.watchIssues();
 };

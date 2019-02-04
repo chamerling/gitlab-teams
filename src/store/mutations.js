@@ -105,6 +105,10 @@ export default {
     state.currentUser = user;
   },
 
+  setConnectedUser(state, user) {
+    state.connectedUser = user;
+  },
+
   // issues
   addIssue({ issues }, issue) {
     Vue.set(issues, issue.id, issue);

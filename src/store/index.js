@@ -6,10 +6,14 @@ import * as getters from "./getters";
 import state from "./state";
 import plugins from "./plugins";
 import mutations from "./mutations";
+import ui from "./modules/ui";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  modules: {
+    ui
+  },
   state,
   actions,
   getters,

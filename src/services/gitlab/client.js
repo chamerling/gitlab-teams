@@ -25,6 +25,10 @@ export default class Client {
       .then(result => result.data[0]);
   }
 
+  fetchCurrentUser() {
+    return this.client.get("/api/v4/user").then(result => result.data);
+  }
+
   searchUsers(text) {
     return this.client.get(`/api/v4/users?search=${text}`);
   }

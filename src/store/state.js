@@ -12,5 +12,6 @@ export default {
   todoSize: 0,
   issues: {},
   issueSize: 0,
-  currentUser: null
+  currentUser: null,
+  connectedUser: null
 };
