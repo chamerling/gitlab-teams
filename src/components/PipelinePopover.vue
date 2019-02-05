@@ -30,8 +30,10 @@
           </v-btn>
           <span>Cancel</span>
         </v-tooltip>
-        <v-tooltip top>
-          <v-btn v-if="pipeline.web_url" small :href="pipeline.web_url" target="_blank" slot="activator">Open</v-btn>
+        <v-tooltip top v-if="pipeline.web_url" >
+          <v-btn class="ml-1" :href="pipeline.web_url" target="_blank" slot="activator" flat icon small>
+            <v-icon>open_in_new</v-icon>
+          </v-btn>
           <span>Open</span>
         </v-tooltip>
       </v-card-actions>
