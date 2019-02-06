@@ -16,20 +16,13 @@ export default new Router({
   routes: [
     {
       path: "/",
-      component: Home,
-      children: [
-        {
-          // default children takes the inital parent name
-          path: "",
-          name: "home",
-          component: MergeRequests
-        },
-        {
-          path: "/mrs/:state",
-          name: "home.others",
-          component: MergeRequests
-        }
-      ]
+      name: "home",
+      component: Home
+    },
+    {
+      path: "/mrs",
+      name: "mrs",
+      component: MergeRequests
     },
     {
       path: "/todo",

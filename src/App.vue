@@ -48,6 +48,16 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile v-if="isConfigured" @click="$router.push({ name: 'mrs' })">
+          <v-list-tile-action>
+            <v-icon>merge_type</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title class="with-badge">
+              Merge Requests
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
         <v-list-tile v-if="isConfigured" @click="$router.push({ name: 'issues' })">
           <v-list-tile-action>
             <v-icon>bug_report</v-icon>
@@ -195,6 +205,7 @@ export default {
     if (!this.isConfigured) {
       this.openSettings();
     } else {
+      // FIXME: Also need to dispatch loadCurrentUser to watchMergeRequests
       this.$store.dispatch("launchUserWatchers");
     }
   },
