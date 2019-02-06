@@ -42,6 +42,7 @@
 <script>
 import { mapGetters } from "vuex";
 import gitlab from "@/gitlab";
+import store from "@/store";
 import MergeRequests from "@/components/MergeRequests.vue";
 
 export default {
@@ -54,10 +55,18 @@ export default {
   },
   computed: {
     ...mapGetters({
-      // TODO: need to fetch the right ones on mount or route change because if you come from a team you will get the team ones displayed here
-      // even better: Have the current user in another state property to continuously watch them
       computedMergeRequests: "getMergeRequests"
     })
+  },
+  // TODO: need to fetch the right ones on mount or route change because if you come from a team you will get the team ones displayed here
+  // even better: Have the current user in another state property to continuously watch them
+  beforeRouteEnter(to, from, next) {
+    store.dispatch("loadCurrentUser");
+    next();
+  },
+  beforeRouteUpdate(to, from, next) {
+    store.dispatch("loadCurrentUser");
+    next();
   },
   methods: {
     fetchData(state /* closed OR merged */) {
