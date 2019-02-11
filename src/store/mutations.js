@@ -25,14 +25,5 @@ export default {
   setUsers(state, users) {
     // TODO: move to team module
     state.team.users = users;
-  },
-
-  showSnackbar(state, value) {
-    state.snackbar.show = value;
-  },
-
-  displaySnackbarMessage(state, message) {
-    state.snackbar.message = message;
-    state.snackbar.show = true;
   }
 };
