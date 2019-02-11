@@ -8,13 +8,15 @@ import plugins from "./plugins";
 import mutations from "./mutations";
 import ui from "./modules/ui";
 import todo from "./modules/todo";
+import merge_request from "./modules/merge_request";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     ui,
-    todo
+    todo,
+    merge_request
   },
   state,
   actions,

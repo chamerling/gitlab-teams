@@ -3,33 +3,12 @@ import Vue from "vue";
 import gitlab from "@/gitlab";
 
 export default {
-
   addProject({ projects }, project) {
     Vue.set(projects, project.id, project);
   },
 
   setProjects(state, projects) {
     state.projects = projects;
-  },
-
-  addMergeRequest({ mergeRequests }, mergeRequest) {
-    Vue.set(mergeRequests, mergeRequest.id, mergeRequest);
-  },
-
-  removeMergeRequest({ mergeRequests }, mergeRequest) {
-    Vue.delete(mergeRequests, mergeRequest.id);
-  },
-
-  setMergeRequests(state, mergeRequests) {
-    state.mergeRequests = mergeRequests;
-  },
-
-  resetMergeRequests(state) {
-    state.mergeRequests = {};
-  },
-
-  updateMergeRequest({ mergeRequests }, mergeRequest) {
-    Vue.set(mergeRequests, mergeRequest.id, mergeRequest);
   },
 
   setCurrentTeam(state, teamName) {
