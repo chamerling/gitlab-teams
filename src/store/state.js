@@ -5,8 +5,6 @@ export default {
   apiToken: process.env.VUE_APP_API_TOKEN || localStorage.getItem("apiToken"),
   pipelines: {}, // id is 'mergeRequestId'
   projects: {},
-  issues: {},
-  issueSize: 0,
   currentUser: null,
   connectedUser: null
 };

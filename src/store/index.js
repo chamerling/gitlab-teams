@@ -10,6 +10,7 @@ import ui from "./modules/ui";
 import todo from "./modules/todo";
 import merge_request from "./modules/merge_request";
 import team from "./modules/team";
+import issue from "./modules/issue";
 
 Vue.use(Vuex);
 
@@ -17,6 +18,7 @@ export default new Vuex.Store({
   modules: {
     ui,
     todo,
+    issue,
     merge_request,
     team
   },

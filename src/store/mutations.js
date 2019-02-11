@@ -47,23 +47,6 @@ export default {
     state.connectedUser = user;
   },
 
-  // issues
-  addIssue({ issues }, issue) {
-    Vue.set(issues, issue.id, issue);
-  },
-
-  removeIssue({ issues }, issue) {
-    Vue.delete(issues, issue.id);
-  },
-
-  setIssues(state, issues) {
-    state.issues = issues;
-  },
-
-  setIssueSize(state, size) {
-    state.issueSize = parseInt(size);
-  },
-
   showSnackbar(state, value) {
     state.snackbar.show = value;
   },

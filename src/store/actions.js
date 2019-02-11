@@ -47,18 +47,6 @@ export const fetchProject = ({ commit, state }, projectId) => {
 
 
 
-// issues
-export const addIssue = ({ commit }, issue) => {
-  commit("addIssue", issue);
-};
-
-export const removeIssue = ({ commit }, issue) => {
-  commit("removeIssue", issue);
-};
-
-export const setIssueSize = ({ commit }, size) => {
-  commit("setIssueSize", size);
-};
 
 export const updatePipeline = ({ commit }, { mergeRequest, pipeline }) => {
   commit("updatePipeline", { mergeRequest, pipeline });
@@ -93,8 +81,6 @@ export const loadUser = ({ dispatch, state }, userName) => {
     });
   });
 };
-
-
 
 export const launchWatchers = ({ dispatch, state }) => {
   const gl = gitlab.get();
