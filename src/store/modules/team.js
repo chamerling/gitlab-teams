@@ -1,15 +1,19 @@
 import _ from "lodash";
+import Vue from "vue";
 import gitlab from "@/gitlab";
 
 const state = {
   teams: JSON.parse(localStorage.getItem("teams") || "[]"),
-  team: {}
+  team: {},
+  projects: {}
 };
 
 const getters = {
   getTeams(state) {
     return state.teams;
-  }
+  },
+
+  getProject: ({ projects }) => id => projects[id]
 };
 
 const actions = {
@@ -36,6 +40,21 @@ const actions = {
       .client.fetchUsers(state.team.usernames)
       .then(users => {
         commit("setTeamUsers", users);
+      });
+  },
+
+  fetchTeamProject({ commit, state }, projectId) {
+    if (state.projects[projectId]) {
+      return Promise.resolve(state.projects[projectId]);
+    }
+
+    return gitlab
+      .get()
+      .client.fetchProject(projectId)
+      .then(project => {
+        commit("addTeamProject", project);
+
+        return project;
       });
   }
 };
@@ -70,6 +89,14 @@ const mutations = {
 
   setTeamUsers(state, users) {
     state.team.users = users;
+  },
+
+  addTeamProject({ projects }, project) {
+    Vue.set(projects, project.id, project);
+  },
+
+  setTeamProjects(state, projects) {
+    state.projects = projects;
   }
 };
 

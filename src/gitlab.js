@@ -9,7 +9,7 @@ function init(store) {
   });
 
   gitlabApi.on("new-merge-request", mr => {
-    store.dispatch("fetchProject", mr.project_id).then(() => {
+    store.dispatch("fetchTeamProject", mr.project_id).then(() => {
       store.dispatch("addMergeRequest", mr);
     });
   });
@@ -35,7 +35,7 @@ function init(store) {
   });
 
   gitlabApi.on("new-issue", issue => {
-    store.dispatch("fetchProject", issue.project_id).then(() => {
+    store.dispatch("fetchTeamProject", issue.project_id).then(() => {
       store.dispatch("addIssue", issue);
     });
   });

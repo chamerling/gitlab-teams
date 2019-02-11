@@ -18,7 +18,7 @@ const actions = {
     commit("resetTeams");
     commit("setMergeRequests", {});
     commit("setPipelines", {});
-    commit("setProjects", {});
+    commit("setTeamProjects", {});
     commit("setTodos", {});
     commit("setConnectedUser", null);
     dispatch("launchWatchers");

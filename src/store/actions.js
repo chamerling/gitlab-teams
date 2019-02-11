@@ -1,21 +1,5 @@
 import gitlab from "@/gitlab";
 
-
-export const fetchProject = ({ commit, state }, projectId) => {
-  if (state.projects[projectId]) {
-    return Promise.resolve(state.projects[projectId]);
-  }
-
-  return gitlab
-    .get()
-    .client.fetchProject(projectId)
-    .then(project => {
-      commit("addProject", project);
-
-      return project;
-    });
-};
-
 export const loadCurrentUser = ({ dispatch }) => {
   const gl = gitlab.get();
 
