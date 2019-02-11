@@ -11,33 +11,6 @@ export default {
     state.projects = projects;
   },
 
-  setCurrentTeam(state, teamName) {
-    const team = _.find(state.teams, { name: teamName });
-
-    state.team = team;
-  },
-
-  addTeam(state, team) {
-    state.teams.push(team);
-    localStorage.setItem("teams", JSON.stringify(state.teams));
-  },
-
-  removeTeam(state, team) {
-    const index = state.teams.findIndex(e => e.name === team.name);
-
-    if (index > -1) {
-      state.teams.splice(index, 1);
-    }
-
-    localStorage.setItem("teams", JSON.stringify(state.teams));
-  },
-
-  resetTeams(state) {
-    localStorage.setItem("teams", JSON.stringify([]));
-    state.teams = [];
-    state.team = {};
-  },
-
   updatePipeline({ pipelines }, { mergeRequest, pipeline }) {
     Vue.set(pipelines, mergeRequest.id, pipeline);
   },

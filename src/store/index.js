@@ -9,6 +9,7 @@ import mutations from "./mutations";
 import ui from "./modules/ui";
 import todo from "./modules/todo";
 import merge_request from "./modules/merge_request";
+import team from "./modules/team";
 
 Vue.use(Vuex);
 
@@ -16,7 +17,8 @@ export default new Vuex.Store({
   modules: {
     ui,
     todo,
-    merge_request
+    merge_request,
+    team
   },
   state,
   actions,

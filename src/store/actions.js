@@ -42,42 +42,9 @@ export const fetchProject = ({ commit, state }, projectId) => {
     });
 };
 
-export const cleanMergeRequests = ({ commit }) => {
-  const gl = gitlab.get();
 
-  gl.unwatchMergeRequests();
-  commit("setMergeRequests", {});
-  commit("setPipelines", {});
-};
 
-export const merge = ({ dispatch }, mr) => {
-  const gl = gitlab.get();
 
-  return gl.client.merge(mr).then(() => {
-    dispatch("removeMergeRequest", mr);
-    // TODO: Stop watchers for this MR
-  });
-};
-
-export const closeMergeRequest = ({ dispatch }, mr) => {
-  const gl = gitlab.get();
-
-  return gl.client.closeMergeRequest(mr).then(() => {
-    dispatch("removeMergeRequest", mr);
-  });
-};
-
-export const addMergeRequest = ({ commit }, mr) => {
-  commit("addMergeRequest", mr);
-};
-
-export const removeMergeRequest = ({ commit }, mr) => {
-  commit("removeMergeRequest", mr);
-};
-
-export const updateMergeRequest = ({ commit }, mr) => {
-  commit("updateMergeRequest", mr);
-};
 
 
 // issues
@@ -127,22 +94,7 @@ export const loadUser = ({ dispatch, state }, userName) => {
   });
 };
 
-export const loadTeam = ({ commit, dispatch }, teamName) => {
-  dispatch("cleanMergeRequests");
-  commit("setCurrentTeam", teamName);
-  dispatch("launchWatchers");
-};
 
-export const createTeam = ({ commit }, team) => {
-  commit("addTeam", team);
-};
-
-export const deleteTeam = ({ state, commit, dispatch }, team) => {
-  if (state.team && state.team.name === team.name) {
-    dispatch("cleanMergeRequests");
-  }
-  commit("removeTeam", team);
-};
 
 export const launchWatchers = ({ dispatch, state }) => {
   const gl = gitlab.get();

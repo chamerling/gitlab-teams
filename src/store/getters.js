@@ -1,6 +1,5 @@
 import _ from "lodash";
 
-export const getTeams = state => state.teams;
 
 export const getConnectedUser = state => state.connectedUser;
 
