@@ -27,14 +27,6 @@ export default {
     state.team.users = users;
   },
 
-  setCurrentUser(state, user) {
-    state.currentUser = user;
-  },
-
-  setConnectedUser(state, user) {
-    state.connectedUser = user;
-  },
-
   showSnackbar(state, value) {
     state.snackbar.show = value;
   },

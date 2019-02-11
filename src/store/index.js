@@ -12,6 +12,7 @@ import merge_request from "./modules/merge_request";
 import team from "./modules/team";
 import issue from "./modules/issue";
 import pipeline from "./modules/pipeline";
+import user from "./modules/user";
 
 Vue.use(Vuex);
 
@@ -22,6 +23,7 @@ export default new Vuex.Store({
     issue,
     merge_request,
     team,
+    user,
     pipeline
   },
   state,

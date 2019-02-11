@@ -9,24 +9,6 @@ export const fetchUsers = ({ state, commit }) => {
     });
 };
 
-export const fetchUser = ({ commit }, userName) => {
-  return gitlab
-    .get()
-    .client.fetchUser(userName)
-    .then(user => {
-      commit("setCurrentUser", user);
-    });
-};
-
-export const fetchConnectedUser = ({ commit }) => {
-  return gitlab
-    .get()
-    .client.fetchCurrentUser()
-    .then(user => {
-      commit("setConnectedUser", user);
-    });
-};
-
 export const fetchProject = ({ commit, state }, projectId) => {
   if (state.projects[projectId]) {
     return Promise.resolve(state.projects[projectId]);
