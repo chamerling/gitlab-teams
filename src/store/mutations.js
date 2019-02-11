@@ -35,6 +35,7 @@ export default {
   },
 
   setUsers(state, users) {
+    // TODO: move to team module
     state.team.users = users;
   },
 
