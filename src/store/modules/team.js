@@ -1,4 +1,5 @@
 import _ from "lodash";
+import gitlab from "@/gitlab";
 
 const state = {
   teams: JSON.parse(localStorage.getItem("teams") || "[]"),
@@ -27,6 +28,15 @@ const actions = {
       dispatch("cleanMergeRequests");
     }
     commit("removeTeam", team);
+  },
+
+  fetchTeamUsers({ state, commit }) {
+    return gitlab
+      .get()
+      .client.fetchUsers(state.team.usernames)
+      .then(users => {
+        commit("setTeamUsers", users);
+      });
   }
 };
 
@@ -56,6 +66,10 @@ const mutations = {
     localStorage.setItem("teams", JSON.stringify([]));
     state.teams = [];
     state.team = {};
+  },
+
+  setTeamUsers(state, users) {
+    state.team.users = users;
   }
 };
 

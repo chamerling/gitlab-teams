@@ -1,13 +1,5 @@
 import gitlab from "@/gitlab";
 
-export const fetchUsers = ({ state, commit }) => {
-  return gitlab
-    .get()
-    .client.fetchUsers(state.team.usernames)
-    .then(users => {
-      commit("setUsers", users);
-    });
-};
 
 export const fetchProject = ({ commit, state }, projectId) => {
   if (state.projects[projectId]) {
@@ -45,9 +37,9 @@ export const loadUser = ({ dispatch, state }, userName) => {
 export const launchWatchers = ({ dispatch, state }) => {
   const gl = gitlab.get();
 
-  dispatch("fetchUsers").then(() => {
+  dispatch("fetchTeamUsers").then(() => {
     gl.watchMergeRequestsForUsers({
-      userIds: state.team.users.map(user => user.id)
+      userIds: state.team.team.users.map(user => user.id)
     });
   });
 };
