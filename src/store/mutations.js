@@ -1,6 +1,4 @@
-import _ from "lodash";
 import Vue from "vue";
-import gitlab from "@/gitlab";
 
 export default {
   addProject({ projects }, project) {
@@ -9,17 +7,6 @@ export default {
 
   setProjects(state, projects) {
     state.projects = projects;
-  },
-
-  updateSettings(state, settings) {
-    state.apiEndpoint = settings.apiEndpoint;
-    state.apiToken = settings.apiToken;
-    localStorage.setItem("apiEndpoint", state.apiEndpoint || "");
-    localStorage.setItem("apiToken", state.apiToken || "");
-    // FIXME: This MUST not be here
-    gitlab.get().unwatchUser();
-    gitlab.get().unwatchMergeRequests();
-    gitlab.init(this);
   },
 
   setUsers(state, users) {

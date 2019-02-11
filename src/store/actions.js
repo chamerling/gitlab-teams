@@ -24,18 +24,6 @@ export const fetchProject = ({ commit, state }, projectId) => {
     });
 };
 
-export const updateSettings = ({ commit, dispatch }, settings) => {
-  commit("updateSettings", settings);
-  commit("resetTeams");
-  commit("setMergeRequests", {});
-  commit("setPipelines", {});
-  commit("setProjects", {});
-  commit("setTodos", {});
-  commit("setConnectedUser", null);
-  dispatch("launchWatchers");
-  dispatch("launchUserWatchers");
-};
-
 export const loadCurrentUser = ({ dispatch }) => {
   const gl = gitlab.get();
 

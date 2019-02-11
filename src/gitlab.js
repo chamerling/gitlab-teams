@@ -4,8 +4,8 @@ let gitlabApi = null;
 
 function init(store) {
   gitlabApi = new Gitlab.Api({
-    apiEndpoint: store.state.apiEndpoint,
-    apiToken: store.state.apiToken
+    apiEndpoint: store.state.settings.apiEndpoint,
+    apiToken: store.state.settings.apiToken
   });
 
   gitlabApi.on("new-merge-request", mr => {

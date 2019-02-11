@@ -87,7 +87,7 @@ export default {
     },
     apiToken: {
       get() {
-        return this.$store.state.apiToken;
+        return this.$store.state.settings.apiToken;
       },
       set(value) {
         this.localApiToken = value;
@@ -95,7 +95,7 @@ export default {
     },
     apiEndpoint: {
       get() {
-        return this.$store.state.apiEndpoint;
+        return this.$store.state.settings.apiEndpoint;
       },
       set(value) {
         this.localApiEndpoint = value;
@@ -103,8 +103,8 @@ export default {
     }
   },
   mounted() {
-    this.localApiToken = this.$store.state.apiToken;
-    this.localApiEndpoint = this.$store.state.apiEndpoint;
+    this.localApiToken = this.$store.state.settings.apiToken;
+    this.localApiEndpoint = this.$store.state.settings.apiEndpoint;
   },
   methods: {
     submit() {
