@@ -19,12 +19,6 @@ export const getMergeRequests = ({ mergeRequests }) =>
 
 export const getProject = ({ projects }) => id => projects[id];
 
-export const getTodos = ({ todos }) =>
-  _.orderBy(Object.values(todos), "created_at", "desc");
-
-export const getTodosSize = ({ todoSize, todos }) =>
-  todoSize || (Object.values(todos) || []).length;
-
 export const getIssues = ({ issues }) =>
   _.orderBy(Object.values(issues), "created_at", "desc");
 

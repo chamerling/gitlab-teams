@@ -7,12 +7,14 @@ import state from "./state";
 import plugins from "./plugins";
 import mutations from "./mutations";
 import ui from "./modules/ui";
+import todo from "./modules/todo";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
-    ui
+    ui,
+    todo
   },
   state,
   actions,

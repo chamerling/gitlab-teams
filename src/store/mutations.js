@@ -3,24 +3,9 @@ import Vue from "vue";
 import gitlab from "@/gitlab";
 
 export default {
-  addTodo({ todos }, todo) {
-    Vue.set(todos, todo.id, todo);
-  },
-
-  removeTodo({ todos }, todo) {
-    Vue.delete(todos, todo.id);
-  },
-
-  setTodoSize(state, size) {
-    state.todoSize = parseInt(size);
-  },
 
   addProject({ projects }, project) {
     Vue.set(projects, project.id, project);
-  },
-
-  setTodos(state, todos) {
-    state.todos = todos;
   },
 
   setProjects(state, projects) {

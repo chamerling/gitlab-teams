@@ -79,39 +79,6 @@ export const updateMergeRequest = ({ commit }, mr) => {
   commit("updateMergeRequest", mr);
 };
 
-export const addTodo = ({ commit }, todo) => {
-  commit("addTodo", todo);
-};
-
-export const removeTodo = ({ commit }, todo) => {
-  commit("removeTodo", todo);
-};
-
-export const updateTodo = ({ commit }, todo) => {
-  commit("updateTodo", todo);
-};
-
-export const markTodoAsDone = ({ dispatch, state }, todo) => {
-  const gl = gitlab.get();
-
-  return gl.client.markTodoAsDone(todo).then(() => {
-    dispatch("removeTodo", todo);
-    dispatch("setTodoSize", --state.todoSize);
-  });
-};
-
-export const markAllTodosAsDone = ({ commit, dispatch }) => {
-  const gl = gitlab.get();
-
-  return gl.client.markAllTodosAsDone().then(() => {
-    dispatch("setTodoSize", 0);
-    commit("setTodos", {});
-  });
-};
-
-export const setTodoSize = ({ commit }, size) => {
-  commit("setTodoSize", size);
-};
 
 // issues
 export const addIssue = ({ commit }, issue) => {

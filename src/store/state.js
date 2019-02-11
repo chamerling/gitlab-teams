@@ -8,8 +8,6 @@ export default {
   teams: JSON.parse(localStorage.getItem("teams") || "[]"),
   team: {},
   projects: {},
-  todos: {},
-  todoSize: 0,
   issues: {},
   issueSize: 0,
   currentUser: null,
