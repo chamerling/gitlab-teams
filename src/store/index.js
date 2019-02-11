@@ -11,6 +11,7 @@ import todo from "./modules/todo";
 import merge_request from "./modules/merge_request";
 import team from "./modules/team";
 import issue from "./modules/issue";
+import pipeline from "./modules/pipeline";
 
 Vue.use(Vuex);
 
@@ -20,7 +21,8 @@ export default new Vuex.Store({
     todo,
     issue,
     merge_request,
-    team
+    team,
+    pipeline
   },
   state,
   actions,

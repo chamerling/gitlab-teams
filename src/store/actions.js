@@ -42,16 +42,6 @@ export const fetchProject = ({ commit, state }, projectId) => {
     });
 };
 
-
-
-
-
-
-
-export const updatePipeline = ({ commit }, { mergeRequest, pipeline }) => {
-  commit("updatePipeline", { mergeRequest, pipeline });
-};
-
 export const updateSettings = ({ commit, dispatch }, settings) => {
   commit("updateSettings", settings);
   commit("resetTeams");

@@ -11,18 +11,6 @@ export default {
     state.projects = projects;
   },
 
-  updatePipeline({ pipelines }, { mergeRequest, pipeline }) {
-    Vue.set(pipelines, mergeRequest.id, pipeline);
-  },
-
-  removePipeline({ pipelines }, { mergeRequest }) {
-    Vue.delete(pipelines, mergeRequest.id);
-  },
-
-  setPipelines(state, pipelines) {
-    state.pipelines = pipelines;
-  },
-
   updateSettings(state, settings) {
     state.apiEndpoint = settings.apiEndpoint;
     state.apiToken = settings.apiToken;
