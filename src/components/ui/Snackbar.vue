@@ -1,7 +1,7 @@
 <template>
-  <v-snackbar v-model="show" :timeout="snackbar.timeout">
-    {{ snackbar.message }}
-    <v-btn dark flat @click="snackbar.show = false">Close</v-btn>
+  <v-snackbar v-model="show" :timeout="ui.snackbar.timeout">
+    {{ ui.snackbar.message }}
+    <v-btn dark flat @click="show = false">Close</v-btn>
   </v-snackbar>
 </template>
 
@@ -13,13 +13,13 @@ export default {
   computed: {
     show: {
       get() {
-        return this.$store.state.snackbar.show;
+        return this.$store.state.ui.snackbar.show;
       },
       set(value) {
         this.$store.dispatch("showSnackbar", value);
       }
     },
-    ...mapState(["snackbar"])
+    ...mapState(["ui"])
   }
 };
 </script>
