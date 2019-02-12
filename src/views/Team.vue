@@ -8,6 +8,7 @@
         </v-badge>
       </div>
     </v-layout>
+    <build-gauge :merge-requests="mergeRequests" v-if="mergeRequests.length"/>
     <merge-requests :merge-requests="mergeRequests" v-if="mergeRequests.length"/>
   </div>
 </template>
@@ -15,6 +16,7 @@
 <script>
 import { mapGetters, mapState } from "vuex";
 import MergeRequests from "@/components/MergeRequests.vue";
+import BuildGauge from "@/components/BuildGauge.vue";
 import UserAvatarPopover from "@/components/UserAvatarPopover.vue";
 import store from "@/store";
 
@@ -22,7 +24,8 @@ export default {
   name: "team",
   components: {
     MergeRequests,
-    "user-avatar": UserAvatarPopover
+    "user-avatar": UserAvatarPopover,
+    BuildGauge
   },
   computed: {
     ...mapState(["team"]),
