@@ -13,7 +13,7 @@ export const loadUser = ({ dispatch, state }, userName) => {
   dispatch("cleanMergeRequests");
   dispatch("fetchUser", userName).then(() => {
     gl.watchMergeRequestsForUsers({
-      userIds: [state.currentUser.id]
+      userIds: [state.user.currentUser.id]
     });
   });
 };
