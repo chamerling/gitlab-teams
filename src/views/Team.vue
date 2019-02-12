@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <v-layout align-center justify-end row fill-height ma-2>
-      <div id="user" class="ma-1" v-for="user in team.users" :key="user.id" @click="$router.push({ name: 'user', params: {name: user.username} })">
+      <div id="user" class="ma-1" v-for="user in team.team.users" :key="user.id" @click="$router.push({ name: 'user', params: {name: user.username} })">
         <v-badge overlap>
           <span slot="badge">{{ userMergeRequests(user.username).length }}</span>
           <user-avatar :user="user"/>
