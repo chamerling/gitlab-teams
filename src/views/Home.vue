@@ -7,6 +7,9 @@
       <v-flex md12 sm12 lg4>
         <todos-card :todos="todos"/>
       </v-flex>
+      <v-flex md12 sm12 lg4>
+        <teams-card/>
+      </v-flex>
       <v-flex md12 sm12 lg12>
         <merge-requests-card :merge-requests="mergeRequests"/>
       </v-flex>
@@ -20,6 +23,7 @@
 import MergeRequestsCard from "@/components/cards/MergeRequestsCard.vue";
 import UserStatsCard from "@/components/cards/UserStatsCard.vue";
 import TodosCard from "@/components/cards/TodosCard.vue";
+import TeamsCard from "@/components/cards/TeamsCard.vue";
 import { mapGetters } from "vuex";
 import store from "@/store";
 
@@ -43,7 +47,8 @@ export default {
   components: {
     MergeRequestsCard,
     UserStatsCard,
-    TodosCard
+    TodosCard,
+    TeamsCard
   }
 };
 </script>
