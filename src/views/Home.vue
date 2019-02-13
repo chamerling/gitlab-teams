@@ -4,6 +4,9 @@
       <v-flex md12 sm12 lg4>
         <user-stats-card :user="user" :merge-requests="mergeRequests"/>
       </v-flex>
+      <v-flex md12 sm12 lg4>
+        <todos-card :todos="todos"/>
+      </v-flex>
       <v-flex md12 sm12 lg12>
         <merge-requests-card :merge-requests="mergeRequests"/>
       </v-flex>
@@ -16,6 +19,7 @@
 <script>
 import MergeRequestsCard from "@/components/cards/MergeRequestsCard.vue";
 import UserStatsCard from "@/components/cards/UserStatsCard.vue";
+import TodosCard from "@/components/cards/TodosCard.vue";
 import { mapGetters } from "vuex";
 import store from "@/store";
 
@@ -25,6 +29,7 @@ export default {
     ...mapGetters({
       mergeRequests: "getMergeRequests",
       user: "getConnectedUser",
+      todos: "getTodos"
     })
   },
   beforeRouteEnter(to, from, next) {
@@ -37,7 +42,8 @@ export default {
   },
   components: {
     MergeRequestsCard,
-    UserStatsCard
+    UserStatsCard,
+    TodosCard
   }
 };
 </script>
