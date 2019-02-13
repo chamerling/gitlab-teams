@@ -2,8 +2,10 @@
   <div class="home">
     <merge-requests :merge-requests="computedMergeRequests" v-if="computedMergeRequests.length"/>
     <template v-else>
-      <div class="text-xs-center">
-        <v-progress-circular indeterminate></v-progress-circular>
+      <div class="pa-3">
+        <v-alert :value="true" type="success">
+          No merge requests.
+        </v-alert>
       </div>
     </template>
   </div>
