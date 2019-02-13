@@ -1,18 +1,20 @@
 <template>
-  <div class="home">
-    <merge-requests :merge-requests="computedMergeRequests" v-if="computedMergeRequests.length"/>
-    <template v-else>
-      <div class="pa-3">
-        <v-alert :value="true" type="success">
-          No merge requests.
-        </v-alert>
-      </div>
-    </template>
-  </div>
+  <v-container fill-height fluid grid-list-xl>
+    <v-layout wrap>
+      <v-flex md12 sm12 lg8>
+        <merge-requests-card :merge-requests="mergeRequests"/>
+      </v-flex>
+      <v-flex md12 sm12 lg4>
+        <span>Hello word</span>
+      </v-flex>
+    </v-layout>
+  </v-container>
+</template>
+
 </template>
 
 <script>
-import MergeRequests from "@/components/MergeRequests.vue";
+import MergeRequestsCard from "@/components/cards/MergeRequestsCard.vue";
 import { mapGetters } from "vuex";
 import store from "@/store";
 
@@ -23,7 +25,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      computedMergeRequests: "getMergeRequests"
+      mergeRequests: "getMergeRequests"
     })
   },
   beforeRouteEnter(to, from, next) {
@@ -35,7 +37,7 @@ export default {
     next();
   },
   components: {
-    MergeRequests
+    MergeRequestsCard
   }
 };
 </script>
