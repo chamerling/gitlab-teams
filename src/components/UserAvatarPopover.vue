@@ -20,9 +20,11 @@
           <v-list-tile-content>
             <v-list-tile-title>{{ user.name }}</v-list-tile-title>
             <v-list-tile-sub-title>@{{ user.username }}</v-list-tile-sub-title>
+            <v-list-tile-sub-title><slot></slot></v-list-tile-sub-title>
           </v-list-tile-content>
 
           <v-list-tile-action>
+            <slot name="action"></slot>
           </v-list-tile-action>
         </v-list-tile>
       </v-list>
