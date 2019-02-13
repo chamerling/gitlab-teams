@@ -1,10 +1,10 @@
 <template>
   <div :class="{ running: stats.isRunning }">
-    <v-progress-circular :size="58" :width="5" :value="stats.ratio" :color="stats.color" >
+    <v-progress-circular :size="avatarSize.progress" :width="5" :value="stats.ratio" :color="stats.color" >
       <v-badge overlap>
         <span slot="badge">{{ mergeRequests.length }}</span>
-        <user-avatar-popover :user="user">
-          <span v-if="stats.success || stats.failed || starts.running">Pipelines: {{stats.success}} success, {{stats.failed}} failed, {{stats.running}} running</span>
+        <user-avatar-popover :user="user" :size="avatarSize.avatar">
+          <span v-if="stats.success || stats.failed || stats.running">Pipelines: {{stats.success}} success, {{stats.failed}} failed, {{stats.running}} running</span>
         </user-avatar-popover>
       </v-badge>
     </v-progress-circular>
@@ -18,7 +18,11 @@ export default {
   name: "AvatarBuildGauge",
   props: {
     user: Object,
-    mergeRequests: Array
+    mergeRequests: Array,
+    size: {
+      type: Number,
+      default: 48
+    }
   },
   methods: {
     getPipeline(mergeRequest) {
@@ -26,8 +30,14 @@ export default {
     }
   },
   computed: {
+    avatarSize() {
+      return {
+        progress: this.size + 10,
+        avatar: this.size
+      }
+    },
     stats() {
-      const pipelines = this.mergeRequests.map(mergeRequest => this.getPipeline(mergeRequest)).filter(Boolean);
+      const pipelines = this.mergeRequests.map(mergeRequest => this.getPipeline(mergeRequest)).filter(Boolean) || [];
       const success = pipelines.filter(pipeline => pipeline.status === "success");
       const failed = pipelines.filter(pipeline => pipeline.status === "failed");
       const running = pipelines.filter(pipeline => pipeline.status === "running");

@@ -1,11 +1,11 @@
 <template>
   <v-container fill-height fluid grid-list-xl>
     <v-layout wrap>
-      <v-flex md12 sm12 lg8>
-        <merge-requests-card :merge-requests="mergeRequests"/>
-      </v-flex>
       <v-flex md12 sm12 lg4>
-        <span>Hello word</span>
+        <user-stats-card :user="user" :merge-requests="mergeRequests"/>
+      </v-flex>
+      <v-flex md12 sm12 lg12>
+        <merge-requests-card :merge-requests="mergeRequests"/>
       </v-flex>
     </v-layout>
   </v-container>
@@ -15,17 +15,16 @@
 
 <script>
 import MergeRequestsCard from "@/components/cards/MergeRequestsCard.vue";
+import UserStatsCard from "@/components/cards/UserStatsCard.vue";
 import { mapGetters } from "vuex";
 import store from "@/store";
 
 export default {
   name: "home",
-  data() {
-    return {};
-  },
   computed: {
     ...mapGetters({
-      mergeRequests: "getMergeRequests"
+      mergeRequests: "getMergeRequests",
+      user: "getConnectedUser",
     })
   },
   beforeRouteEnter(to, from, next) {
@@ -37,7 +36,8 @@ export default {
     next();
   },
   components: {
-    MergeRequestsCard
+    MergeRequestsCard,
+    UserStatsCard
   }
 };
 </script>

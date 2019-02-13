@@ -7,7 +7,7 @@
     offset-y
     bottom
   >
-    <v-avatar size="48" slot="activator">
+    <v-avatar :size="size" slot="activator">
       <img :src="user.avatar_url" :alt="user.username">
     </v-avatar>
     <v-card>
@@ -36,7 +36,11 @@
 export default {
   name: "user-avatar-popover",
   props: {
-    user: Object
+    user: Object,
+    size: {
+      type: Number,
+      default: 48
+    }
   },
   data: () => ({
     menu: false
