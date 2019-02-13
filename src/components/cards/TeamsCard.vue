@@ -2,7 +2,7 @@
   <v-card height="250">
     <v-card-title>
       <v-icon large left>people</v-icon>
-      <span class="title font-weight-light">Teams</span>
+      <span class="title font-weight-light ml-2">Teams</span>
     </v-card-title>
     <v-card-text>
       <div id="teams" class="ma-3">

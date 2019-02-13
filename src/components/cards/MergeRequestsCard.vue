@@ -2,7 +2,7 @@
   <v-card>
     <v-card-title>
       <v-icon large left>merge_type</v-icon>
-      <span class="title font-weight-light">Merge Requests</span>
+      <span class="title font-weight-light ml-2">Merge Requests</span>
     </v-card-title>
     <v-card-text scrollable>
       <merge-requests v-if="mergeRequests.length" :merge-requests="mergeRequests"/>

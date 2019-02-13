@@ -2,7 +2,7 @@
   <v-card height="250">
     <v-card-title>
       <v-icon large left>list</v-icon>
-      <span class="title font-weight-light">Todos</span>
+      <span class="title font-weight-light ml-2">Todos</span>
     </v-card-title>
     <v-card-text>
       <div id="count" class="ma-3">
