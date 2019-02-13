@@ -8,7 +8,7 @@
         <todos-card :todos="todos"/>
       </v-flex>
       <v-flex md12 sm12 lg4>
-        <teams-card/>
+        <teams-card :teams="teams"/>
       </v-flex>
       <v-flex md12 sm12 lg12>
         <merge-requests-card :merge-requests="mergeRequests"/>
@@ -34,7 +34,14 @@ export default {
       mergeRequests: "getMergeRequests",
       user: "getConnectedUser",
       todos: "getTodos"
-    })
+    }),
+    teams() {
+      return _.orderBy(
+        this.$store.getters.getTeams,
+        [team => team.name.toLowerCase()],
+        "asc"
+      );
+    }
   },
   beforeRouteEnter(to, from, next) {
     store.dispatch("loadCurrentUser");

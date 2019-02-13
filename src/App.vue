@@ -108,7 +108,7 @@
             </v-list-tile-content>
             <v-list-tile-action>
               <v-menu offset-y min-width="150">
-                <v-btn icon ripple slot="activator">
+                <v-btn icon ripple slot="activator" @click.native.prevent>
                   <v-icon color="grey darken-1">more_vert</v-icon>
                 </v-btn>
                 <v-list>

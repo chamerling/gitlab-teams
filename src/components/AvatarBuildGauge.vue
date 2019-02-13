@@ -3,7 +3,7 @@
     <v-progress-circular :size="avatarSize.progress" :width="5" :value="stats.ratio" :color="stats.color" >
       <v-badge overlap>
         <span slot="badge">{{ mergeRequests.length }}</span>
-        <user-avatar-popover :user="user" :size="avatarSize.avatar">
+        <user-avatar-popover v-if="user" :user="user" :size="avatarSize.avatar">
           <span v-if="stats.success || stats.failed || stats.running">Pipelines: {{stats.success}} success, {{stats.failed}} failed, {{stats.running}} running</span>
         </user-avatar-popover>
       </v-badge>
