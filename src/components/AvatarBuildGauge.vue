@@ -36,7 +36,7 @@ export default {
         color,
         success: success.length,
         pipelines: pipelines.length,
-        isRunning: true
+        isRunning
       };
     }
   },
