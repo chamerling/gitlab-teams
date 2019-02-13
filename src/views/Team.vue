@@ -2,10 +2,7 @@
   <div class="home">
     <v-layout align-center justify-end row fill-height ma-2>
       <div id="user" class="ma-1" v-for="user in team.team.users" :key="user.id" @click="$router.push({ name: 'user', params: {name: user.username} })">
-        <v-badge overlap>
-          <span slot="badge">{{ userMergeRequests(user.username).length }}</span>
-          <user-avatar :user="user"/>
-        </v-badge>
+        <avatar-build-gauge :user="user" :merge-requests="userMergeRequests(user.username)"/>
       </div>
     </v-layout>
     <build-gauge :merge-requests="mergeRequests" v-if="mergeRequests.length"/>
@@ -17,6 +14,7 @@
 import { mapGetters, mapState } from "vuex";
 import MergeRequests from "@/components/MergeRequests.vue";
 import BuildGauge from "@/components/BuildGauge.vue";
+import AvatarBuildGauge from "@/components/AvatarBuildGauge.vue";
 import UserAvatarPopover from "@/components/UserAvatarPopover.vue";
 import store from "@/store";
 
@@ -25,7 +23,8 @@ export default {
   components: {
     MergeRequests,
     "user-avatar": UserAvatarPopover,
-    BuildGauge
+    BuildGauge,
+    AvatarBuildGauge
   },
   computed: {
     ...mapState(["team"]),
