@@ -84,9 +84,9 @@ export default class Client {
   }
 
   fetchPipelines(projectId, refId) {
-    return this.client.get(
-      `/api/v4/projects/${projectId}/pipelines?ref=${refId}`
-    );
+    return this.client.get(`/api/v4/projects/${projectId}/pipelines`, {
+      ref: refId
+    });
   }
 
   fetchPipeline(projectId, id) {
