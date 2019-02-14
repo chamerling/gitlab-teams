@@ -1,16 +1,16 @@
 <template>
   <v-container fill-height fluid grid-list-xl>
     <v-layout wrap>
-      <v-flex sm12 md4 lg3>
+      <v-flex sm6 md6 lg3>
         <user-stats-card :user="user" :merge-requests="mergeRequests"/>
       </v-flex>
-      <v-flex sm12 md4 lg3>
+      <v-flex sm6 md6 lg3>
         <todos-card :todos="todos"/>
       </v-flex>
-      <v-flex sm12 md4 lg3>
+      <v-flex sm6 md6 lg3>
         <issues-card :issues="issues" :total="issuesSize"/>
       </v-flex>
-      <v-flex sm12 md4 lg3>
+      <v-flex sm6 md6 lg3>
         <teams-card :teams="teams"/>
       </v-flex>
       <v-flex md12 sm12 lg12>
