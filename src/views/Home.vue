@@ -1,13 +1,16 @@
 <template>
   <v-container fill-height fluid grid-list-xl>
     <v-layout wrap>
-      <v-flex md12 sm12 lg4>
+      <v-flex sm12 md4 lg3>
         <user-stats-card :user="user" :merge-requests="mergeRequests"/>
       </v-flex>
-      <v-flex md12 sm12 lg4>
+      <v-flex sm12 md4 lg3>
         <todos-card :todos="todos"/>
       </v-flex>
-      <v-flex md12 sm12 lg4>
+      <v-flex sm12 md4 lg3>
+        <issues-card :issues="issues" :total="issuesSize"/>
+      </v-flex>
+      <v-flex sm12 md4 lg3>
         <teams-card :teams="teams"/>
       </v-flex>
       <v-flex md12 sm12 lg12>
@@ -23,6 +26,7 @@
 import MergeRequestsCard from "@/components/cards/MergeRequestsCard.vue";
 import UserStatsCard from "@/components/cards/UserStatsCard.vue";
 import TodosCard from "@/components/cards/TodosCard.vue";
+import IssuesCard from "@/components/cards/IssuesCard.vue";
 import TeamsCard from "@/components/cards/TeamsCard.vue";
 import { mapGetters } from "vuex";
 import store from "@/store";
@@ -33,6 +37,8 @@ export default {
     ...mapGetters({
       mergeRequests: "getMergeRequests",
       user: "getConnectedUser",
+      issues: "getIssues",
+      issuesSize: "getIssuesSize",
       todos: "getTodos"
     }),
     teams() {
@@ -55,6 +61,7 @@ export default {
     MergeRequestsCard,
     UserStatsCard,
     TodosCard,
+    IssuesCard,
     TeamsCard
   }
 };
