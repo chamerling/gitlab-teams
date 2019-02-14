@@ -34,7 +34,7 @@
       </v-list-tile-sub-title>
     </v-list-tile-content>
 
-    <v-list-tile-action>
+    <v-list-tile-action v-if="!hideActions">
       <div id="actions">
         <v-badge class="pr-2" overlap left color="orange">
           <span slot="badge">{{ item.user_notes_count }}</span>
@@ -65,7 +65,11 @@ const states = {
 export default {
   name: "Issue",
   props: {
-    item: Object
+    item: Object,
+    hideActions: {
+      type: Boolean,
+      default: false
+    }
   },
   computed: {
     ...mapGetters({

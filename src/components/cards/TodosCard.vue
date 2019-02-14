@@ -5,17 +5,34 @@
       <span class="title font-weight-light ml-2">Todos</span>
     </v-card-title>
     <v-card-text>
-      <div id="count" class="ma-3">
+      <div id="count" class="ma-1">
         <span class="font-weight-medium display-3">{{todos ? todos.length : 0}}</span>
       </div>
+      <v-tooltip bottom>
+        <v-list slot="activator" v-if="todos.length" two-line dark dense>
+          <todo :item="last"/>
+        </v-list>
+        <span>Last todo: {{last.body}}</span>
+      </v-tooltip>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
+import { head } from "lodash";
+import Todo from "@/components/Todo.vue";
+
 export default {
   props: {
     todos: Array
+  },
+  computed: {
+    last() {
+      return head(this.todos);
+    }
+  },
+  components: {
+    Todo
   }
 }
 </script>

@@ -7,9 +7,12 @@
     <v-card-text>
       <div class="teams ma-3">
         <div class="team ma-1" v-for="team in teams" :key="team.name">
-          <v-avatar color="orange" :size="60" @click="goTo(team)">
-            <span class="white--text headline">{{team.name[0].toUpperCase()}}</span>
-          </v-avatar>
+          <v-tooltip bottom>
+            <v-avatar slot="activator" color="orange" :size="60" @click="goTo(team)">
+              <span class="white--text headline">{{team.name[0].toUpperCase()}}</span>
+            </v-avatar>
+            <span>{{team.name}}</span>
+          </v-tooltip>
         </div>
       </div>
     </v-card-text>

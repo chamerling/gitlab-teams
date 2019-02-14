@@ -5,14 +5,23 @@
       <span class="title font-weight-light ml-2">Issues</span>
     </v-card-title>
     <v-card-text>
-      <div id="count" class="ma-3">
+      <div id="count" class="ma-1">
         <span class="font-weight-medium display-3">{{total}}</span>
       </div>
+      <v-tooltip bottom>
+        <v-list slot="activator" v-if="issues.length" two-line dark dense>
+          <issue :item="last" hide-actions/>
+        </v-list>
+        <span>Last issue: {{last.title}}</span>
+      </v-tooltip>
     </v-card-text>
   </v-card>
 </template>
 
 <script>
+import { head } from "lodash";
+import Issue from "@/components/Issue.vue";
+
 export default {
   props: {
     issues: Array,
@@ -20,6 +29,14 @@ export default {
       type: Number,
       default: 0
     }
+  },
+  computed: {
+    last() {
+      return head(this.issues);
+    }
+  },
+  components: {
+    Issue
   }
 }
 </script>
