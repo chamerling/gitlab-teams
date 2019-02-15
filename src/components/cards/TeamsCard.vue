@@ -8,9 +8,7 @@
       <div class="teams ma-3">
         <div class="team ma-1" v-for="team in teams" :key="team.name">
           <v-tooltip bottom>
-            <v-avatar slot="activator" color="orange" :size="60" @click="goTo(team)">
-              <span class="white--text headline">{{team.name[0].toUpperCase()}}</span>
-            </v-avatar>
+            <team-avatar slot="activator" :team="team" :size="60"/>
             <span>{{team.name}}</span>
           </v-tooltip>
         </div>
@@ -20,6 +18,8 @@
 </template>
 
 <script>
+import TeamAvatar from "@/components/TeamAvatar.vue";
+
 export default {
   props: {
     teams: Array
@@ -28,6 +28,9 @@ export default {
     goTo(team) {
       this.$router.push({ name: "team", params: { name: team.name }});
     }
+  },
+  components: {
+    TeamAvatar
   }
 }
 </script>

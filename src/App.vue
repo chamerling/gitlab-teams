@@ -99,9 +99,7 @@
           </v-list-tile>
           <v-list-tile :to="`/team/${team.name}`" active-class="grey darken-2" v-for="team in teams" :key="team.name" avatar>
             <v-list-tile-avatar>
-              <v-avatar size="36">
-                <span class="white--text headline">{{team.icon || "🦊"}}</span>
-              </v-avatar>
+              <team-avatar :team="team" size="32"/>
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title v-text="team.name"></v-list-tile-title>
@@ -157,6 +155,7 @@
 import _ from "lodash";
 import { mapGetters } from "vuex";
 import Snackbar from "@/components/ui/Snackbar.vue";
+import TeamAvatar from "@/components/TeamAvatar.vue";
 
 export default {
   data: () => ({
@@ -210,7 +209,8 @@ export default {
     }
   },
   components: {
-    snackbar: Snackbar
+    Snackbar,
+    TeamAvatar
   }
 };
 </script>
