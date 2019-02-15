@@ -45,8 +45,8 @@ const actions = {
 };
 
 const getters = {
-  getMergeRequest({ mergeRequests }, id) {
-    return mergeRequests[id];
+  getMergeRequest({ mergeRequests }) {
+    return id => mergeRequests[id];
   },
 
   getMergeRequestsForUser({ mergeRequests }) {

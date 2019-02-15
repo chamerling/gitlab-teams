@@ -7,10 +7,10 @@
     offset-y
     bottom
   >
-    <v-icon slot="activator" :color="getPipelineColor()" @click.native.prevent>{{getPipelineIcon()}}</v-icon>
+    <v-icon :size="size" :class="{ running: pipeline.status === 'running' }" slot="activator" :color="getPipelineColor()" @click.native.prevent>{{getPipelineIcon()}}</v-icon>
     <v-card>
       <v-card-text id="card-text">
-        <v-icon :color="getPipelineColor()" class="mr-1">{{getPipelineIcon()}}</v-icon>
+        <v-icon :class="{ running: pipeline.status === 'running' }" :color="getPipelineColor()" class="mr-1">{{getPipelineIcon()}}</v-icon>
         <span>Pipeline #{{pipeline.id}} {{pipeline.status}}</span>
         <span class="ml-1 mr-1">-</span>
         <span v-if="pipeline.status === 'running'">Started {{ pipeline.updated_at | moment("calendar")}}</span>
@@ -48,7 +48,11 @@ export default {
   name: "pipeline-popover",
   props: {
     pipeline: Object,
-    mr: Object
+    mr: Object,
+    size: {
+      type: Number,
+      default: 24
+    }
   },
   methods: {
     retry() {
@@ -94,6 +98,24 @@ export default {
   #card-text {
     display: flex
     align-items: center
+  }
+
+  .running {
+    animation: pulsate 1.5s ease-out;
+    animation-iteration-count: infinite;
+    opacity: 0.5;
+  }
+
+  @keyframes pulsate {
+    0% {
+        opacity: 0.5;
+    }
+    50% {
+        opacity: 1.0;
+    }
+    100% {
+        opacity: 0.5;
+    }
   }
 </style>
 

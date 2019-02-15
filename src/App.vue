@@ -40,7 +40,7 @@
       <v-list dense>
         <v-list-tile v-if="isConfigured" @click="$router.push({ name: 'home' })">
           <v-list-tile-action>
-            <v-icon>home</v-icon>
+            <v-icon>dashboard</v-icon>
           </v-list-tile-action>
           <v-list-tile-content>
             <v-list-tile-title>

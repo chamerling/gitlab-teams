@@ -11,10 +11,13 @@
         <issues-card :issues="issues" :total="issuesSize"/>
       </v-flex>
       <v-flex sm6 md6 lg3>
-        <teams-card :teams="teams"/>
+        <pipelines-card :pipelines="pipelines"/>
       </v-flex>
       <v-flex md12 sm12 lg12>
         <merge-requests-card :merge-requests="mergeRequests"/>
+      </v-flex>
+      <v-flex sm6 md6 lg3>
+        <teams-card :teams="teams"/>
       </v-flex>
     </v-layout>
   </v-container>
@@ -28,7 +31,8 @@ import UserStatsCard from "@/components/cards/UserStatsCard.vue";
 import TodosCard from "@/components/cards/TodosCard.vue";
 import IssuesCard from "@/components/cards/IssuesCard.vue";
 import TeamsCard from "@/components/cards/TeamsCard.vue";
-import { mapGetters } from "vuex";
+import PipelinesCard from "@/components/cards/PipelinesCard.vue";
+import { mapGetters, mapState } from "vuex";
 import store from "@/store";
 
 export default {
@@ -39,7 +43,8 @@ export default {
       user: "getConnectedUser",
       issues: "getIssues",
       issuesSize: "getIssuesSize",
-      todos: "getTodos"
+      todos: "getTodos",
+      pipelines: "getPipelines"
     }),
     teams() {
       return _.orderBy(
@@ -62,6 +67,7 @@ export default {
     UserStatsCard,
     TodosCard,
     IssuesCard,
+    PipelinesCard,
     TeamsCard
   }
 };

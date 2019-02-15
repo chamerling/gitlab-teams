@@ -1,4 +1,5 @@
 import Vue from "vue";
+import { orderBy, findKey } from "lodash";
 
 const state = {
   pipelines: {} // id is 'mergeRequestId'
@@ -7,6 +8,15 @@ const state = {
 const getters = {
   getPipeline({ pipelines }) {
     return mergeRequestId => pipelines[mergeRequestId];
+  },
+
+  getPipelines({ pipelines }) {
+    return orderBy(Object.values(pipelines), "created_at", "desc");
+  },
+
+  getMergeRequestIdForPipeline({ pipelines }) {
+    return pipelineId =>
+      findKey(pipelines, pipeline => pipeline.id === pipelineId);
   }
 };
 
