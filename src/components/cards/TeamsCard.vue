@@ -5,7 +5,7 @@
       <span class="title font-weight-light ml-2">Teams</span>
     </v-card-title>
     <v-card-text>
-      <div class="teams ma-3">
+      <div class="teams ma-1">
         <div class="team ma-1" v-for="team in teams" :key="team.name">
           <v-tooltip bottom>
             <team-avatar slot="activator" :team="team" :size="60"/>
@@ -39,7 +39,8 @@ export default {
   .teams {
     display: flex;
     align-items: center;
-    justify-content: center
+    justify-content: center;
+    flex-wrap: wrap;
   }
 
   .team {

@@ -8,9 +8,9 @@
       <div id="count" class="ma-1">
         <span class="font-weight-medium display-3">{{pipelines ? pipelines.length : 0}}</span>
       </div>
-      <div v-if="pipelines.length" class="pipelines ma-3">
+      <div v-if="pipelines.length" class="pipelines ma-1">
         <div class="pipeline ma-1" v-for="pipeline in pipelines" :key="pipeline.id">
-          <pipeline :pipeline="pipeline" :mr="getMergeRequest(pipeline)" :size="48"/>
+          <pipeline :pipeline="pipeline" :mr="getMergeRequest(pipeline)" :size="getSize()"/>
         </div>
       </div>
     </v-card-text>
@@ -26,6 +26,9 @@ export default {
     pipelines: Array
   },
   methods: {
+    getSize() {
+      return this.pipelines.length > 4 ? 32 : 48;
+    },
     getMergeRequest(pipeline) {
       const mergeRequestId = this.$store.getters.getMergeRequestIdForPipeline(pipeline.id);
 
@@ -53,6 +56,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-wrap: wrap;
   }
 </style>
 
