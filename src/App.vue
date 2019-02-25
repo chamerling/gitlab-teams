@@ -99,7 +99,7 @@
           </v-list-tile>
           <v-list-tile :to="`/team/${team.name}`" active-class="grey darken-2" v-for="team in teams" :key="team.name" avatar>
             <v-list-tile-avatar>
-              <team-avatar :team="team" size="32"/>
+              <team-avatar :team="team" :size="32"/>
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title v-text="team.name"></v-list-tile-title>
