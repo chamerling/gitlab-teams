@@ -23,6 +23,10 @@ const getters = {
 const actions = {
   updatePipeline({ commit }, { mergeRequest, pipeline }) {
     commit("updatePipeline", { mergeRequest, pipeline });
+  },
+
+  removePipelineForMergeRequest({ commit }, mergeRequest) {
+    commit("removePipeline", { mergeRequest });
   }
 };
 

@@ -35,8 +35,9 @@ const actions = {
     commit("addMergeRequest", mr);
   },
 
-  removeMergeRequest({ commit }, mr) {
+  removeMergeRequest({ commit, dispatch }, mr) {
     commit("removeMergeRequest", mr);
+    dispatch("removePipelineForMergeRequest", mr);
   },
 
   updateMergeRequest({ commit }, mr) {
