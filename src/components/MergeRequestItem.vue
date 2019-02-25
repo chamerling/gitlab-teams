@@ -27,6 +27,10 @@
               <span>Assigned to {{mr.assignee.name}}</span>
             </v-tooltip>
           </div>
+          <v-tooltip v-if="mr.milestone" bottom>
+            <v-chip slot="activator" color="primary" small text-color="white">{{ mr.milestone.title }}</v-chip>
+            <span>Milestone</span>
+          </v-tooltip>
           <v-tooltip v-for="label in mr.labels" :key="label" bottom>
             <v-chip slot="activator" color="orange" small text-color="white">{{ label }}</v-chip>
             <span>Label</span>
