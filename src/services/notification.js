@@ -17,8 +17,9 @@ function notify(type, title, options = {}) {
 }
 
 function isEnabled() {
+  return Promise.reject(new Error("Notification disabled"));
   // TODO: Check if yhe type is allowed to notify
-  return enable();
+  //return enable();
 }
 
 function enable() {
