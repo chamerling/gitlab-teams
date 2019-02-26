@@ -38,6 +38,23 @@
             </v-card-actions>
           </v-card>
 
+          <v-card class="elevation-12 mt-5">
+            <v-toolbar dark>
+              <v-toolbar-title class="white--text">Desktop Notification</v-toolbar-title>
+            </v-toolbar>
+            <v-card-text>
+              <div class="body-1 mb-3">
+                Allows to be notified on your GitLab activity
+                <v-switch
+                  disabled
+                  color="primary"
+                  v-model="desktopNotification"
+                  :label="desktopNotification ? 'Enabled' : 'Disabled'"
+                ></v-switch>
+              </div>
+            </v-card-text>
+          </v-card>
+
           <v-card v-if="isConfigured" class="elevation-12 mt-5">
             <v-toolbar dark>
               <v-toolbar-title class="white--text">Clean data</v-toolbar-title>
@@ -100,6 +117,9 @@ export default {
       set(value) {
         this.localApiEndpoint = value;
       }
+    },
+    desktopNotification() {
+      return this.$store.state.notification.enabled;
     }
   },
   mounted() {
