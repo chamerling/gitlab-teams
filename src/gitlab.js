@@ -9,8 +9,8 @@ function init(store) {
     apiToken: store.state.settings.apiToken
   });
 
-  gitlabApi.on("pipeline-failed", () => {
-    notification.notify("pipeline-failed", "Pipeline failed");
+  gitlabApi.on("pipeline-failed", ({ pipeline }) => {
+    notification.notify("pipeline-failed", `Pipeline ${pipeline.id} failed`);
   });
 
   gitlabApi.on("new-merge-request", mr => {
