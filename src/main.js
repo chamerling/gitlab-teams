@@ -10,6 +10,7 @@ import router from "./router";
 import store from "./store";
 import gitlab from "./gitlab";
 import style from "./style";
+import notification from "./notification";
 
 Vue.config.productionTip = false;
 Vue.use(Vuetify, { theme: style });
@@ -24,6 +25,7 @@ if (process.env.VUE_APP_GA) {
 }
 
 gitlab.init(store);
+notification.init(store);
 
 new Vue({
   router,

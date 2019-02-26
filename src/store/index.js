@@ -14,6 +14,7 @@ import issue from "./modules/issue";
 import pipeline from "./modules/pipeline";
 import user from "./modules/user";
 import settings from "./modules/settings";
+import notification from "./modules/notification";
 
 Vue.use(Vuex);
 
@@ -26,6 +27,7 @@ export default new Vuex.Store({
     team,
     user,
     settings,
+    notification,
     pipeline
   },
   state,

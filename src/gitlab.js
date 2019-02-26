@@ -1,4 +1,5 @@
-import Gitlab from "./services/gitlab";
+import Gitlab from "@/services/gitlab";
+import notification from "@/services/notification";
 
 let gitlabApi = null;
 
@@ -6,6 +7,10 @@ function init(store) {
   gitlabApi = new Gitlab.Api({
     apiEndpoint: store.state.settings.apiEndpoint,
     apiToken: store.state.settings.apiToken
+  });
+
+  gitlabApi.on("pipeline-failed", () => {
+    notification.notify("pipeline-failed", "Pipeline failed");
   });
 
   gitlabApi.on("new-merge-request", mr => {

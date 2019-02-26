@@ -6,7 +6,9 @@ import {
   pluck,
   distinct,
   share,
-  map
+  filter,
+  map,
+  distinctUntilChanged
 } from "rxjs/operators";
 import EventEmitter from "eventemitter3";
 
@@ -44,16 +46,23 @@ export default class Api extends EventEmitter {
       this.emit("new-merge-request", mr);
       this.subscriptions.set(mr.id, []);
 
-      const pipelineSubscription = this.watchPipeline(mr).subscribe(
-        pipeline => {
-          if (pipeline) {
-            // TODO: Update pipeline only when status changes
-            this.emit("updated-pipeline", {
-              mergeRequest: mr,
-              pipeline: pipeline
-            });
-          }
+      const pipelineShare$ = this.watchPipeline(mr).pipe(share());
+      const pipelineSubscription = pipelineShare$.subscribe(pipeline => {
+        if (pipeline) {
+          this.emit("updated-pipeline", {
+            mergeRequest: mr,
+            pipeline: pipeline
+          });
         }
+      });
+
+      const pipelineBuildNotifier$ = pipelineShare$.pipe(
+        distinctUntilChanged("status"),
+        filter(pipeline => pipeline.status === "failed")
+      );
+
+      const pipelineBuildNotifierSubscription = pipelineBuildNotifier$.subscribe(
+        pipeline => this.emit("pipeline-failed", { mergeRequest: mr, pipeline })
       );
 
       const mergeRequestSubscription = this.watchMergeRequest(mr).subscribe(
@@ -73,6 +82,7 @@ export default class Api extends EventEmitter {
         .get(mr.id)
         .push(
           ...[
+            pipelineBuildNotifierSubscription,
             pipelineSubscription,
             mergeRequestSubscription,
             newMergeRequestSubscription
