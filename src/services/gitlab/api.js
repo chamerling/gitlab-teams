@@ -7,6 +7,8 @@ import {
   distinct,
   share,
   filter,
+  skip,
+  startWith,
   map,
   distinctUntilChanged
 } from "rxjs/operators";
@@ -57,7 +59,9 @@ export default class Api extends EventEmitter {
       });
 
       const pipelineBuildNotifier$ = pipelineShare$.pipe(
-        distinctUntilChanged("status"),
+        startWith({ status: "failed" }),
+        distinctUntilChanged((x, y) => x.status === y.status),
+        skip(1),
         filter(pipeline => pipeline.status === "failed")
       );
 
