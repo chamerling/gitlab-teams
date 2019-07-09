@@ -45,17 +45,15 @@ npm run build
 npm run lint
 ```
 
-### Deploy
+### Docker
 
-App is deployed on https://chamerling.github.io/gitlab-teams with the help of gh-pages and with some little help from git worktree.
-To deploy a new version:
+Docker image is built on commit and available on Docker Hub.
 
-1. `rm -fr dist/*`
-2. `npm run build`
-3. `cd dist`
-4. `git add .`
-5. `git commit -am 'VXYZ'`
-6. `git push origin gh-pages`
+```sh
+docker run -it -p 8888:80 --rm --name gitlab-teams chamerling/gitlab-teams
+```
+
+Then open http://localhost:8888 and enjoy.
 
 ## License
 
