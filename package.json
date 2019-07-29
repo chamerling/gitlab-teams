@@ -12,7 +12,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "notifyjs": "^3.0.0",
-    "rxjs": "^6.3.3",
+    "rxjs": "^6.5.2",
     "vue": "^2.5.17",
     "vue-analytics": "^5.16.1",
     "vue-axios": "^2.1.4",
