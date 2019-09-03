@@ -35,6 +35,7 @@ export const launchUserWatchers = ({ dispatch }) => {
   gl.watchTodos();
   gl.watchIssues();
   gl.watchProjects();
+  gl.watchRunners();
 };
 
 export const cleanAll = ({ dispatch }) => {

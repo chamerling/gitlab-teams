@@ -11,6 +11,7 @@ import todo from "./modules/todo";
 import merge_request from "./modules/merge_request";
 import team from "./modules/team";
 import issue from "./modules/issue";
+import runner from "./modules/runner";
 import pipeline from "./modules/pipeline";
 import user from "./modules/user";
 import settings from "./modules/settings";
@@ -24,6 +25,7 @@ export default new Vuex.Store({
     ui,
     todo,
     issue,
+    runner,
     merge_request,
     team,
     user,

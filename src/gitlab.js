@@ -56,6 +56,10 @@ function init(store) {
   gitlabApi.on("project-length", length => {
     store.dispatch("setProjectSize", length);
   });
+
+  gitlabApi.on("new-runner", runner => {
+    store.dispatch("addRunner", runner);
+  });
 }
 
 function get() {
