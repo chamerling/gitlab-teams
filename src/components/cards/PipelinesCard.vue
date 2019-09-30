@@ -18,7 +18,6 @@
 </template>
 
 <script>
-import { head } from "lodash";
 import PipelinePopover from "@/components/PipelinePopover.vue";
 
 export default {
