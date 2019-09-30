@@ -4,7 +4,7 @@
       <v-badge overlap>
         <span slot="badge">{{ mergeRequests.length }}</span>
         <user-avatar-popover v-if="user" :user="user" :size="avatarSize.avatar">
-          <span v-if="stats.success || stats.failed || stats.running">Pipelines: {{stats.success}} success, {{stats.failed}} failed, {{stats.running}} running</span>
+          <span v-if="stats.running || stats.failed || stats.success">Pipelines: {{stats.success}} success, {{stats.failed}} failed, {{stats.running}} running</span>
         </user-avatar-popover>
       </v-badge>
     </v-progress-circular>
