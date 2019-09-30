@@ -26,10 +26,14 @@ export default {
   },
   computed: {
     stats() {
-      const pipelines = this.mergeRequests.map(mergeRequest => this.getPipeline(mergeRequest)).filter(Boolean);
-      const success = pipelines.filter(pipeline => pipeline.status === "success");
+      const pipelines = this.mergeRequests
+        .map(mergeRequest => this.getPipeline(mergeRequest))
+        .filter(Boolean);
+      const success = pipelines.filter(
+        pipeline => pipeline.status === "success"
+      );
       const ratio = ((success.length * 100) / pipelines.length).toFixed(2);
-      const color = ['error', 'warning', 'success'][Math.floor(ratio / 40)]
+      const color = ["error", "warning", "success"][Math.floor(ratio / 40)];
 
       return {
         ratio,
@@ -38,6 +42,6 @@ export default {
         pipelines: pipelines.length
       };
     }
-  },
-}
+  }
+};
 </script>

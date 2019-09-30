@@ -23,7 +23,7 @@ export default {
   components: {
     AvatarBuildGauge
   }
-}
+};
 </script>
 <style lang="stylus" scoped>
   #gauge {
@@ -33,4 +33,3 @@ export default {
     cursor: pointer
   }
 </style>
-

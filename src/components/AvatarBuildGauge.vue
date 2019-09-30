@@ -34,16 +34,27 @@ export default {
       return {
         progress: this.size + 10,
         avatar: this.size
-      }
+      };
     },
     stats() {
-      const pipelines = this.mergeRequests.map(mergeRequest => this.getPipeline(mergeRequest)).filter(Boolean) || [];
-      const success = pipelines.filter(pipeline => pipeline.status === "success");
+      const pipelines =
+        this.mergeRequests
+          .map(mergeRequest => this.getPipeline(mergeRequest))
+          .filter(Boolean) || [];
+      const success = pipelines.filter(
+        pipeline => pipeline.status === "success"
+      );
       const failed = pipelines.filter(pipeline => pipeline.status === "failed");
-      const running = pipelines.filter(pipeline => pipeline.status === "running");
-      const isRunning = pipelines.some(pipeline => pipeline.status === "running");
+      const running = pipelines.filter(
+        pipeline => pipeline.status === "running"
+      );
+      const isRunning = pipelines.some(
+        pipeline => pipeline.status === "running"
+      );
       const ratio = ((success.length * 100) / pipelines.length).toFixed(2);
-      const color = ['error', 'warning', 'success'][Math.floor(ratio / 40)] || "grey darken-3";
+      const color =
+        ["error", "warning", "success"][Math.floor(ratio / 40)] ||
+        "grey darken-3";
 
       return {
         ratio,
@@ -59,7 +70,7 @@ export default {
   components: {
     UserAvatarPopover
   }
-}
+};
 </script>
 
 <style scoped>
@@ -70,15 +81,13 @@ export default {
 
 @keyframes pulse {
   0% {
-    box-shadow: 0 0 0 0 rgba(204,169,44, 0.4);
+    box-shadow: 0 0 0 0 rgba(204, 169, 44, 0.4);
   }
   70% {
-      box-shadow: 0 0 0 5px rgba(204,169,44, 0);
+    box-shadow: 0 0 0 5px rgba(204, 169, 44, 0);
   }
   100% {
-      box-shadow: 0 0 0 0 rgba(204,169,44, 0);
+    box-shadow: 0 0 0 0 rgba(204, 169, 44, 0);
   }
 }
 </style>
-
-

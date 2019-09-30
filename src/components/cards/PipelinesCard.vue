@@ -30,7 +30,9 @@ export default {
       return this.pipelines.length > 4 ? 32 : 48;
     },
     getMergeRequest(pipeline) {
-      const mergeRequestId = this.$store.getters.getMergeRequestIdForPipeline(pipeline.id);
+      const mergeRequestId = this.$store.getters.getMergeRequestIdForPipeline(
+        pipeline.id
+      );
 
       if (mergeRequestId) {
         return this.$store.getters.getMergeRequest(mergeRequestId);
@@ -40,23 +42,22 @@ export default {
     }
   },
   components: {
-    "pipeline": PipelinePopover
+    pipeline: PipelinePopover
   }
-}
+};
 </script>
 
 <style scoped>
-  #count {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
+#count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 
-  .pipelines {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
+.pipelines {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 </style>
-
