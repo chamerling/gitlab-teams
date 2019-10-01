@@ -23,8 +23,6 @@
   </v-container>
 </template>
 
-</template>
-
 <script>
 import MergeRequestsCard from "@/components/cards/MergeRequestsCard.vue";
 import UserStatsCard from "@/components/cards/UserStatsCard.vue";
@@ -32,7 +30,7 @@ import TodosCard from "@/components/cards/TodosCard.vue";
 import IssuesCard from "@/components/cards/IssuesCard.vue";
 import TeamsCard from "@/components/cards/TeamsCard.vue";
 import PipelinesCard from "@/components/cards/PipelinesCard.vue";
-import { mapGetters, mapState } from "vuex";
+import { mapGetters } from "vuex";
 import store from "@/store";
 
 export default {
@@ -47,6 +45,7 @@ export default {
       pipelines: "getPipelines"
     }),
     teams() {
+      // eslint-disable-next-line no-undef
       return _.orderBy(
         this.$store.getters.getTeams,
         [team => team.name.toLowerCase()],

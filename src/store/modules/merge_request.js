@@ -51,9 +51,10 @@ const getters = {
   },
 
   getMergeRequestsForUser({ mergeRequests }) {
-    return username => Object.values(mergeRequests).filter(
-      mergeRequest => mergeRequest.author.username === username
-    );
+    return username =>
+      Object.values(mergeRequests).filter(
+        mergeRequest => mergeRequest.author.username === username
+      );
   },
 
   getMergeRequests({ mergeRequests }) {

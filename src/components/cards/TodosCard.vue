@@ -34,14 +34,13 @@ export default {
   components: {
     Todo
   }
-}
+};
 </script>
 
 <style scoped>
-  #count {
-    display: flex;
-    align-items: center;
-    justify-content: center
-  }
+#count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 </style>
-

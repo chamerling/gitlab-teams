@@ -45,7 +45,7 @@ const mutations = {
 
   setIssueSize(state, size) {
     state.issueSize = parseInt(size);
-  },
+  }
 };
 
 export default {

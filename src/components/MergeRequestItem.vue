@@ -132,9 +132,21 @@ export default {
   methods: {
     createTodo() {
       // TODO: Dispatch so that we can update the TODO counter and list
-      gitlab.get().client.createTodoFromMergeRequest({ project_id: this.mr.project_id , iid: this.mr.iid })
-        .then(() => this.$store.dispatch("displaySnackbarMessage", "Todo has been created"))
-        .catch(() => this.$store.dispatch("displaySnackbarMessage", "Can not create Todo"));
+      gitlab
+        .get()
+        .client.createTodoFromMergeRequest({
+          project_id: this.mr.project_id,
+          iid: this.mr.iid
+        })
+        .then(() =>
+          this.$store.dispatch(
+            "displaySnackbarMessage",
+            "Todo has been created"
+          )
+        )
+        .catch(() =>
+          this.$store.dispatch("displaySnackbarMessage", "Can not create Todo")
+        );
     },
     copyLink() {
       const link = `${this.mr.title} - ${this.mr.web_url}`;

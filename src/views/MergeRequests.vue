@@ -71,13 +71,13 @@ export default {
   methods: {
     fetchData(state /* closed OR merged */) {
       this.loaded = false;
-        this.mergeRequests = [];
-        gitlab
-          .get()
-          .client.fetchMergeRequests({ state })
-          .then(mrs => (this.mergeRequests = mrs.data))
-          .finally(() => (this.loaded = true));
-      }
+      this.mergeRequests = [];
+      gitlab
+        .get()
+        .client.fetchMergeRequests({ state })
+        .then(mrs => (this.mergeRequests = mrs.data))
+        .finally(() => (this.loaded = true));
+    }
   },
   components: {
     MergeRequests

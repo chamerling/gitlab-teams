@@ -38,14 +38,13 @@ export default {
   components: {
     Issue
   }
-}
+};
 </script>
 
 <style scoped>
-  #count {
-    display: flex;
-    align-items: center;
-    justify-content: center
-  }
+#count {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 </style>
-

@@ -15,14 +15,12 @@ import { mapGetters, mapState } from "vuex";
 import MergeRequests from "@/components/MergeRequests.vue";
 import BuildGauge from "@/components/BuildGauge.vue";
 import AvatarBuildGauge from "@/components/AvatarBuildGauge.vue";
-import UserAvatarPopover from "@/components/UserAvatarPopover.vue";
 import store from "@/store";
 
 export default {
   name: "team",
   components: {
     MergeRequests,
-    "user-avatar": UserAvatarPopover,
     BuildGauge,
     AvatarBuildGauge
   },

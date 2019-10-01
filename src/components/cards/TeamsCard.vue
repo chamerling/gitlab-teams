@@ -26,29 +26,28 @@ export default {
   },
   methods: {
     goTo(team) {
-      this.$router.push({ name: "team", params: { name: team.name }});
+      this.$router.push({ name: "team", params: { name: team.name } });
     }
   },
   components: {
     TeamAvatar
   }
-}
+};
 </script>
 
 <style scoped>
-  .teams {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
+.teams {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
 
-  .team {
-    cursor: pointer;
-  }
+.team {
+  cursor: pointer;
+}
 
-  .avatar {
-    font-size: 40px;
-  }
+.avatar {
+  font-size: 40px;
+}
 </style>
-

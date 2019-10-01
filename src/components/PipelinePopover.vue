@@ -56,14 +56,38 @@ export default {
   },
   methods: {
     retry() {
-      gitlab.get().client.retryPipeline(this.mr.source_project_id, this.pipeline.id)
-        .then(() => this.$store.dispatch("displaySnackbarMessage", "Pipeline has been relaunched"))
-        .catch(() => this.$store.dispatch("displaySnackbarMessage", "Can not relaunch pipeline"));
+      gitlab
+        .get()
+        .client.retryPipeline(this.mr.source_project_id, this.pipeline.id)
+        .then(() =>
+          this.$store.dispatch(
+            "displaySnackbarMessage",
+            "Pipeline has been relaunched"
+          )
+        )
+        .catch(() =>
+          this.$store.dispatch(
+            "displaySnackbarMessage",
+            "Can not relaunch pipeline"
+          )
+        );
     },
     cancel() {
-      gitlab.get().client.cancelPipeline(this.mr.source_project_id, this.pipeline.id)
-        .then(() => this.$store.dispatch("displaySnackbarMessage", "Pipeline has been canceled"))
-        .catch(() => this.$store.dispatch("displaySnackbarMessage", "Can not cancel pipeline"));
+      gitlab
+        .get()
+        .client.cancelPipeline(this.mr.source_project_id, this.pipeline.id)
+        .then(() =>
+          this.$store.dispatch(
+            "displaySnackbarMessage",
+            "Pipeline has been canceled"
+          )
+        )
+        .catch(() =>
+          this.$store.dispatch(
+            "displaySnackbarMessage",
+            "Can not cancel pipeline"
+          )
+        );
     },
     getPipelineColor() {
       const colors = {
@@ -118,4 +142,3 @@ export default {
     }
   }
 </style>
-

@@ -30,7 +30,8 @@ function enable() {
     if (Notify.isSupported()) {
       Notify.requestPermission(
         () => resolve(true),
-        () => reject(new Error("You denied permission to display notifications"))
+        () =>
+          reject(new Error("You denied permission to display notifications"))
       );
     } else {
       reject(new Error("Notification are not supported by your browser"));
