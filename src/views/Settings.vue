@@ -140,7 +140,7 @@ export default {
         return this.$store.state.settings.darkMode;
       },
       set(value) {
-        this.localDarkMode = value;
+        this.$store.dispatch("updateTheme", value);
       }
     },
     desktopNotification() {
