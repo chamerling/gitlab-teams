@@ -12,7 +12,7 @@
         <v-list slot="activator" v-if="todos.length" two-line dense>
           <todo :item="last"/>
         </v-list>
-        <span>Last todo: {{last.body}}</span>
+        <span v-if="last">Last todo: {{last.body}}</span>
       </v-tooltip>
     </v-card-text>
   </v-card>
