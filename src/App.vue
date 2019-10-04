@@ -10,136 +10,138 @@
         app
       >
 
-      <v-list-tile v-if="miniDrawer" @click.stop="miniDrawer = !miniDrawer">
-        <v-list-tile-action>
+      <v-list-item v-if="miniDrawer" @click.stop="miniDrawer = !miniDrawer">
+        <v-list-item-action>
           <v-icon>chevron_right</v-icon>
-        </v-list-tile-action>
-      </v-list-tile>
+        </v-list-item-action>
+      </v-list-item>
 
       <v-list dense class="pa-1" v-if="connectedUser">
-        <v-list-tile avatar>
-          <v-list-tile-avatar>
+        <v-list-item avatar>
+          <v-list-item-avatar>
             <v-avatar size="44px">
               <img v-if="connectedUser" :src="connectedUser.avatar_url">
               <v-icon v-else>account_circle</v-icon>
             </v-avatar>
-          </v-list-tile-avatar>
+          </v-list-item-avatar>
 
-          <v-list-tile-content>
-            <v-list-tile-title>{{ connectedUser.name }}</v-list-tile-title>
-          </v-list-tile-content>
+          <v-list-item-content>
+            <v-list-item-title>{{ connectedUser.name }}</v-list-item-title>
+          </v-list-item-content>
 
-        <v-list-tile-action>
+        <v-list-item-action>
             <v-btn icon @click.stop="miniDrawer = !miniDrawer">
               <v-icon>chevron_left</v-icon>
             </v-btn>
-          </v-list-tile-action>
-        </v-list-tile>
+          </v-list-item-action>
+        </v-list-item>
       </v-list>
 
       <v-list dense>
-        <v-list-tile v-if="isConfigured" @click="$router.push({ name: 'home' })">
-          <v-list-tile-action>
+        <v-list-item v-if="isConfigured" @click="$router.push({ name: 'home' })">
+          <v-list-item-action>
             <v-icon>dashboard</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>
               Home
-            </v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile v-if="isConfigured" @click="$router.push({ name: 'mrs' })">
-          <v-list-tile-action>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item v-if="isConfigured" @click="$router.push({ name: 'mrs' })">
+          <v-list-item-action>
             <v-icon>merge_type</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title class="with-badge">
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title class="with-badge">
               Merge Requests
-            </v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile v-if="isConfigured" @click="$router.push({ name: 'issues' })">
-          <v-list-tile-action>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item v-if="isConfigured" @click="$router.push({ name: 'issues' })">
+          <v-list-item-action>
             <v-icon>bug_report</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title class="with-badge">
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title class="with-badge">
               Issues
-            </v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
-        <v-list-tile v-if="isConfigured" @click="$router.push({ name: 'todo' })">
-          <v-list-tile-action>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+        <v-list-item v-if="isConfigured" @click="$router.push({ name: 'todo' })">
+          <v-list-item-action>
             <v-badge v-if="miniDrawer" right overlap>
               <span slot="badge">{{todosSize}}</span>
               <v-icon>list</v-icon>
             </v-badge>
             <v-icon v-else>list</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-content>
-            <v-list-tile-title class="with-badge">
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title class="with-badge">
               <span>Todo</span>
               <v-spacer/>
               <v-chip v-if="todosSize" color="orange" small text-color="white">{{todosSize}}</v-chip>
-            </v-list-tile-title>
-          </v-list-tile-content>
-        </v-list-tile>
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
         <v-list>
-          <v-list-tile v-if="isConfigured" class="mt-3">
-            <v-list-tile-action>
+          <v-list-item v-if="isConfigured" class="mt-3">
+            <v-list-item-action>
               <v-btn icon ripple @click="createTeam">
                 <v-icon color="grey darken-1">add_circle_outline</v-icon>
               </v-btn>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>
+            </v-list-item-action>
+            <v-list-item-content>
+              <v-list-item-title>
                 <span class="grey--text text--darken-1">TEAMS</span>
-              </v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile :to="`/team/${team.name}`" active-class="grey darken-2" v-for="team in teams" :key="team.name" avatar>
-            <v-list-tile-avatar>
+              </v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <v-list-item :to="`/team/${team.name}`" active-class="grey darken-2" v-for="team in teams" :key="team.name" avatar>
+            <v-list-item-avatar>
               <team-avatar :team="team" :size="32"/>
-            </v-list-tile-avatar>
-            <v-list-tile-content>
-              <v-list-tile-title v-text="team.name"></v-list-tile-title>
-            </v-list-tile-content>
-            <v-list-tile-action>
+            </v-list-item-avatar>
+            <v-list-item-content>
+              <v-list-item-title v-text="team.name"></v-list-item-title>
+            </v-list-item-content>
+            <v-list-item-action>
               <v-menu offset-y min-width="150">
-                <v-btn icon ripple slot="activator" @click.native.prevent>
-                  <v-icon color="grey darken-1">more_vert</v-icon>
-                </v-btn>
+                <template v-slot:activator="{ on }">
+                    <v-btn dark icon ripple v-on="on" @click.native.prevent>
+                        <v-icon>more_vert</v-icon>
+                    </v-btn>
+                </template>
                 <v-list>
-                  <v-list-tile @click.prevent="deleteTeam(team)">
-                    <v-list-tile-title>Delete</v-list-tile-title>
-                  </v-list-tile>
+                  <v-list-item @click.prevent="deleteTeam(team)">
+                    <v-list-item-title>Delete</v-list-item-title>
+                  </v-list-item>
                 </v-list>
               </v-menu>
-            </v-list-tile-action>
-          </v-list-tile>
+            </v-list-item-action>
+          </v-list-item>
         </v-list>
-        <v-list-tile @click="openSettings">
-          <v-list-tile-action>
+        <v-list-item @click="openSettings">
+          <v-list-item-action>
             <v-icon color="grey darken-1">settings</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title class="grey--text text--darken-1">Settings</v-list-tile-title>
-        </v-list-tile>
-        <v-list-tile href="https://github.com/chamerling/gitlab-teams/" target="_blank">
-          <v-list-tile-action>
+          </v-list-item-action>
+          <v-list-item-title class="grey--text text--darken-1">Settings</v-list-item-title>
+        </v-list-item>
+        <v-list-item href="https://github.com/chamerling/gitlab-teams/" target="_blank">
+          <v-list-item-action>
             <v-icon color="grey darken-1">info</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title class="grey--text text--darken-1">About</v-list-tile-title>
-        </v-list-tile>
+          </v-list-item-action>
+          <v-list-item-title class="grey--text text--darken-1">About</v-list-item-title>
+        </v-list-item>
       </v-list>
       </v-navigation-drawer>
-      <v-toolbar dark flat fixed app clipped-left dense color="orange darken-4">
-        <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+      <v-app-bar dark flat fixed clipped-left dense color="orange darken-4">
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title>GitLab Teams</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon @click="goBack" v-if="isConfigured && $route.name === 'settings'">
           <v-icon small>clear</v-icon>
         </v-btn>
-      </v-toolbar>
+      </v-app-bar>
       <v-content>
         <v-container class="pa-0">
           <transition name="fade" mode="out-in">

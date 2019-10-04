@@ -13,7 +13,11 @@ import style from "./style";
 import notification from "./notification";
 
 Vue.config.productionTip = false;
-Vue.use(Vuetify, { theme: style });
+const opts = {
+  dark: true,
+  theme: style
+};
+Vue.use(Vuetify);
 Vue.use(VueMoment);
 Vue.use(VueClipboard);
 
@@ -30,5 +34,6 @@ notification.init(store);
 new Vue({
   router,
   store,
+  vuetify: new Vuetify(opts),
   render: h => h(App)
 }).$mount("#app");
