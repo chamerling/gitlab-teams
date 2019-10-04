@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-app dark>
+    <v-app :dark="darkMode">
       <v-navigation-drawer
         :mini-variant="miniDrawer"
         v-model="drawer"
@@ -177,6 +177,9 @@ export default {
     }
   },
   computed: {
+    darkMode() {
+      return (typeof this.$store.state.settings.darkMode != "boolean" ? true : this.$store.state.settings.darkMode);
+    },
     isConfigured() {
       return this.$store.getters.isConfigured;
     },
