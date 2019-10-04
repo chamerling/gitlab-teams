@@ -45,6 +45,11 @@ const mutations = {
 
   setIssueSize(state, size) {
     state.issueSize = parseInt(size);
+  },
+
+  resetIssues(state) {
+    state.issues = {};
+    state.issueSize = 0;
   }
 };
 

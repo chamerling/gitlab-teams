@@ -21,6 +21,8 @@ const actions = {
     commit("setTeamProjects", {});
     commit("setTodos", {});
     commit("setConnectedUser", null);
+    commit("resetIssues");
+    commit("resetNotification");
     dispatch("launchWatchers");
     dispatch("launchUserWatchers");
   }
