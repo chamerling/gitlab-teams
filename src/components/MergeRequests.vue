@@ -1,5 +1,5 @@
 <template>
-  <v-list two-line dark>
+  <v-list two-line>
     <div v-for="mergeRequest in orderedMergeRequests" :key="mergeRequest.id">
       <merge-request-item :mr="mergeRequest" :pipeline="getPipeline(mergeRequest)"/>
     </div>

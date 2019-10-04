@@ -1,6 +1,6 @@
 <template>
   <div>
-    <v-tabs v-model="activeTab" dark slider-color="orange">
+    <v-tabs v-model="activeTab" slider-color="orange">
       <v-tab key="open">
         Open
       </v-tab>
