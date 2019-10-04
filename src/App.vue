@@ -178,7 +178,8 @@ export default {
   },
   computed: {
     darkMode() {
-      return (typeof this.$store.state.settings.darkMode != "boolean" ? true : this.$store.state.settings.darkMode);
+      let mode = this.$store.state.settings.darkMode;
+      return (typeof mode == "boolean" ? mode : (mode == "false" ? false : true));
     },
     isConfigured() {
       return this.$store.getters.isConfigured;
