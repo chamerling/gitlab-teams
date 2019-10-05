@@ -36,11 +36,11 @@
                   return-object
                 >
                   <template slot="no-data">
-                    <v-list-tile>
-                      <v-list-tile-title>
+                    <v-list-item>
+                      <v-list-item-title>
                         Search GitLab User...
-                      </v-list-tile-title>
-                    </v-list-tile>
+                      </v-list-item-title>
+                    </v-list-item>
                   </template>
                   <template slot="selection" slot-scope="data">
                     <v-chip
@@ -56,14 +56,14 @@
                   </template>
 
                   <template slot="item" slot-scope="data">
-                    <v-list-tile-avatar>
+                    <v-list-item-avatar>
                       <v-avatar>
                         <img :src="data.item.avatar_url"/>
                       </v-avatar>
-                    </v-list-tile-avatar>
-                    <v-list-tile-content>
-                      <v-list-tile-title v-text="data.item.name"></v-list-tile-title>
-                    </v-list-tile-content>
+                    </v-list-item-avatar>
+                    <v-list-item-content>
+                      <v-list-item-title v-text="data.item.name"></v-list-item-title>
+                    </v-list-item-content>
                   </template>
                 </v-autocomplete>
 

@@ -12,15 +12,15 @@
     </v-avatar>
     <v-card>
       <v-list>
-        <v-list-tile avatar>
+        <v-list-tile>
           <v-list-tile-avatar>
             <img :src="user.avatar_url">
           </v-list-tile-avatar>
 
           <v-list-tile-content>
             <v-list-tile-title>{{ user.name }}</v-list-tile-title>
-            <v-list-tile-sub-title>@{{ user.username }}</v-list-tile-sub-title>
-            <v-list-tile-sub-title><slot></slot></v-list-tile-sub-title>
+            <v-list-tile-subtitle>@{{ user.username }}</v-list-tile-subtitle>
+            <v-list-tile-subtitle><slot></slot></v-list-tile-subtitle>
           </v-list-tile-content>
 
           <v-list-tile-action>

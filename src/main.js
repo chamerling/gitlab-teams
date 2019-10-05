@@ -1,4 +1,5 @@
 import "vuetify/dist/vuetify.min.css";
+import "@mdi/font/css/materialdesignicons.css";
 import VueMoment from "vue-moment";
 import Vuetify from "vuetify";
 import VueAnalytics from "vue-analytics";
@@ -14,8 +15,9 @@ import notification from "./notification";
 
 Vue.config.productionTip = false;
 const opts = {
-  dark: true,
-  theme: style
+  theme: {
+    dark: true
+  }
 };
 Vue.use(Vuetify);
 Vue.use(VueMoment);

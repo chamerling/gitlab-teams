@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-app dark>
+    <v-app>
       <v-navigation-drawer
         :mini-variant="miniDrawer"
         v-model="drawer"
@@ -17,7 +17,7 @@
       </v-list-item>
 
       <v-list dense class="pa-1" v-if="connectedUser">
-        <v-list-item avatar>
+        <v-list-item>
           <v-list-item-avatar>
             <v-avatar size="44px">
               <img v-if="connectedUser" :src="connectedUser.avatar_url">
@@ -97,7 +97,7 @@
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>
-          <v-list-item :to="`/team/${team.name}`" active-class="grey darken-2" v-for="team in teams" :key="team.name" avatar>
+          <v-list-item :to="`/team/${team.name}`" active-class="grey darken-2" v-for="team in teams" :key="team.name">
             <v-list-item-avatar>
               <team-avatar :team="team" :size="32"/>
             </v-list-item-avatar>
@@ -134,7 +134,7 @@
         </v-list-item>
       </v-list>
       </v-navigation-drawer>
-      <v-app-bar dark flat fixed clipped-left dense color="orange darken-4">
+      <v-app-bar app dark flat fixed clipped-left dense color="orange darken-4">
         <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
         <v-toolbar-title>GitLab Teams</v-toolbar-title>
         <v-spacer></v-spacer>

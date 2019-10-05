@@ -1,17 +1,17 @@
 <template>
-  <v-list-tile avatar :href="item.web_url" target="_blank">
-    <v-list-tile-avatar @click.prevent="$router.push({ name: 'user', params: {name: item.author.username} })">
+  <v-list-item :href="item.web_url" target="_blank">
+    <v-list-item-avatar @click.prevent="$router.push({ name: 'user', params: {name: item.author.username} })">
       <user-avatar :user="item.author"/>
-    </v-list-tile-avatar>
+    </v-list-item-avatar>
 
-    <v-list-tile-content>
-      <v-list-tile-title id="title">
+    <v-list-item-content>
+      <v-list-item-title id="title">
         <span>{{ item.title }}</span>
-      </v-list-tile-title>
-      <v-list-tile-sub-title>
+      </v-list-item-title>
+      <v-list-item-subtitle>
         <span class="state">{{ getState() }}</span> - Created {{ item.created_at | moment("calendar")}} - Updated {{ item.updated_at | moment('calendar')}}
-      </v-list-tile-sub-title>
-      <v-list-tile-sub-title>
+      </v-list-item-subtitle>
+      <v-list-item-subtitle>
         <div id="subtitle">
           {{ getProject(item.project_id).name }}#{{ item.iid }}
           <div class="ml-1" v-for="assignee in item.assignees" :key="assignee.id">
@@ -31,10 +31,10 @@
             <span>Label</span>
           </v-tooltip>
         </div>
-      </v-list-tile-sub-title>
-    </v-list-tile-content>
+      </v-list-item-subtitle>
+    </v-list-item-content>
 
-    <v-list-tile-action v-if="!hideActions">
+    <v-list-item-action v-if="!hideActions">
       <div id="actions">
         <v-badge class="pr-2" overlap left color="orange">
           <span slot="badge">{{ item.user_notes_count }}</span>
@@ -49,8 +49,8 @@
           <v-icon>thumb_down</v-icon>
         </v-badge>
       </div>
-    </v-list-tile-action>
-  </v-list-tile>
+    </v-list-item-action>
+  </v-list-item>
 </template>
 
 <script>
