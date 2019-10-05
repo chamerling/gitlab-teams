@@ -20,7 +20,7 @@
     "vue-loader": "^15.7.1",
     "vue-moment": "^4.0.0",
     "vue-router": "^3.0.2",
-    "vuetify": "^2.0.20",
+    "vuetify": "^2.1.1",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
