@@ -150,9 +150,7 @@ export default {
   mounted() {
     this.localApiToken = this.$store.state.settings.apiToken;
     this.localApiEndpoint = this.$store.state.settings.apiEndpoint;
-
-    let mode = this.$store.state.settings.darkMode;
-    this.localDarkMode = (typeof mode == "boolean" ? mode : (mode == "false" ? false : true));
+    this.localDarkMode = this.$store.state.settings.darkMode;
   },
   methods: {
     submit() {
