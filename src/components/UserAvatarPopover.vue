@@ -12,21 +12,21 @@
     </v-avatar>
     <v-card>
       <v-list>
-        <v-list-tile>
-          <v-list-tile-avatar>
+        <v-list-item>
+          <v-list-item-avatar>
             <img :src="user.avatar_url">
-          </v-list-tile-avatar>
+          </v-list-item-avatar>
 
-          <v-list-tile-content>
-            <v-list-tile-title>{{ user.name }}</v-list-tile-title>
-            <v-list-tile-subtitle>@{{ user.username }}</v-list-tile-subtitle>
-            <v-list-tile-subtitle><slot></slot></v-list-tile-subtitle>
-          </v-list-tile-content>
+          <v-list-item-content>
+            <v-list-item-title>{{ user.name }}</v-list-item-title>
+            <v-list-item-subtitle>@{{ user.username }}</v-list-item-subtitle>
+            <v-list-item-subtitle><slot></slot></v-list-item-subtitle>
+          </v-list-item-content>
 
-          <v-list-tile-action>
+          <v-list-item-action>
             <slot name="action"></slot>
-          </v-list-tile-action>
-        </v-list-tile>
+          </v-list-item-action>
+        </v-list-item>
       </v-list>
     </v-card>
   </v-menu>
