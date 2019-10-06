@@ -10,8 +10,11 @@
           @click="setValue(option)"
         >
           <v-list-tile-action>
-            <v-icon v-if="value.field  === option.value">
-              {{ value.order === "asc" ? "arrow_upward" : "arrow_downward" }}
+            <v-icon :class="{
+              'sort-icon': true,
+              [value.order]: option.field === value.field
+            }">
+              arrow_upward
             </v-icon>
           </v-list-tile-action>
           <v-list-tile-title>{{ option.label }}</v-list-tile-title>
@@ -30,11 +33,13 @@ export default {
     setValue(option) {
       let newValue = { ...this.value };
 
-      if (option.value === this.value.field) {
+      if (option.field === this.value.field) {
         newValue.order = this.value.order === "asc" ? "desc" : "asc";
       } else {
-        newValue.field = option.value;
-        newValue.order = "desc";
+        newValue = {
+          field: option.field,
+          order: "desc"
+        };
       }
 
       this.$emit("input", newValue);
@@ -42,3 +47,20 @@ export default {
   }
 };
 </script>
+
+<style lang="stylus" scoped>
+  .sort-icon {
+    opacity: 0;
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.5, 1);
+  }
+
+  .asc {
+    opacity: 1;
+    transform: none;
+  }
+
+  .desc {
+    opacity: 1;
+    transform: rotate(-180 deg);
+  }
+</style>

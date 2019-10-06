@@ -58,11 +58,11 @@ export default {
       mergeRequestsOrderOptions: [
         {
           label: "Last updated",
-          value: "updated_at"
+          field: "updated_at"
         },
         {
           label: "Created date",
-          value: "created_at"
+          field: "created_at"
         }
       ],
       mergeRequestsOrder: {
