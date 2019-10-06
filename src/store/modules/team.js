@@ -3,6 +3,7 @@ import Vue from "vue";
 import gitlab from "@/gitlab";
 
 const state = {
+  createTeamDialog: false,
   teams: JSON.parse(localStorage.getItem("teams") || "[]"),
   team: {},
   projects: {}
@@ -21,6 +22,10 @@ const actions = {
     dispatch("cleanMergeRequests");
     commit("setCurrentTeam", teamName);
     dispatch("launchWatchers");
+  },
+
+  setCreateTeamDialog({ state }, mode) {
+    state.createTeamDialog = mode;
   },
 
   createTeam({ commit }, team) {
@@ -97,7 +102,8 @@ const mutations = {
 
   setTeamProjects(state, projects) {
     state.projects = projects;
-  }
+  },
+
 };
 
 export default {

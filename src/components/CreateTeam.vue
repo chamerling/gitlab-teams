@@ -90,6 +90,7 @@ export default {
         };
 
         this.$store.dispatch("createTeam", team);
+        this.$store.dispatch("setCreateTeamDialog", false);
         this.$router.push({ name: "team", params: { name: team.name } });
 
         this.clear();

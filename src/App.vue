@@ -87,7 +87,7 @@
         <v-list>
           <v-list-tile v-if="isConfigured" class="mt-3">
             <v-list-tile-action>
-              <v-btn icon ripple @click="createTeamDialog = true">
+              <v-btn icon ripple @click="createTeam">
                 <v-icon color="grey darken-1">add_circle_outline</v-icon>
               </v-btn>
             </v-list-tile-action>
@@ -151,7 +151,7 @@
       <v-dialog v-model="createTeamDialog" width="500">
           <v-card>
             <v-toolbar dark>
-                <v-btn icon dark @click="createTeamDialog = false">
+                <v-btn icon dark @click="createTeam">
                 <v-icon>close</v-icon>
                 </v-btn>
                 <v-toolbar-title class="white--text">Create a new team</v-toolbar-title>
@@ -173,12 +173,15 @@ import CreateTeam from "@/components/CreateTeam.vue";
 
 export default {
   data: () => ({
-    drawer: null,
-    createTeamDialog: false
+    drawer: null
   }),
   methods: {
     openSettings() {
       this.$router.push({ name: "settings" });
+    },
+    createTeam() {
+      this.$store.dispatch("setCreateTeamDialog", true);
+      this.createTeamDialog = this.$store.state.team.createTeamDialog;
     },
     deleteTeam(team) {
       this.$store.dispatch("deleteTeam", team);
@@ -189,6 +192,9 @@ export default {
     }
   },
   computed: {
+    createTeamDialog() {
+      return this.$store.state.team.createTeamDialog;
+    },
     isConfigured() {
       return this.$store.getters.isConfigured;
     },
