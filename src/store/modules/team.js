@@ -24,8 +24,8 @@ const actions = {
     dispatch("launchWatchers");
   },
 
-  setCreateTeamDialog({ state }, mode) {
-    state.createTeamDialog = mode;
+  setCreateTeamDialog({ commit }, mode) {
+    commit("setCreateDialog", mode);
   },
 
   createTeam({ commit }, team) {
@@ -104,6 +104,9 @@ const mutations = {
     state.projects = projects;
   },
 
+  setCreateDialog(state, mode) {
+    state.createTeamDialog = mode;
+  }
 };
 
 export default {

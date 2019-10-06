@@ -180,8 +180,7 @@ export default {
       this.$router.push({ name: "settings" });
     },
     createTeam() {
-      this.$store.dispatch("setCreateTeamDialog", true);
-      this.createTeamDialog = this.$store.state.team.createTeamDialog;
+      this.createTeamDialog = true;
     },
     deleteTeam(team) {
       this.$store.dispatch("deleteTeam", team);
@@ -192,8 +191,13 @@ export default {
     }
   },
   computed: {
-    createTeamDialog() {
-      return this.$store.state.team.createTeamDialog;
+    createTeamDialog: {
+      get() {
+        return this.$store.state.team.createTeamDialog;
+      },
+      set(value) {
+        this.$store.dispatch("setCreateTeamDialog", value);
+      }
     },
     isConfigured() {
       return this.$store.getters.isConfigured;
