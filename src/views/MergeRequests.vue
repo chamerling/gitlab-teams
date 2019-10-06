@@ -10,6 +10,9 @@
       <v-tab key="closed" @click="fetchData('closed')">
         Closed
       </v-tab>
+      <v-layout v-show="activeTab !== 0" justify-end>
+        <item-order-select v-model="mergeRequestsOrder" :options="mergeRequestsOrderOptions"/>
+      </v-layout>
       <v-tab-item key="open">
         <template>
           <merge-requests :merge-requests="computedMergeRequests"/>
@@ -17,7 +20,7 @@
       </v-tab-item>
       <v-tab-item key="merged">
         <template v-if="loaded">
-          <merge-requests :merge-requests="mergeRequests"/>
+          <merge-requests :merge-requests="mergeRequests" :order-option="mergeRequestsOrder"/>
         </template>
         <template v-else>
           <div class="text-xs-center pa-3">
@@ -27,7 +30,7 @@
       </v-tab-item>
       <v-tab-item key="closed">
         <template v-if="loaded">
-          <merge-requests :merge-requests="mergeRequests"/>
+          <merge-requests :merge-requests="mergeRequests" :order-option="mergeRequestsOrder"/>
         </template>
         <template v-else>
           <div class="text-xs-center pa-3">
@@ -43,6 +46,7 @@
 import { mapGetters } from "vuex";
 import gitlab from "@/gitlab";
 import store from "@/store";
+import ItemOrderSelect from "@/components/ItemOrderSelect.vue";
 import MergeRequests from "@/components/MergeRequests.vue";
 
 export default {
@@ -50,7 +54,21 @@ export default {
     return {
       activeTab: null,
       loaded: false,
-      mergeRequests: null
+      mergeRequests: null,
+      mergeRequestsOrderOptions: [
+        {
+          label: "Last updated",
+          value: "updated_at"
+        },
+        {
+          label: "Created date",
+          value: "created_at"
+        }
+      ],
+      mergeRequestsOrder: {
+        field: "updated_at",
+        order: "desc"
+      }
     };
   },
   computed: {
@@ -80,6 +98,7 @@ export default {
     }
   },
   components: {
+    ItemOrderSelect,
     MergeRequests
   }
 };
