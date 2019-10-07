@@ -148,4 +148,10 @@ export default class Client {
       .post(`/api/v4/projects/${project_id}/merge_requests/${iid}/todo`)
       .then(result => result.data);
   }
+
+  fetchProjects() {
+    return this.client
+      .get(`/api/v4/projects?membership=true`)
+      .then(result => result);
+  }
 }

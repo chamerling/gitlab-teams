@@ -188,4 +188,34 @@ export default class Api extends EventEmitter {
     this.userSubscriptions.forEach(subscription => subscription.unsubscribe());
     this.userSubscriptions = [];
   }
+
+  watchProjects() {
+    const projects$ = timer(0, this.pollingInterval * 2).pipe(
+      switchMap(() => from(this.client.fetchProjects()))
+    );
+
+    const sharedProjects$ = projects$.pipe(share());
+
+    const newProjects$ = sharedProjects$.pipe(
+      pluck("data"),
+      flatMap(project => project),
+      distinct(project => project.id)
+    );
+
+    const projectSize$ = sharedProjects$.pipe(
+      pluck("headers"),
+      map(headers => headers["x-total"])
+    );
+
+    const newProjectsSubscription = newProjects$.subscribe(project => {
+      this.emit("new-project", project);
+    });
+
+    const projectsSizeSubscription = projectSize$.subscribe(length => {
+      this.emit("project-length", length);
+    });
+
+    this.userSubscriptions.push(newProjectsSubscription);
+    this.userSubscriptions.push(projectsSizeSubscription);
+  }
 }
