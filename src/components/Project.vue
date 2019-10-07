@@ -32,7 +32,7 @@
 
         <v-tooltip bottom>
           <span class="pr-3" slot="activator">
-            <v-icon small>call_split</v-icon>
+            <v-icon small>merge_type</v-icon>
             <span class="caption">{{ forks_count }}</span>
           </span>
           <span>Forks</span>
