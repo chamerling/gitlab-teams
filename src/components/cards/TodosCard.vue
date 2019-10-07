@@ -9,10 +9,12 @@
         <span class="font-weight-medium display-3">{{todos ? todos.length : 0}}</span>
       </div>
       <v-tooltip bottom>
-        <v-list slot="activator" v-if="todos.length" two-line dark dense>
-          <todo :item="last"/>
-        </v-list>
-        <span>Last todo: {{last.body}}</span>
+        <template v-slot:activator="{ on }">
+          <v-list v-on="on" v-if="todos.length" two-line dark dense>
+            <todo :item="last"/>
+          </v-list>
+        </template>
+        <span v-if="last">Last todo: {{last.body}}</span>
       </v-tooltip>
     </v-card-text>
   </v-card>

@@ -1,4 +1,5 @@
 import "vuetify/dist/vuetify.min.css";
+import "@mdi/font/css/materialdesignicons.css";
 import VueMoment from "vue-moment";
 import Vuetify from "vuetify";
 import VueAnalytics from "vue-analytics";
@@ -13,7 +14,12 @@ import style from "./style";
 import notification from "./notification";
 
 Vue.config.productionTip = false;
-Vue.use(Vuetify, { theme: style });
+const opts = {
+  theme: {
+    dark: true
+  }
+};
+Vue.use(Vuetify);
 Vue.use(VueMoment);
 Vue.use(VueClipboard);
 
@@ -30,5 +36,6 @@ notification.init(store);
 new Vue({
   router,
   store,
+  vuetify: new Vuetify(opts),
   render: h => h(App)
 }).$mount("#app");

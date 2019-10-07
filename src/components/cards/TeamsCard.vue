@@ -8,7 +8,9 @@
       <div class="teams ma-1">
         <div @click="goTo(team)" class="team ma-1" v-for="team in teams" :key="team.name">
           <v-tooltip bottom>
-            <team-avatar slot="activator" :team="team" :size="60"/>
+            <template v-slot:activator="{ on }">
+              <team-avatar v-on="on" :team="team" :size="60"/>
+            </template>
             <span>{{team.name}}</span>
           </v-tooltip>
         </div>

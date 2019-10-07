@@ -12,7 +12,7 @@
         <v-list slot="activator" v-if="issues.length" two-line dark dense>
           <issue :item="last" hide-actions/>
         </v-list>
-        <span>Last issue: {{last.title}}</span>
+        <span v-if="last">Last issue: {{last.title}}</span>
       </v-tooltip>
     </v-card-text>
   </v-card>

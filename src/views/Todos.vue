@@ -1,7 +1,7 @@
 <template>
   <div class="todos">
     <v-layout align-center justify-end row fill-height ma-2>
-      <v-btn v-if="todosSize" outline @click="markAllAsRead()">
+      <v-btn v-if="todosSize" outlined @click="markAllAsRead()">
         Mark all as done
         <v-icon right>done_all</v-icon>
       </v-btn>
