@@ -151,7 +151,7 @@ export default class Client {
 
   fetchProjects() {
     return this.client
-      .get(`/api/v4/projects?membership=true`)
+      .get(`/api/v4/projects?starred=true&order_by=name`)
       .then(result => result);
   }
 }

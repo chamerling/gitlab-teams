@@ -8,7 +8,7 @@ const state = {
 
 const getters = {
   getProjects({ projects }) {
-    return orderBy(Object.values(projects), "last_activity_at", "desc");
+    return orderBy(Object.values(projects), "name");
   },
 
   getProjectsSize({ projectSize, projects }) {
