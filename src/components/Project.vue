@@ -54,7 +54,7 @@
 import { mapGetters } from "vuex";
 
 export default {
-  name: 'project',
+  name: "project",
   props: {
     name_with_namespace: {
       type: String
@@ -95,10 +95,10 @@ export default {
       return this.visibility === "private";
     },
     isOwner() {
-      return this.creator_id === this.connectedUser.id
+      return this.creator_id === this.connectedUser.id;
     }
   }
-}
+};
 </script>
 
 <style lang="stylus" scoped>
