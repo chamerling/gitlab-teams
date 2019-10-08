@@ -149,7 +149,6 @@ export default {
   mounted() {
     this.localApiToken = this.$store.state.settings.apiToken;
     this.localApiEndpoint = this.$store.state.settings.apiEndpoint;
-    this.darkMode = this.$store.state.settings.darkMode;
   },
   methods: {
     submit() {
@@ -166,11 +165,6 @@ export default {
       this.localApiToken = this.$store.state.apiToken;
       this.localApiEndpoint = this.$store.state.apiEndpoint;
       this.darkMode = this.$store.state.darkMode;
-    }
-  },
-  watch: {
-    darkMode(toggle) {
-      this.$store.dispatch("updateTheme", toggle);
     }
   },
   components: {}
