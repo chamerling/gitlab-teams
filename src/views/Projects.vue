@@ -28,7 +28,6 @@ export default {
       projects: "getProjects",
       projectSize: "getProjectsSize"
     })
-  },
-  methods: {}
+  }
 };
 </script>
