@@ -13,6 +13,10 @@ const actions = {
 const mutations = {
   setEnabled(state, value) {
     state.enabled = value;
+  },
+
+  resetNotification(state) {
+    state.enabled = false;
   }
 };
 

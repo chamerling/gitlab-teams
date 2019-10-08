@@ -1,6 +1,8 @@
 import gitlab from "@/gitlab";
 
 const state = {
+  // eslint-disable-next-line
+  darkMode: (typeof localStorage.getItem("darkMode") == "boolean" ? localStorage.getItem("darkMode") : (localStorage.getItem("darkMode") == "false" ? false : true)),
   apiEndpoint:
     localStorage.getItem("apiEndpoint") || process.env.VUE_APP_DEFAULT_GITLAB,
   apiToken: process.env.VUE_APP_API_TOKEN || localStorage.getItem("apiToken")
@@ -21,8 +23,13 @@ const actions = {
     commit("setTeamProjects", {});
     commit("setTodos", {});
     commit("setConnectedUser", null);
+    commit("resetIssues");
+    commit("resetNotification");
     dispatch("launchWatchers");
     dispatch("launchUserWatchers");
+  },
+  updateTheme({ commit }, mode) {
+    commit("updateTheme", mode);
   }
 };
 
@@ -36,6 +43,10 @@ const mutations = {
     gitlab.get().unwatchUser();
     gitlab.get().unwatchMergeRequests();
     gitlab.init(this);
+  },
+  updateTheme(state, mode) {
+    state.darkMode = mode;
+    localStorage.setItem("darkMode", mode);
   }
 };
 

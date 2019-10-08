@@ -44,12 +44,28 @@
             </v-toolbar>
             <v-card-text>
               <div class="body-1 mb-3">
-                Allows to be notified on your GitLab activity
+                Allows to be notified on your GitLab activity.
                 <v-switch
                   disabled
                   color="primary"
                   v-model="desktopNotification"
                   :label="desktopNotification ? 'Enabled' : 'Disabled'"
+                ></v-switch>
+              </div>
+            </v-card-text>
+          </v-card>
+
+          <v-card class="elevation-12 mt-5">
+            <v-toolbar dark>
+              <v-toolbar-title class="white--text">Theme</v-toolbar-title>
+            </v-toolbar>
+            <v-card-text>
+              <div class="body-1 mb-3">
+                Select light or dark mode.
+                <v-switch
+                  color="primary"
+                  v-model="darkMode"
+                  :label="darkMode ? 'Dark' : 'Light'"
                 ></v-switch>
               </div>
             </v-card-text>
@@ -118,6 +134,14 @@ export default {
         this.localApiEndpoint = value;
       }
     },
+    darkMode: {
+      get() {
+        return this.$store.state.settings.darkMode;
+      },
+      set(value) {
+        this.$store.dispatch("updateTheme", value);
+      }
+    },
     desktopNotification() {
       return this.$store.state.notification.enabled;
     }
@@ -140,6 +164,7 @@ export default {
       this.$store.dispatch("cleanAll");
       this.localApiToken = this.$store.state.apiToken;
       this.localApiEndpoint = this.$store.state.apiEndpoint;
+      this.darkMode = this.$store.state.darkMode;
     }
   },
   components: {}

@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <v-app dark>
+    <v-app :dark="darkMode">
       <v-navigation-drawer
         :mini-variant="miniDrawer"
         v-model="drawer"
@@ -95,7 +95,7 @@
         <v-list>
           <v-list-tile v-if="isConfigured" class="mt-3">
             <v-list-tile-action>
-              <v-btn icon ripple @click="createTeam">
+              <v-btn icon ripple @click="dialog = true">
                 <v-icon color="grey darken-1">add_circle_outline</v-icon>
               </v-btn>
             </v-list-tile-action>
@@ -105,7 +105,7 @@
               </v-list-tile-title>
             </v-list-tile-content>
           </v-list-tile>
-          <v-list-tile :to="`/team/${team.name}`" active-class="grey darken-2" v-for="team in teams" :key="team.name" avatar>
+          <v-list-tile :to="`/team/${team.name}`" :active-class="(darkMode) ? `grey darken-2` : `grey lighten-4`" v-for="team in teams" :key="team.name" avatar>
             <v-list-tile-avatar>
               <team-avatar :team="team" :size="32"/>
             </v-list-tile-avatar>
@@ -156,6 +156,19 @@
         </v-container>
       </v-content>
       <snackbar/>
+      <v-dialog v-model="dialog" width="500">
+        <v-card>
+          <v-toolbar dark>
+            <v-btn icon dark @click="dialog = false">
+              <v-icon>close</v-icon>
+            </v-btn>
+            <v-toolbar-title class="white--text">Create a new team</v-toolbar-title>
+          </v-toolbar>
+          <v-card-text>
+            <CreateTeam @close="dialog = false" />
+          </v-card-text>
+        </v-card>
+      </v-dialog>
     </v-app>
   </div>
 </template>
@@ -164,17 +177,16 @@ import _ from "lodash";
 import { mapGetters } from "vuex";
 import Snackbar from "@/components/ui/Snackbar.vue";
 import TeamAvatar from "@/components/TeamAvatar.vue";
+import CreateTeam from "@/components/CreateTeam.vue";
 
 export default {
   data: () => ({
-    drawer: null
+    drawer: null,
+    dialog: false
   }),
   methods: {
     openSettings() {
       this.$router.push({ name: "settings" });
-    },
-    createTeam() {
-      this.$router.push({ name: "create-team" });
     },
     deleteTeam(team) {
       this.$store.dispatch("deleteTeam", team);
@@ -185,6 +197,9 @@ export default {
     }
   },
   computed: {
+    darkMode() {
+      return this.$store.state.settings.darkMode;
+    },
     isConfigured() {
       return this.$store.getters.isConfigured;
     },
@@ -218,7 +233,8 @@ export default {
   },
   components: {
     Snackbar,
-    TeamAvatar
+    TeamAvatar,
+    CreateTeam
   }
 };
 </script>

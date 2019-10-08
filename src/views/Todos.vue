@@ -6,7 +6,7 @@
         <v-icon right>done_all</v-icon>
       </v-btn>
     </v-layout>
-    <v-list v-if="todosSize" two-line dark>
+    <v-list v-if="todosSize" two-line>
       <template v-for="(todo, index) in todos">
         <todo :item="todo" :key="todo.id"/>
         <v-divider v-if="index + 1 < todos.length" :key="index" ></v-divider>

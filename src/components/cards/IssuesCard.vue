@@ -9,10 +9,10 @@
         <span class="font-weight-medium display-3">{{total}}</span>
       </div>
       <v-tooltip bottom>
-        <v-list slot="activator" v-if="issues.length" two-line dark dense>
+        <v-list slot="activator" v-if="issues.length" two-line dense>
           <issue :item="last" hide-actions/>
         </v-list>
-        <span>Last issue: {{last.title}}</span>
+        <span v-if="last">Last issue: {{last.title}}</span>
       </v-tooltip>
     </v-card-text>
   </v-card>

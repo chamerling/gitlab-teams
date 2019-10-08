@@ -7,7 +7,6 @@ import Todos from "./views/Todos.vue";
 import Issues from "./views/Issues.vue";
 import User from "./views/User.vue";
 import MergeRequests from "./views/MergeRequests.vue";
-import CreateTeam from "@/views/CreateTeam.vue";
 import Projects from "./views/Projects.vue";
 
 Vue.use(Router);
@@ -49,11 +48,6 @@ export default new Router({
       path: "/settings",
       name: "settings",
       component: Settings
-    },
-    {
-      path: "/settings/team/create",
-      name: "create-team",
-      component: CreateTeam
     },
     {
       path: "/about",

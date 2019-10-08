@@ -1,6 +1,6 @@
 <template>
   <div class="todos">
-    <v-list v-if="issuesSize" two-line dark>
+    <v-list v-if="issuesSize" two-line>
       <template v-for="(issue, index) in issues">
         <issue :item="issue" :key="issue.id"/>
         <v-divider v-if="index + 1 < issues.length" :key="index" ></v-divider>

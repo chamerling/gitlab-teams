@@ -1,5 +1,5 @@
 <template>
-  <v-list two-line dark>
+  <v-list two-line>
     <div v-for="mergeRequest in orderedMergeRequests" :key="mergeRequest.id">
       <merge-request-item :mr="mergeRequest" :pipeline="getPipeline(mergeRequest)"/>
     </div>
@@ -13,7 +13,16 @@ import MergeRequestItem from "@/components/MergeRequestItem.vue";
 export default {
   name: "MergeRequests",
   props: {
-    mergeRequests: Array
+    mergeRequests: Array,
+    orderOption: {
+      type: Object,
+      default() {
+        return {
+          field: "created_at",
+          order: "desc"
+        };
+      }
+    }
   },
   methods: {
     getPipeline(mergeRequest) {
@@ -22,7 +31,11 @@ export default {
   },
   computed: {
     orderedMergeRequests() {
-      return _.orderBy(this.mergeRequests, "created_at", "desc");
+      return _.orderBy(
+        this.mergeRequests,
+        this.orderOption.field,
+        this.orderOption.order
+      );
     }
   },
   components: {
