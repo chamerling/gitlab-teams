@@ -48,6 +48,14 @@ function init(store) {
   gitlabApi.on("issue-length", length => {
     store.dispatch("setIssueSize", length);
   });
+
+  gitlabApi.on("new-project", project => {
+    store.dispatch("addProject", project);
+  });
+
+  gitlabApi.on("project-length", length => {
+    store.dispatch("setProjectSize", length);
+  });
 }
 
 function get() {

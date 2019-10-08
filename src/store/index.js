@@ -15,6 +15,7 @@ import pipeline from "./modules/pipeline";
 import user from "./modules/user";
 import settings from "./modules/settings";
 import notification from "./modules/notification";
+import project from "./modules/project";
 
 Vue.use(Vuex);
 
@@ -28,7 +29,8 @@ export default new Vuex.Store({
     user,
     settings,
     notification,
-    pipeline
+    pipeline,
+    project
   },
   state,
   actions,
