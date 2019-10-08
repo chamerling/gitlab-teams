@@ -5,14 +5,8 @@
       <v-list-tile-title id="name">
         <span>{{ item.name }}</span>
       </v-list-tile-title>
-      <v-list-tile-sub-title v-if="getStatus() === 'online'">
-        <span class="status-green">{{ getStatus() }}</span> - {{ item.description }}
-      </v-list-tile-sub-title>
-      <v-list-tile-sub-title v-else-if="getStatus() === 'offline'">
-        <span class="status-red">{{ getStatus() }}</span> - {{ item.description }}
-      </v-list-tile-sub-title>
-      <v-list-tile-sub-title v-else>
-        <span class="status-yellow">{{ getStatus() }}</span> - {{ item.description }}
+      <v-list-tile-sub-title>
+        <span v-bind:class="statusColor" >{{ item.status }}</span> - {{ item.description }}
       </v-list-tile-sub-title>
     </v-list-tile-content>
 
@@ -25,12 +19,6 @@
 
 <script>
 
-const status = {
-  online: "online",
-  offline: "offline",
-  paused: "paused"
-};
-
 export default {
   name: "Runner",
   props: {
@@ -41,13 +29,13 @@ export default {
     }
   },
   computed: {
-  },
-  methods: {
-    getStatus() {
-      return status[this.item.status];
+    statusColor: function () {
+      return {
+        'status-green': this.item.status === 'online',
+        'status-red': this.item.status === 'offline',
+        'status-yellow': this.item.status === 'paused'
+      }
     }
-  },
-  components: {
   }
 };
 </script>
