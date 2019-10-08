@@ -64,8 +64,8 @@
                 Select light or dark mode.
                 <v-switch
                   color="primary"
-                  v-model="localDarkMode"
-                  :label="localDarkMode ? 'Dark' : 'Light'"
+                  v-model="darkMode"
+                  :label="darkMode ? 'Dark' : 'Light'"
                 ></v-switch>
               </div>
             </v-card-text>
@@ -111,8 +111,7 @@ export default {
           ) || "URL is not valid"
       ],
       localApiToken: null,
-      localApiEndpoint: null,
-      localDarkMode: null
+      localApiEndpoint: null
     };
   },
   computed: {
@@ -150,7 +149,7 @@ export default {
   mounted() {
     this.localApiToken = this.$store.state.settings.apiToken;
     this.localApiEndpoint = this.$store.state.settings.apiEndpoint;
-    this.localDarkMode = this.$store.state.settings.darkMode;
+    this.darkMode = this.$store.state.settings.darkMode;
   },
   methods: {
     submit() {
@@ -166,11 +165,11 @@ export default {
       this.$store.dispatch("cleanAll");
       this.localApiToken = this.$store.state.apiToken;
       this.localApiEndpoint = this.$store.state.apiEndpoint;
-      this.localDarkMode = this.$store.state.darkMode;
+      this.darkMode = this.$store.state.darkMode;
     }
   },
   watch: {
-    localDarkMode(toggle) {
+    darkMode(toggle) {
       this.$store.dispatch("updateTheme", toggle);
     }
   },
