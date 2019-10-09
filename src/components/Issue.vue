@@ -35,7 +35,7 @@
     </v-list-tile-content>
 
     <v-list-tile-action v-if="!hideActions">
-      <div id="actions">
+      <div id="actions" v-if="$vuetify.breakpoint.mdAndUp">
         <v-badge class="pr-2" overlap left color="orange">
           <span slot="badge">{{ item.user_notes_count }}</span>
           <v-icon>chat</v-icon>
@@ -48,6 +48,31 @@
           <span slot="badge">{{ item.downvotes }}</span>
           <v-icon>thumb_down</v-icon>
         </v-badge>
+      </div>
+      <div v-else>
+        <v-menu offset-y min-width="150">
+            <v-btn icon ripple slot="activator" @click.native.prevent>
+                <v-icon color="grey darken-1">more_vert</v-icon>
+            </v-btn>
+            <div id="actions">
+            <v-list>
+                <v-list-tile>
+                    <v-badge class="pr-2" overlap left color="orange">
+                    <span slot="badge">{{ item.user_notes_count }}</span>
+                    <v-icon>chat</v-icon>
+                    </v-badge>
+                    <v-badge class="pr-2" overlap left color="orange">
+                    <span slot="badge">{{ item.upvotes }}</span>
+                    <v-icon>thumb_up</v-icon>
+                    </v-badge>
+                    <v-badge class="pr-2" overlap left color="orange">
+                    <span slot="badge">{{ item.downvotes }}</span>
+                    <v-icon>thumb_down</v-icon>
+                    </v-badge>
+                </v-list-tile>
+            </v-list>
+            </div>
+        </v-menu>
       </div>
     </v-list-tile-action>
   </v-list-tile>
