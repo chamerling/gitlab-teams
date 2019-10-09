@@ -19,6 +19,9 @@
       <v-flex sm6 md6 lg3>
         <teams-card :teams="teams"/>
       </v-flex>
+      <v-flex sm6 md6 lg3>
+        <projects-card :projects="projects"/>
+      </v-flex>
     </v-layout>
   </v-container>
 </template>
@@ -29,6 +32,7 @@ import UserStatsCard from "@/components/cards/UserStatsCard.vue";
 import TodosCard from "@/components/cards/TodosCard.vue";
 import IssuesCard from "@/components/cards/IssuesCard.vue";
 import TeamsCard from "@/components/cards/TeamsCard.vue";
+import ProjectsCard from "@/components/cards/ProjectsCard.vue";
 import PipelinesCard from "@/components/cards/PipelinesCard.vue";
 import { mapGetters } from "vuex";
 import store from "@/store";
@@ -51,6 +55,14 @@ export default {
         [team => team.name.toLowerCase()],
         "asc"
       );
+    },
+    projects() {
+      // eslint-disable-next-line no-undef
+      return _.orderBy(
+        this.$store.getters.getProjects,
+        [project => project.name.toLowerCase()],
+        "asc"
+      );
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -67,7 +79,8 @@ export default {
     TodosCard,
     IssuesCard,
     PipelinesCard,
-    TeamsCard
+    TeamsCard,
+    ProjectsCard
   }
 };
 </script>
