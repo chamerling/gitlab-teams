@@ -5,6 +5,7 @@ import Settings from "./views/Settings.vue";
 import Team from "./views/Team.vue";
 import Todos from "./views/Todos.vue";
 import Issues from "./views/Issues.vue";
+import Runners from "./views/Runners.vue";
 import User from "./views/User.vue";
 import MergeRequests from "./views/MergeRequests.vue";
 import Projects from "./views/Projects.vue";
@@ -33,6 +34,11 @@ export default new Router({
       path: "/issues",
       name: "issues",
       component: Issues
+    },
+    {
+      path: "/runners",
+      name: "runners",
+      component: Runners
     },
     {
       path: "/team/:name",

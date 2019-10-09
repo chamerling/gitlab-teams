@@ -135,6 +135,10 @@ export default class Client {
     return this.client.get("/api/v4/issues");
   }
 
+  fetchRunners() {
+    return this.client.get("/api/v4/runners/all");
+  }
+
   markTodoAsDone(todo) {
     return this.client.post(`/api/v4/todos/${todo.id}/mark_as_done`);
   }

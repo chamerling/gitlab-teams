@@ -92,6 +92,16 @@
             <v-list-tile-title class="with-badge">Projects</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
+        <v-list-tile v-if="isConfigured" @click="$router.push({ name: 'runners' })">
+          <v-list-tile-action>
+            <v-icon>directions_run</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title class="with-badge">
+              Runners
+            </v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
         <v-list>
           <v-list-tile v-if="isConfigured" class="mt-3">
             <v-list-tile-action>
