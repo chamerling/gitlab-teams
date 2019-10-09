@@ -40,7 +40,7 @@
     </v-list-tile-content>
 
     <v-list-tile-action>
-      <div id="actions">
+      <div id="actions" v-if="$vuetify.breakpoint.mdAndUp">
         <v-badge class="pr-2" overlap left>
           <span slot="badge">{{ mr.user_notes_count }}</span>
           <v-icon>chat</v-icon>
@@ -65,6 +65,66 @@
             <v-icon color="grey darken-1">more_vert</v-icon>
           </v-btn>
           <v-list>
+            <v-list-tile :href="mr.web_url" target="_blank">
+              <v-list-tile-title>View on GitLab</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile @click="createTodo()">
+              <v-list-tile-title>Create Todo</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile v-if="canBeClosed" @click="close()">
+              <v-list-tile-title>Close MR</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile @click="copyLink()">
+              <v-list-tile-title>Copy link</v-list-tile-title>
+            </v-list-tile>
+            <v-list-tile @click="showMore=true">
+              <v-list-tile-title>Show more...</v-list-tile-title>
+              <v-dialog v-model="showMore" max-width="800px" lazy>
+                <v-card>
+                  <v-card-title primary-title>
+                    <h3>{{ mr.title }}</h3>
+                  </v-card-title>
+                  <v-card-text>
+                    <merge-request-details :mr="mr"/>
+                  </v-card-text>
+                  <v-card-actions>
+                    <v-spacer></v-spacer>
+                    <v-btn color="primary" flat @click="showMore=false">Close</v-btn>
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
+            </v-list-tile>
+          </v-list>
+        </v-menu>
+      </div>
+      <div v-else>
+        <v-menu offset-y min-width="150">
+          <v-btn icon ripple slot="activator" @click.native.prevent>
+            <v-icon color="grey darken-1">more_vert</v-icon>
+          </v-btn>
+          <v-list>
+            <v-list-tile>
+              <v-badge class="pr-2" overlap left>
+                <span slot="badge">{{ mr.user_notes_count }}</span>
+                <v-icon>chat</v-icon>
+              </v-badge>
+              <v-badge class="pr-2" overlap left>
+                <span slot="badge">{{ mr.upvotes }}</span>
+                <v-icon>thumb_up</v-icon>
+              </v-badge>
+              <v-tooltip top>
+                <v-btn class="mr-3" icon small
+                  slot="activator"
+                  @click.prevent="merge()"
+                  :disabled="merging || closing || mr.work_in_progress || mr.merge_status !== 'can_be_merged' || mr.state !== 'opened'"
+                  :loading="merging"
+                >
+                  <v-icon>merge_type</v-icon>
+                </v-btn>
+                <span>Merge it</span>
+              </v-tooltip>
+            </v-list-tile>
+            <v-divider></v-divider>
             <v-list-tile :href="mr.web_url" target="_blank">
               <v-list-tile-title>View on GitLab</v-list-tile-title>
             </v-list-tile>
