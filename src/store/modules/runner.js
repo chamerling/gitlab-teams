@@ -45,7 +45,7 @@ const mutations = {
 
   setRunnerSize(state, size) {
     state.runnerSize = parseInt(size);
-  },
+  }
 };
 
 export default {
