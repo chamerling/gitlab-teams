@@ -19,6 +19,12 @@
 
 <script>
 
+const STATUS_COLORS = {
+  online: "status-green",
+  offline: "status-red",
+  paused: "status-yellow"
+};
+
 export default {
   name: "Runner",
   props: {
@@ -30,11 +36,7 @@ export default {
   },
   computed: {
     statusColor: function () {
-      return {
-        'status-green': this.item.status === 'online',
-        'status-red': this.item.status === 'offline',
-        'status-yellow': this.item.status === 'paused'
-      }
+      return STATUS_COLORS[this.item.status];
     }
   }
 };
