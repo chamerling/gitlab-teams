@@ -1,6 +1,6 @@
 <template>
 <!--  Fix access to apiEndpoint-->
-  <v-list-tile avatar :href="'https://ci.linagora.com/api/v4/runners/' + item.id" target="_blank">
+  <v-list-tile avatar :href="this.$store.state.settings.apiEndpoint + /runners/ + item.id" target="_blank">
     <v-list-tile-content>
       <v-list-tile-title id="name">
         <span>{{ item.name }}</span>
