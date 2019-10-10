@@ -1,7 +1,7 @@
 # gitlab-teams
 
 [![Build Status](https://travis-ci.com/chamerling/gitlab-teams.svg?branch=master)](https://travis-ci.com/chamerling/gitlab-teams)
-[![Netlify Status](https://api.netlify.com/api/v1/badges/db5f01da-0959-4e96-b9f2-f7a00cfb5591/deploy-status)](https://app.netlify.com/sites/gitlab-teams/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/db5f01da-0959-4e96-b9f2-f7a00cfb5591/deploy-status)](https://gitlab-teams.netlify.com)
 
 View your defined Gitlab teams Merge Requests live-updated without effort i.e. the missing thing from Gitlab.
 
