@@ -1,6 +1,7 @@
 <template>
   <v-avatar :color="getColor()" :size="size">
-    <span class="white--text headline">{{team.name[0].toUpperCase()}}</span>
+    <img v-if="icon" :src="icon" :alt="name">
+    <span v-else class="white--text headline">{{name[0].toUpperCase()}}</span>
   </v-avatar>
 </template>
 
@@ -28,10 +29,15 @@ const COLORS = [
 ];
 
 export default {
-  name: "TeamAvatar",
+  name: "ProjectAvatar",
   props: {
-    team: {
-      type: Object
+    icon: {
+      type: String,
+      default: null
+    },
+    name: {
+      type: String,
+      required: true
     },
     size: {
       type: Number,
@@ -40,14 +46,17 @@ export default {
   },
   methods: {
     getColor() {
-      const length = this.team.name.length;
+      if (this.icon) {
+        return;
+      }
+
+      const length = this.name.length;
       if (!length || length === 1) {
         return COLORS[0];
       }
 
       const sum =
-        this.team.name.charCodeAt(length - 1) +
-        this.team.name.charCodeAt(length - 2);
+        this.name.charCodeAt(length - 1) + this.name.charCodeAt(length - 2);
 
       return COLORS[sum % COLORS.length];
     }

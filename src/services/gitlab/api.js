@@ -186,20 +186,20 @@ export default class Api extends EventEmitter {
 
   watchRunners() {
     const runners$ = timer(0, this.pollingInterval * 2).pipe(
-        switchMap(() => from(this.client.fetchRunners()))
+      switchMap(() => from(this.client.fetchRunners()))
     );
 
     const sharedRunners$ = runners$.pipe(share());
 
     const newRunners$ = sharedRunners$.pipe(
-        pluck("data"),
-        flatMap(runner => runner),
-        distinct(runner => runner.id)
+      pluck("data"),
+      flatMap(runner => runner),
+      distinct(runner => runner.id)
     );
 
     const runnerSize$ = sharedRunners$.pipe(
-        pluck("headers"),
-        map(headers => headers["x-total"])
+      pluck("headers"),
+      map(headers => headers["x-total"])
     );
 
     const newRunnersSubscription = newRunners$.subscribe(runner => {

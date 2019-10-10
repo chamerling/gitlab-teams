@@ -117,7 +117,7 @@
           </v-list-tile>
           <v-list-tile :to="`/team/${team.name}`" :active-class="(darkMode) ? `grey darken-2` : `grey lighten-4`" v-for="team in teams" :key="team.name" avatar>
             <v-list-tile-avatar>
-              <team-avatar :team="team" :size="32"/>
+              <avatar :name="team.name" :size="32"/>
             </v-list-tile-avatar>
             <v-list-tile-content>
               <v-list-tile-title v-text="team.name"></v-list-tile-title>
@@ -186,7 +186,7 @@
 import _ from "lodash";
 import { mapGetters } from "vuex";
 import Snackbar from "@/components/ui/Snackbar.vue";
-import TeamAvatar from "@/components/TeamAvatar.vue";
+import Avatar from "@/components/Avatar.vue";
 import CreateTeam from "@/components/CreateTeam.vue";
 
 export default {
@@ -243,7 +243,7 @@ export default {
   },
   components: {
     Snackbar,
-    TeamAvatar,
+    Avatar,
     CreateTeam
   }
 };

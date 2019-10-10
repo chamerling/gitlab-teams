@@ -18,7 +18,6 @@
 </template>
 
 <script>
-
 const STATUS_COLORS = {
   online: "status-green",
   offline: "status-red",
