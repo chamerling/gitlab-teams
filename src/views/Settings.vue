@@ -18,7 +18,10 @@
                   v-model="apiToken"
                   label="Personal Access Token"
                   :rules="tokenRules"
+                  :type="showToken ? 'text' : 'password'"
                   required
+                  :append-icon="showToken ? 'visibility' : 'visibility_off'"
+                  @click:append="showToken = !showToken"
                 ></v-text-field>
                 <v-text-field
                   v-model="apiEndpoint"
@@ -111,7 +114,8 @@ export default {
           ) || "URL is not valid"
       ],
       localApiToken: null,
-      localApiEndpoint: null
+      localApiEndpoint: null,
+      showToken: false,
     };
   },
   computed: {
