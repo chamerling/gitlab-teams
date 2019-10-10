@@ -1,6 +1,6 @@
 <template>
 <!--  Fix access to apiEndpoint-->
-  <v-list-tile avatar :href="url" target="_blank">
+  <v-list-tile avatar :href="web_url" target="_blank">
     <v-list-tile-content>
       <v-list-tile-title id="name">
         <span>{{ item.name }}</span>
@@ -37,10 +37,10 @@ export default {
   computed: {
     statusColor: function() {
       return STATUS_COLORS[this.item.status];
+    },
+    web_url: function() {
+      return `${this.$store.state.settings.apiEndpoint}/admin/runners/${this.item.id}`;
     }
-  },
-  url: function() {
-    return `${this.$store.state.settings.apiEndpoint}/runners/${this.item.id}`;
   }
 };
 </script>
