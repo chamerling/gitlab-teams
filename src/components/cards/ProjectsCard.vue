@@ -8,7 +8,7 @@
       <div class="projects ma-1">
         <div @click="goTo(project)" class="project ma-1" v-for="project in projects" :key="project.name">
           <v-tooltip bottom>
-            <project-avatar slot="activator" :project="project" :size="60"/>
+            <avatar slot="activator" :name="project.name" :icon="project.avatar_url" :size="60"/>
             <span>{{project.name_with_namespace}}</span>
           </v-tooltip>
         </div>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import ProjectAvatar from "@/components/ProjectAvatar.vue";
+import Avatar from "@/components/Avatar.vue";
 
 export default {
   props: {
@@ -30,7 +30,7 @@ export default {
     }
   },
   components: {
-    ProjectAvatar
+    Avatar
   }
 };
 </script>

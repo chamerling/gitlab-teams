@@ -8,7 +8,7 @@
       <div class="teams ma-1">
         <div @click="goTo(team)" class="team ma-1" v-for="team in teams" :key="team.name">
           <v-tooltip bottom>
-            <team-avatar slot="activator" :team="team" :size="60"/>
+            <avatar slot="activator" :name="team.name" :size="60"/>
             <span>{{team.name}}</span>
           </v-tooltip>
         </div>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import TeamAvatar from "@/components/TeamAvatar.vue";
+import Avatar from "@/components/Avatar.vue";
 
 export default {
   props: {
@@ -30,7 +30,7 @@ export default {
     }
   },
   components: {
-    TeamAvatar
+    Avatar
   }
 };
 </script>
