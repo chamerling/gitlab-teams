@@ -21,7 +21,7 @@
     </v-list-tile-content>
 
     <v-list-tile-action>
-      <div id="actions">
+      <div id="actions" v-if="$vuetify.breakpoint.mdAndUp">
         <v-badge class="pr-2" overlap left>
           <span slot="badge">{{ star_count }}</span>
           <v-icon>star</v-icon>
@@ -34,6 +34,31 @@
           <span slot="badge">{{ open_issues_count }}</span>
           <v-icon>error_outline</v-icon>
         </v-badge>
+      </div>
+      <div v-else>
+        <v-menu offset-y min-width="150">
+          <v-btn icon ripple slot="activator" @click.native.prevent>
+            <v-icon color="grey darken-1">more_vert</v-icon>
+          </v-btn>
+          <div>
+            <v-list>
+              <v-list-tile>
+                <v-badge class="pr-2" overlap left>
+                  <span slot="badge">{{ star_count }}</span>
+                  <v-icon>star</v-icon>
+                </v-badge>
+                <v-badge class="pr-2" overlap left>
+                  <span slot="badge">{{ forks_count }}</span>
+                  <v-icon>merge_type</v-icon>
+                </v-badge>
+                <v-badge class="pr-2" overlap left>
+                  <span slot="badge">{{ open_issues_count }}</span>
+                  <v-icon>error_outline</v-icon>
+                </v-badge>
+              </v-list-tile>
+            </v-list>
+          </div>
+        </v-menu>
       </div>
     </v-list-tile-action>
   </v-list-tile>

@@ -52,9 +52,9 @@
       <div v-else>
         <v-menu offset-y min-width="150">
           <v-btn icon ripple slot="activator" @click.native.prevent>
-              <v-icon color="grey darken-1">more_vert</v-icon>
+            <v-icon color="grey darken-1">more_vert</v-icon>
           </v-btn>
-          <div id="actions">
+          <div>
             <v-list>
               <v-list-tile>
                 <v-badge class="pr-2" overlap left color="orange">
