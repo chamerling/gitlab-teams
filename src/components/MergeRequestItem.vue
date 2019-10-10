@@ -112,17 +112,13 @@
                 <span slot="badge">{{ mr.upvotes }}</span>
                 <v-icon>thumb_up</v-icon>
               </v-badge>
-              <v-tooltip top>
-                <v-btn class="mr-3" icon small
-                  slot="activator"
-                  @click.prevent="merge()"
-                  :disabled="merging || closing || mr.work_in_progress || mr.merge_status !== 'can_be_merged' || mr.state !== 'opened'"
-                  :loading="merging"
-                >
-                  <v-icon>merge_type</v-icon>
-                </v-btn>
-                <span>Merge it</span>
-              </v-tooltip>
+              <v-btn class="mr-3" small flat
+                @click.prevent="merge()"
+                :disabled="merging || closing || mr.work_in_progress || mr.merge_status !== 'can_be_merged' || mr.state !== 'opened'"
+                :loading="merging"
+              >
+                Merge
+              </v-btn>
             </v-list-tile>
             <v-divider></v-divider>
             <v-list-tile :href="mr.web_url" target="_blank">
