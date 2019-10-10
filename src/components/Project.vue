@@ -22,29 +22,18 @@
 
     <v-list-tile-action>
       <div id="actions">
-        <v-tooltip bottom>
-          <span class="pr-3" slot="activator">
-            <v-icon small>star</v-icon>
-            <span class="caption">{{ star_count }}</span>
-          </span>
-          <span>Stars</span>
-        </v-tooltip>
-
-        <v-tooltip bottom>
-          <span class="pr-3" slot="activator">
-            <v-icon small>merge_type</v-icon>
-            <span class="caption">{{ forks_count }}</span>
-          </span>
-          <span>Forks</span>
-        </v-tooltip>
-
-        <v-tooltip bottom>
-          <span class="pr-3" slot="activator">
-            <v-icon small>error_outline</v-icon>
-            <span class="caption">{{ open_issues_count }}</span>
-          </span>
-          <span>Issues</span>
-        </v-tooltip>
+        <v-badge class="pr-2" overlap left>
+          <span slot="badge">{{ star_count }}</span>
+          <v-icon>star</v-icon>
+        </v-badge>
+        <v-badge class="pr-2" overlap left>
+          <span slot="badge">{{ forks_count }}</span>
+          <v-icon>merge_type</v-icon>
+        </v-badge>
+        <v-badge class="pr-2" overlap left>
+          <span slot="badge">{{ open_issues_count }}</span>
+          <v-icon>error_outline</v-icon>
+        </v-badge>
       </div>
     </v-list-tile-action>
   </v-list-tile>
