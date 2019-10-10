@@ -9,10 +9,11 @@ import Runners from "./views/Runners.vue";
 import User from "./views/User.vue";
 import MergeRequests from "./views/MergeRequests.vue";
 import Projects from "./views/Projects.vue";
+import App from "./App.vue";
 
 Vue.use(Router);
 
-export default new Router({
+let router = new Router({
   base: process.env.BASE_URL,
   routes: [
     {
@@ -38,7 +39,10 @@ export default new Router({
     {
       path: "/runners",
       name: "runners",
-      component: Runners
+      component: Runners,
+      meta: {
+        requiresAdmin: true
+      }
     },
     {
       path: "/team/:name",
@@ -71,3 +75,14 @@ export default new Router({
     }
   ]
 });
+
+router.beforeEach((to, from, next) => {
+  if (to.matched.some(record => record.meta.requiresAdmin)) {
+    if (App.isAdmin) {
+      next({ name: "home" });
+    }
+  }
+  next();
+});
+
+export default router;

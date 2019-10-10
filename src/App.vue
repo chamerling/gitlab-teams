@@ -92,7 +92,7 @@
             <v-list-tile-title class="with-badge">Projects</v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile v-if="isConfigured" @click="$router.push({ name: 'runners' })">
+        <v-list-tile v-if="isAdmin" @click="$router.push({ name: 'runners' })">
           <v-list-tile-action>
             <v-icon>directions_run</v-icon>
           </v-list-tile-action>
@@ -212,6 +212,9 @@ export default {
     },
     isConfigured() {
       return this.$store.getters.isConfigured;
+    },
+    isAdmin() {
+      return this.$store.getters.getConnectedUser.is_admin;
     },
     teams() {
       return _.orderBy(
