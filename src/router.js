@@ -9,7 +9,7 @@ import Runners from "./views/Runners.vue";
 import User from "./views/User.vue";
 import MergeRequests from "./views/MergeRequests.vue";
 import Projects from "./views/Projects.vue";
-import App from "./App.vue";
+import store from "@/store";
 
 Vue.use(Router);
 
@@ -78,11 +78,19 @@ let router = new Router({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some(record => record.meta.requiresAdmin)) {
-    if (App.isAdmin) {
-      next({ name: "home" });
+    if (!isAdmin()) {
+      return next({ name: "home" });
     }
   }
   next();
 });
+
+function isAdmin() {
+  return (
+    store.state.user &&
+    store.state.user.connectedUser &&
+    store.state.user.connectedUser.is_admin
+  );
+}
 
 export default router;
