@@ -41,6 +41,8 @@ export default {
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
+  overflow-y: auto;
+  height: 150px;
 }
 
 .project {
