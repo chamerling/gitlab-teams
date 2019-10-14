@@ -2,5 +2,22 @@
   "stats": {
     "title": "My Stats",
     "pipelines": "Pipelines: {success} success, {failed} failed, {running} running"
+  },
+  "todos": {
+    "title": "Todos",
+    "last_todo": "Last todo",
+    "build_failed": "Build failed",
+    "issues": {
+      "assigned": "{user} assigned you the issue {issue}",
+      "mentioned": "{user} mentioned you in the issue {issue}",
+      "directly_addressed": "{user} directly addressed you in the issue {issue}"
+    },
+    "merge_requests": {
+      "assigned": "{user} assigned you the merge request {mergeRequest}",
+      "mentioned": "{user} mentioned you the merge request {mergeRequest}",
+      "requires_approval": "{user} require your approval in merge request {issue}",
+      "unmergeable": "{user} marked the merge request as unmergeable in {issue}",
+      "directly_addressed": "{user} directly addressed you in the merge request {issue}"
+    }
   }
 }

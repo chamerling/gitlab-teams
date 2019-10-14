@@ -2,7 +2,7 @@
   <v-card height="250">
     <v-card-title>
       <v-icon large left>list</v-icon>
-      <span class="title font-weight-light ml-2">Todos</span>
+      <span class="title font-weight-light ml-2">{{ $t("todos.title") }}</span>
     </v-card-title>
     <v-card-text>
       <div id="count" class="ma-1">
@@ -12,7 +12,7 @@
         <v-list slot="activator" v-if="todos.length" two-line dense>
           <todo :item="last"/>
         </v-list>
-        <span v-if="last">Last todo: {{last.body}}</span>
+        <span v-if="last">{{ $t("todos.last_todo") }}: {{last.body}}</span>
       </v-tooltip>
     </v-card-text>
   </v-card>
