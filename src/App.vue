@@ -215,8 +215,8 @@ export default {
     },
     isAdmin() {
       return (
-          this.$store.getters.getConnectedUser &&
-          this.$store.getters.getConnectedUser.is_admin
+        this.$store.getters.getConnectedUser &&
+        this.$store.getters.getConnectedUser.is_admin
       );
     },
     teams() {
