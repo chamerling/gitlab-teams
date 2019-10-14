@@ -6,7 +6,7 @@
     </v-card-title>
     <v-card-text>
       <div id="count" class="ma-1">
-        <span class="font-weight-medium display-3">{{todos ? todos.length : 0}}</span>
+        <span class="font-weight-medium display-3">{{todosSize}}</span>
       </div>
       <v-tooltip bottom>
         <v-list slot="activator" v-if="todos.length" two-line dense>
@@ -24,7 +24,8 @@ import Todo from "@/components/Todo.vue";
 
 export default {
   props: {
-    todos: Array
+    todos: Array,
+    todosSize: Number
   },
   computed: {
     last() {

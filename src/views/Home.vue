@@ -5,7 +5,7 @@
         <user-stats-card :user="user" :merge-requests="mergeRequests"/>
       </v-flex>
       <v-flex sm6 md6 lg3>
-        <todos-card :todos="todos"/>
+        <todos-card :todos="todos" :todosSize="todosSize"/>
       </v-flex>
       <v-flex sm6 md6 lg3>
         <issues-card :issues="issues" :total="issuesSize"/>
@@ -46,6 +46,7 @@ export default {
       issues: "getIssues",
       issuesSize: "getIssuesSize",
       todos: "getTodos",
+      todosSize: "getTodosSize",
       pipelines: "getPipelines"
     }),
     teams() {
