@@ -1,3 +1,6 @@
 {
-  "message": "hello i18n !!"
+  "stats": {
+    "title": "My Stats",
+    "pipelines": "Pipelines: {success} success, {failed} failed, {running} running"
+  }
 }
