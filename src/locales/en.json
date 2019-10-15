@@ -6,7 +6,12 @@
     "created": "Created",
     "milestone": "Milestone",
     "label": "Label",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "into": "into",
+    "assigned_to": "Assigned to {assignee}",
+    "view_on_gitlab": "View on GitLab",
+    "copy_link": "Copy link",
+    "show_more": "Show more..."
   },
   "stats": {
     "title": "My Stats",
@@ -16,6 +21,7 @@
     "title": "Todos",
     "last_todo": "Last todo",
     "build_failed": "Build failed",
+    "create": "Create Todo",
     "issues": {
       "assigned": "{user} assigned you the issue {issue}",
       "mentioned": "{user} mentioned you in the issue {issue}",
@@ -31,8 +37,7 @@
   },
   "issues": {
     "title": "Issues",
-    "last": "Last issue: {issue}",
-    "assigned_to": "Assigned to {assignee}"
+    "last": "Last issue: {issue}"
   },
   "pipelines": {
     "title": "Pipelines",
@@ -42,6 +47,10 @@
   },
   "merge_requests": {
     "title": "Merge Requests",
-    "no_merge_requests": "No merge requests."
+    "no_merge_requests": "No merge requests.",
+    "merge_automatically": "Will be merged automatically",
+    "merge_it": "Merge it",
+    "merge": "Merge",
+    "close": "Close MR"
   }
 }

@@ -9,31 +9,31 @@
         <pipeline v-if="pipeline" :pipeline="pipeline" :mr="mr"/>
         <v-tooltip bottom v-if="mr.merge_when_pipeline_succeeds">
           <v-icon slot="activator" class="ml-1" color="orange">merge_type</v-icon>
-          <span>Will be merged automatically</span>
+          <span>{{ $t("merge_requests.merge_automatically") }}</span>
         </v-tooltip>
         <span class="ml-1">{{ mr.title }}</span>
       </v-list-tile-title>
       <v-list-tile-sub-title>
-        Created {{ mr.created_at | moment("calendar")}} - Updated {{ mr.updated_at | moment('calendar')}}
+        {{ $t("generic.created") }} {{ mr.created_at | moment("calendar")}} - {{ $t("generic.updated") }} {{ mr.updated_at | moment('calendar')}}
       </v-list-tile-sub-title>
       <v-list-tile-sub-title>
         <div id="subtitle">
-          {{ getProject(mr.project_id).name }}!{{ mr.iid }} - {{ mr.source_branch }} into {{ mr.target_branch }}
+          {{ getProject(mr.project_id).name }}!{{ mr.iid }} - {{ mr.source_branch }} {{ $t("generic.into") }} {{ mr.target_branch }}
           <div class="ml-1" v-if="mr.assignee">
             <v-tooltip bottom>
               <v-avatar size="16" slot="activator">
                 <img :src="mr.assignee.avatar_url" :alt="mr.assignee.username">
               </v-avatar>
-              <span>Assigned to {{mr.assignee.name}}</span>
+              <span>{{ $t("generic.assigned_to", { assignee: mr.assignee.name }) }}</span>
             </v-tooltip>
           </div>
           <v-tooltip v-if="mr.milestone" bottom>
             <v-chip slot="activator" color="primary" small text-color="white">{{ mr.milestone.title }}</v-chip>
-            <span>Milestone</span>
+            <span>{{ $t("generic.milestone") }}</span>
           </v-tooltip>
           <v-tooltip v-for="label in mr.labels" :key="label" bottom>
             <v-chip slot="activator" color="orange" small text-color="white">{{ label }}</v-chip>
-            <span>Label</span>
+            <span>{{ $t("generic.label") }}</span>
           </v-tooltip>
         </div>
       </v-list-tile-sub-title>
@@ -58,7 +58,7 @@
           >
             <v-icon>merge_type</v-icon>
           </v-btn>
-          <span>Merge it</span>
+          <span>{{ $t("merge_requests.merge_it") }}</span>
         </v-tooltip>
         <v-menu offset-y min-width="150">
           <v-btn icon ripple slot="activator" @click.native.prevent>
@@ -66,19 +66,19 @@
           </v-btn>
           <v-list>
             <v-list-tile :href="mr.web_url" target="_blank">
-              <v-list-tile-title>View on GitLab</v-list-tile-title>
+              <v-list-tile-title>{{ $t("generic.view_on_gitlab") }}</v-list-tile-title>
             </v-list-tile>
             <v-list-tile @click="createTodo()">
-              <v-list-tile-title>Create Todo</v-list-tile-title>
+              <v-list-tile-title>{{ $t("todos.create") }}</v-list-tile-title>
             </v-list-tile>
             <v-list-tile v-if="canBeClosed" @click="close()">
-              <v-list-tile-title>Close MR</v-list-tile-title>
+              <v-list-tile-title>{{ $t("merge_requests.close") }}</v-list-tile-title>
             </v-list-tile>
             <v-list-tile @click="copyLink()">
-              <v-list-tile-title>Copy link</v-list-tile-title>
+              <v-list-tile-title>{{ $t("generic.copy_link") }}</v-list-tile-title>
             </v-list-tile>
             <v-list-tile @click="showMore=true">
-              <v-list-tile-title>Show more...</v-list-tile-title>
+              <v-list-tile-title>{{ $t("generic.show_more") }}</v-list-tile-title>
               <v-dialog v-model="showMore" max-width="800px" lazy>
                 <v-card>
                   <v-card-title primary-title>
@@ -89,7 +89,7 @@
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="primary" flat @click="showMore=false">Close</v-btn>
+                    <v-btn color="primary" flat @click="showMore=false">{{ $t("generic.close") }}</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>
@@ -115,22 +115,22 @@
             </v-list-tile>
             <v-divider></v-divider>
             <v-list-tile @click.prevent="merge()" :disabled="merging || closing || mr.work_in_progress || mr.merge_status !== 'can_be_merged' || mr.state !== 'opened'">
-              Merge
+              {{ $t("merge_requests.merge") }}
             </v-list-tile>
             <v-list-tile :href="mr.web_url" target="_blank">
-              <v-list-tile-title>View on GitLab</v-list-tile-title>
+              <v-list-tile-title>{{ $t("generic.view_on_gitlab") }}</v-list-tile-title>
             </v-list-tile>
             <v-list-tile @click="createTodo()">
-              <v-list-tile-title>Create Todo</v-list-tile-title>
+              <v-list-tile-title>{{ $t("todos.create") }}</v-list-tile-title>
             </v-list-tile>
             <v-list-tile v-if="canBeClosed" @click="close()">
-              <v-list-tile-title>Close MR</v-list-tile-title>
+              <v-list-tile-title>{{ $t("merge_requests.close") }}</v-list-tile-title>
             </v-list-tile>
             <v-list-tile @click="copyLink()">
-              <v-list-tile-title>Copy link</v-list-tile-title>
+              <v-list-tile-title>{{ $t("generic.copy_link") }}</v-list-tile-title>
             </v-list-tile>
             <v-list-tile @click="showMore=true">
-              <v-list-tile-title>Show more...</v-list-tile-title>
+              <v-list-tile-title>{{ $t("generic.show_more") }}</v-list-tile-title>
               <v-dialog v-model="showMore" max-width="800px" lazy>
                 <v-card>
                   <v-card-title primary-title>
@@ -141,7 +141,7 @@
                   </v-card-text>
                   <v-card-actions>
                     <v-spacer></v-spacer>
-                    <v-btn color="primary" flat @click="showMore=false">Close</v-btn>
+                    <v-btn color="primary" flat @click="showMore=false">{{ $t("generic.close") }}</v-btn>
                   </v-card-actions>
                 </v-card>
               </v-dialog>

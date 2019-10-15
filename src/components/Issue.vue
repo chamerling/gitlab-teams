@@ -19,7 +19,7 @@
               <v-avatar size="16" slot="activator">
                 <img :src="assignee.avatar_url" :alt="assignee.username">
               </v-avatar>
-              <span>{{ $t("issues.assigned_to", { assignee: assignee.name }) }}</span>
+              <span>{{ $t("generic.assigned_to", { assignee: assignee.name }) }}</span>
             </v-tooltip>
           </div>
           <v-tooltip v-if="item.milestone" bottom>
