@@ -1,9 +1,12 @@
 {
   "generic": {
     "open": "Open",
-    "close": "Closed",
+    "close": "Close",
+    "closed": "Closed",
     "updated": "Updated",
+    "last_updated": "Last updated",
     "created": "Created",
+    "created_date": "Created date",
     "milestone": "Milestone",
     "label": "Label",
     "cancel": "Cancel",
@@ -52,6 +55,7 @@
     "merge_automatically": "Will be merged automatically",
     "merge_it": "Merge it",
     "merge": "Merge",
+    "merged": "Merged",
     "close": "Close MR"
   },
   "teams": {
