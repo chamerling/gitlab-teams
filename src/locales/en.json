@@ -55,5 +55,8 @@
   },
   "teams": {
     "title": "Teams"
+  },
+  "projects": {
+    "title": "Projects"
   }
 }
