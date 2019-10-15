@@ -5,6 +5,7 @@
     "closed": "Closed",
     "updated": "Updated",
     "last_updated": "Last updated",
+    "updated_at": "Updated at",
     "created": "Created",
     "created_date": "Created date",
     "milestone": "Milestone",
@@ -63,7 +64,8 @@
   },
   "projects": {
     "title": "Projects",
-    "no_projects": "No projects to show..."
+    "no_projects": "No projects to show...",
+    "owner": "Owner"
   },
   "about": {
     "title": "This is an about page"

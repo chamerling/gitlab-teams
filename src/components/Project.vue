@@ -13,9 +13,9 @@
       <v-list-tile-sub-title>{{description}}</v-list-tile-sub-title>
 
       <v-list-tile-sub-title>
-        <span>Updated at {{last_activity_at | moment("calendar")}}</span>
+        <span>{{ $t('generic.updated_at') }} {{last_activity_at | moment("calendar")}}</span>
         <v-chip small outline v-if="isOwner">
-          <span>Owner</span>
+          <span>{{ $t('projects.owner') }}</span>
         </v-chip>
       </v-list-tile-sub-title>
     </v-list-tile-content>
