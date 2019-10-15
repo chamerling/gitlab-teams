@@ -1,7 +1,7 @@
 <template>
   <v-list-tile avatar :href="web_url" target="_blank">
-    <v-list-tile-avatar>
-      <v-img id="avatar" v-if="avatar_url" :src="avatar_url"></v-img>
+    <v-list-tile-avatar :size="60" class="pr-3">
+      <avatar :name="name" :icon="avatar_url" :size="60"/>
     </v-list-tile-avatar>
 
     <v-list-tile-content>
@@ -66,10 +66,14 @@
 
 <script>
 import { mapGetters } from "vuex";
+import Avatar from "@/components/Avatar.vue";
 
 export default {
   name: "project",
   props: {
+    name: {
+      type: String
+    },
     name_with_namespace: {
       type: String
     },
@@ -111,6 +115,9 @@ export default {
     isOwner() {
       return this.creator_id === this.connectedUser.id;
     }
+  },
+  components: {
+    Avatar
   }
 };
 </script>
