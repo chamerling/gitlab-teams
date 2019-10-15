@@ -58,5 +58,8 @@
   },
   "projects": {
     "title": "Projects"
+  },
+  "about": {
+    "title": "This is an about page"
   }
 }
