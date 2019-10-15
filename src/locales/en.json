@@ -39,5 +39,9 @@
     "started": "Started",
     "finished": "Finished",
     "launch_again": "Launch again"
+  },
+  "merge_requests": {
+    "title": "Merge Requests",
+    "no_merge_requests": "No merge requests."
   }
 }

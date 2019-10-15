@@ -2,18 +2,17 @@
   <v-card>
     <v-card-title>
       <v-icon large left>merge_type</v-icon>
-      <span class="title font-weight-light ml-2">Merge Requests</span>
+      <span class="title font-weight-light ml-2">{{ $t("merge_requests.title") }}</span>
     </v-card-title>
     <v-card-text scrollable>
       <merge-requests v-if="mergeRequests.length" :merge-requests="mergeRequests"/>
       <template v-else>
         <div class="pa-3">
           <v-alert :value="true" type="success">
-            No merge requests.
+            {{ $t("merge_requests.no_merge_requests") }}
           </v-alert>
         </div>
       </template>
-
     </v-card-text>
   </v-card>
 </template>
