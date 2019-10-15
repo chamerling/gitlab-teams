@@ -69,5 +69,8 @@
   },
   "about": {
     "title": "This is an about page"
+  },
+  "runners": {
+    "no_rights": "Looks like you do not have enough rights to access the runners Gitlab API."
   }
 }
