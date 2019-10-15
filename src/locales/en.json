@@ -32,5 +32,8 @@
     "title": "Issues",
     "last": "Last issue: {issue}",
     "assigned_to": "Assigned to {assignee}"
+  },
+  "pipelines": {
+    "title": "Pipelines"
   }
 }
