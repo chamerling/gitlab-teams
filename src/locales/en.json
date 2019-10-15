@@ -65,7 +65,18 @@
     "close": "Close MR"
   },
   "teams": {
-    "title": "Teams"
+    "title": "Teams",
+    "search_users": "Search GitLab User...",
+    "save": "Create",
+    "reset": "Clear",
+    "labels": {
+      "team_name": "Name",
+      "avatar": "Avatar \uD83E\uDD16 \uD83E\uDD8A \uD83E\uDD21",
+      "members": "Members"
+    },
+    "validation": {
+      "name_required": "Name is required"
+    }
   },
   "projects": {
     "title": "Projects",
