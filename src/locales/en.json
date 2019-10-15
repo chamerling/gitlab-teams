@@ -5,7 +5,8 @@
     "updated": "Updated",
     "created": "Created",
     "milestone": "Milestone",
-    "label": "Label"
+    "label": "Label",
+    "cancel": "Cancel"
   },
   "stats": {
     "title": "My Stats",
@@ -34,6 +35,9 @@
     "assigned_to": "Assigned to {assignee}"
   },
   "pipelines": {
-    "title": "Pipelines"
+    "title": "Pipelines",
+    "started": "Started",
+    "finished": "Finished",
+    "launch_again": "Launch again"
   }
 }

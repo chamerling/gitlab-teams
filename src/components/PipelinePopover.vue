@@ -11,10 +11,10 @@
     <v-card>
       <v-card-text id="card-text">
         <v-icon :class="{ running: pipeline.status === 'running' }" :color="getPipelineColor()" class="mr-1">{{getPipelineIcon()}}</v-icon>
-        <span>Pipeline #{{pipeline.id}} {{pipeline.status}}</span>
+        <span>{{ $t("pipelines.title") }} #{{pipeline.id}} {{pipeline.status}}</span>
         <span class="ml-1 mr-1">-</span>
-        <span v-if="pipeline.status === 'running'">Started {{ pipeline.updated_at | moment("calendar")}}</span>
-        <span v-else>Finished {{ pipeline.finished_at | moment("calendar")}}</span>
+        <span v-if="pipeline.status === 'running'">{{ $t("pipelines.started") }} {{ pipeline.updated_at | moment("calendar")}}</span>
+        <span v-else>{{ $t("pipelines.finished") }} {{ pipeline.finished_at | moment("calendar")}}</span>
       </v-card-text>
       <v-card-actions>
         <v-spacer/>
@@ -22,19 +22,19 @@
           <v-btn slot="activator" flat icon small @click="retry()">
             <v-icon>replay</v-icon>
           </v-btn>
-          <span>Launch again</span>
+          <span>{{ $t("pipelines.launch_again") }}</span>
         </v-tooltip>
         <v-tooltip top v-else>
           <v-btn slot="activator" flat icon small @click="cancel()">
             <v-icon>cancel</v-icon>
           </v-btn>
-          <span>Cancel</span>
+          <span>{{ $t("generic.cancel") }}}</span>
         </v-tooltip>
         <v-tooltip top v-if="pipeline.web_url" >
           <v-btn class="ml-1" :href="pipeline.web_url" target="_blank" slot="activator" flat icon small>
             <v-icon>open_in_new</v-icon>
           </v-btn>
-          <span>Open</span>
+          <span>{{ $t("generic.open") }}</span>
         </v-tooltip>
       </v-card-actions>
     </v-card>
