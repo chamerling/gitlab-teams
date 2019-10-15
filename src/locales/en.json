@@ -28,6 +28,8 @@
     "last_todo": "Last todo",
     "build_failed": "Build failed",
     "create": "Create Todo",
+    "mark_all_as_done": "Mark all as done",
+    "no_todos": "Looks like you do not have anything to do...",
     "issues": {
       "assigned": "{user} assigned you the issue {issue}",
       "mentioned": "{user} mentioned you in the issue {issue}",
