@@ -52,5 +52,8 @@
     "merge_it": "Merge it",
     "merge": "Merge",
     "close": "Close MR"
+  },
+  "teams": {
+    "title": "Teams"
   }
 }
