@@ -8,7 +8,7 @@
     </v-list>
     <v-layout v-else ma-4>
       <v-flex>
-        <span>No projects to show...</span>
+        <span>{{ $t("projects.no_projects") }}</span>
       </v-flex>
     </v-layout>
   </div>

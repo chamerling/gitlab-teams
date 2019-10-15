@@ -62,7 +62,8 @@
     "title": "Teams"
   },
   "projects": {
-    "title": "Projects"
+    "title": "Projects",
+    "no_projects": "No projects to show..."
   },
   "about": {
     "title": "This is an about page"
