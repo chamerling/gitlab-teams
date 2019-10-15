@@ -52,7 +52,8 @@
     "title": "Pipelines",
     "started": "Started",
     "finished": "Finished",
-    "launch_again": "Launch again"
+    "launch_again": "Launch again",
+    "run_stats": "{num_completed} out of {total} pipelines are successful ({ratio}%)"
   },
   "merge_requests": {
     "title": "Merge Requests",
