@@ -1,4 +1,12 @@
 {
+  "generic": {
+    "open": "Open",
+    "close": "Closed",
+    "updated": "Updated",
+    "created": "Created",
+    "milestone": "Milestone",
+    "label": "Label"
+  },
   "stats": {
     "title": "My Stats",
     "pipelines": "Pipelines: {success} success, {failed} failed, {running} running"
@@ -22,6 +30,7 @@
   },
   "issues": {
     "title": "Issues",
-    "last": "Last issue: {issue}"
+    "last": "Last issue: {issue}",
+    "assigned_to": "Assigned to {assignee}"
   }
 }

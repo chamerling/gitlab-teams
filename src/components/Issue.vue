@@ -9,7 +9,7 @@
         <span>{{ item.title }}</span>
       </v-list-tile-title>
       <v-list-tile-sub-title>
-        <span class="state">{{ getState() }}</span> - Created {{ item.created_at | moment("calendar")}} - Updated {{ item.updated_at | moment('calendar')}}
+        <span class="state">{{ state }}</span> - {{ $t("generic.created") }} {{ item.created_at | moment("calendar")}} - {{ $t("generic.updated") }} {{ item.updated_at | moment('calendar')}}
       </v-list-tile-sub-title>
       <v-list-tile-sub-title>
         <div id="subtitle">
@@ -19,16 +19,16 @@
               <v-avatar size="16" slot="activator">
                 <img :src="assignee.avatar_url" :alt="assignee.username">
               </v-avatar>
-              <span>Assigned to {{assignee.name}}</span>
+              <span>{{ $t("issues.assigned_to", { assignee: assignee.name }) }}</span>
             </v-tooltip>
           </div>
           <v-tooltip v-if="item.milestone" bottom>
             <v-chip slot="activator" color="primary" small text-color="white">{{ item.milestone.title }}</v-chip>
-            <span>Milestone</span>
+            <span>{{ $t("generic.milestone") }}</span>
           </v-tooltip>
           <v-tooltip v-for="label in item.labels" :key="label" bottom>
             <v-chip slot="activator" color="orange" small text-color="white">{{ label }}</v-chip>
-            <span>Label</span>
+            <span>{{ $t("generic.label") }}</span>
           </v-tooltip>
         </div>
       </v-list-tile-sub-title>
@@ -97,14 +97,12 @@ export default {
     }
   },
   computed: {
+    state() {
+      return this.$t("generic." + states[this.item.state]);
+    },
     ...mapGetters({
       getProject: "getProject"
     })
-  },
-  methods: {
-    getState() {
-      return states[this.item.state];
-    }
   },
   components: {
     "user-avatar": UserAvatarPopover
