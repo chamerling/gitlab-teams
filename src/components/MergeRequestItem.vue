@@ -193,11 +193,14 @@ export default {
         .then(() =>
           this.$store.dispatch(
             "displaySnackbarMessage",
-            "Todo has been created"
+            this.$t("todos.created")
           )
         )
         .catch(() =>
-          this.$store.dispatch("displaySnackbarMessage", "Can not create Todo")
+          this.$store.dispatch(
+            "displaySnackbarMessage",
+            this.$t("todos.creation_error")
+          )
         );
     },
     copyLink() {
@@ -205,7 +208,10 @@ export default {
 
       this.$copyText(link)
         .then(() =>
-          this.$store.dispatch("displaySnackbarMessage", "Link copied")
+          this.$store.dispatch(
+            "displaySnackbarMessage",
+            this.$t("generic.link_copied")
+          )
         )
         .catch(() => {
           /* TODO */
@@ -233,7 +239,7 @@ export default {
         .catch(() =>
           this.$store.dispatch(
             "displaySnackbarMessage",
-            "Error while closing MR"
+            this.$t("merge_requests.close_error")
           )
         )
         .finally(() => {

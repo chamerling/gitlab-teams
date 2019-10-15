@@ -19,7 +19,8 @@
     "enabled": "Enabled",
     "disabled": "Disabled",
     "click_to_copy": "Click to copy",
-    "sha_copied": "SHA copied"
+    "sha_copied": "SHA copied",
+    "link_copied": "Link copied"
   },
   "stats": {
     "title": "My Stats",
@@ -30,6 +31,8 @@
     "last_todo": "Last todo",
     "build_failed": "Build failed",
     "create": "Create Todo",
+    "created": "Todo has been created",
+    "creation_error": "Can not create Todo",
     "mark_all_as_done": "Mark all as done",
     "no_todos": "Looks like you do not have anything to do...",
     "issues": {
@@ -55,7 +58,11 @@
     "started": "Started",
     "finished": "Finished",
     "launch_again": "Launch again",
-    "run_stats": "{num_completed} out of {total} pipelines are successful ({ratio}%)"
+    "run_stats": "{num_completed} out of {total} pipelines are successful ({ratio}%)",
+    "relaunched": "Pipeline has been relaunched",
+    "can_not_relaunch": "Can not relaunch pipeline",
+    "canceled": "Pipeline has been canceled",
+    "can_not_cancel": "Can not cancel pipeline"
   },
   "merge_requests": {
     "title": "Merge Requests",
@@ -64,7 +71,8 @@
     "merge_it": "Merge it",
     "merge": "Merge",
     "merged": "Merged",
-    "close": "Close MR"
+    "close": "Close MR",
+    "close_error": "Error while closing MR"
   },
   "teams": {
     "title": "Teams",

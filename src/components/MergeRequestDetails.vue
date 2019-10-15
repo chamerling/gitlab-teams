@@ -52,7 +52,10 @@ export default {
     copySha(commit) {
       this.$copyText(commit.id)
         .then(() =>
-          this.$store.dispatch("displaySnackbarMessage", this.$t("generic.sha_copied"))
+          this.$store.dispatch(
+            "displaySnackbarMessage",
+            this.$t("generic.sha_copied")
+          )
         )
         .catch(() => {
           /* TODO */

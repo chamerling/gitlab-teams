@@ -62,13 +62,13 @@ export default {
         .then(() =>
           this.$store.dispatch(
             "displaySnackbarMessage",
-            "Pipeline has been relaunched"
+            this.$t("pipelines.relaunched")
           )
         )
         .catch(() =>
           this.$store.dispatch(
             "displaySnackbarMessage",
-            "Can not relaunch pipeline"
+            this.$t("pipelines.can_not_relaunch")
           )
         );
     },
@@ -79,13 +79,13 @@ export default {
         .then(() =>
           this.$store.dispatch(
             "displaySnackbarMessage",
-            "Pipeline has been canceled"
+            this.$t("pipelines.canceled")
           )
         )
         .catch(() =>
           this.$store.dispatch(
             "displaySnackbarMessage",
-            "Can not cancel pipeline"
+            this.$t("pipelines.can_not_cancel")
           )
         );
     },
