@@ -19,5 +19,9 @@
       "unmergeable": "{user} marked the merge request as unmergeable in {issue}",
       "directly_addressed": "{user} directly addressed you in the merge request {issue}"
     }
+  },
+  "issues": {
+    "title": "Issues",
+    "last": "Last issue: {issue}"
   }
 }
