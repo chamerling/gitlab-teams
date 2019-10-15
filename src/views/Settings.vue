@@ -5,18 +5,14 @@
         <v-flex xs12 sm8 md8>
           <v-card class="elevation-12">
             <v-toolbar dark>
-              <v-toolbar-title class="white--text">GitLab API Configuration</v-toolbar-title>
+              <v-toolbar-title class="white--text">{{ $t("settings.api_configuration.title") }}</v-toolbar-title>
             </v-toolbar>
             <v-card-text>
-              <div class="body-1 mb-3">
-                You must define the 'Personal Access Token' (with <b>api</b> scope) and the 'GitLab URL' you want to use. More information on how to set this is available <a href="https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html" target="_blank">on the GitLab documentation</a>.
-                Nothing is sent to any other server than the one you define here.
-                Everything is stored locally, right in your browser.
-              </div>
+              <div class="body-1 mb-3" v-html="$t('settings.api_configuration.description')"></div>
               <v-form ref="form" v-model="valid">
                 <v-text-field
                   v-model="apiToken"
-                  label="Personal Access Token"
+                  :label="$t('settings.api_configuration.access_token')"
                   :rules="tokenRules"
                   :type="showToken ? 'text' : 'password'"
                   required
@@ -25,7 +21,7 @@
                 ></v-text-field>
                 <v-text-field
                   v-model="apiEndpoint"
-                  label="GitLab URL"
+                  :label="$t('settings.api_configuration.gitlab_url')"
                   :rules="urlRules"
                   required
                 ></v-text-field>
@@ -36,23 +32,23 @@
               <v-btn
                 :disabled="!valid"
                 @click="submit">
-                Go!
+                {{ $t("settings.api_configuration.save") }}
               </v-btn>
             </v-card-actions>
           </v-card>
 
           <v-card class="elevation-12 mt-5">
             <v-toolbar dark>
-              <v-toolbar-title class="white--text">Desktop Notification</v-toolbar-title>
+              <v-toolbar-title class="white--text">{{ $t("settings.desktop_notifications.title") }}</v-toolbar-title>
             </v-toolbar>
             <v-card-text>
               <div class="body-1 mb-3">
-                Allows to be notified on your GitLab activity.
+                {{ $t("settings.desktop_notifications.description") }}
                 <v-switch
                   disabled
                   color="primary"
                   v-model="desktopNotification"
-                  :label="desktopNotification ? 'Enabled' : 'Disabled'"
+                  :label="desktopNotification ? $t('generic.enabled') : $t('generic.disabled')"
                 ></v-switch>
               </div>
             </v-card-text>
@@ -60,15 +56,15 @@
 
           <v-card class="elevation-12 mt-5">
             <v-toolbar dark>
-              <v-toolbar-title class="white--text">Theme</v-toolbar-title>
+              <v-toolbar-title class="white--text">{{ $t("settings.theme.title") }}</v-toolbar-title>
             </v-toolbar>
             <v-card-text>
               <div class="body-1 mb-3">
-                Select light or dark mode.
+                {{ $t("settings.theme.description") }}
                 <v-switch
                   color="primary"
                   v-model="darkMode"
-                  :label="darkMode ? 'Dark' : 'Light'"
+                  :label="darkMode ? $t('settings.theme.themes.dark') : $t('settings.theme.themes.light')"
                 ></v-switch>
               </div>
             </v-card-text>
@@ -76,19 +72,18 @@
 
           <v-card v-if="isConfigured" class="elevation-12 mt-5">
             <v-toolbar dark>
-              <v-toolbar-title class="white--text">Clean data</v-toolbar-title>
+              <v-toolbar-title class="white--text">{{ $t("settings.clean_data.title") }}</v-toolbar-title>
             </v-toolbar>
             <v-card-text>
               <div class="body-1 mb-3">
-                Everything which has been stored locally in this browser will be deleted.
-                You will have to configure everything again in this case.
+                {{ $t("settings.clean_data.description") }}
               </div>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
               <v-btn
                 @click="cleanAll">
-                Clean
+                {{ $t("settings.clean_data.clean") }}
               </v-btn>
             </v-card-actions>
           </v-card>
@@ -104,14 +99,14 @@ export default {
   data() {
     return {
       valid: false,
-      tokenRules: [v => !!v || "Token is required"],
+      tokenRules: [v => !!v || this.$t('settings.api_configuration.validation.token_required')],
       urlRules: [
-        v => !!v || "URL is required",
+        v => !!v || this.$t('settings.api_configuration.validation.url_required'),
         v =>
           // eslint-disable-next-line
           /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/.test(
             v
-          ) || "URL is not valid"
+          ) || this.$t('settings.api_configuration.validation.url_invalid')
       ],
       localApiToken: null,
       localApiEndpoint: null,

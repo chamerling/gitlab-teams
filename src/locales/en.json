@@ -15,7 +15,9 @@
     "assigned_to": "Assigned to {assignee}",
     "view_on_gitlab": "View on GitLab",
     "copy_link": "Copy link",
-    "show_more": "Show more..."
+    "show_more": "Show more...",
+    "enabled": "Enabled",
+    "disabled": "Disabled"
   },
   "stats": {
     "title": "My Stats",
@@ -72,5 +74,36 @@
   },
   "runners": {
     "no_rights": "Looks like you do not have enough rights to access the runners Gitlab API."
+  },
+  "settings": {
+    "api_configuration": {
+      "title": "GitLab API Configuration",
+      "description": "You must define the 'Personal Access Token' (with <b>api</b> scope) and the 'GitLab URL' you want to use. More information on how to set this is available <a href=\"https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html\" target=\"_blank\">on the GitLab documentation</a>. Nothing is sent to any other server than the one you define here. Everything is stored locally, right in your browser.",
+      "access_token": "Personal Access Token",
+      "gitlab_url": "GitLab URL",
+      "save": "Go!",
+      "validation": {
+        "token_required": "Token is required",
+        "url_required": "URL is required",
+        "url_invalid": "URL is not valid"
+      }
+    },
+    "desktop_notifications": {
+      "title": "Desktop Notification",
+      "description": "Allows to be notified on your GitLab activity."
+    },
+    "theme": {
+      "title": "Theme",
+      "description": "Select light or dark mode.",
+      "themes": {
+        "dark": "Dark",
+        "light": "Light"
+      }
+    },
+    "clean_data": {
+      "title": "Clean data",
+      "description": "Everything which has been stored locally in this browser will be deleted. You will have to configure everything again in this case.",
+      "clean": "Clean"
+    }
   }
 }
