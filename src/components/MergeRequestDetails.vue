@@ -12,7 +12,7 @@
             <v-list-tile-title>
               <v-tooltip bottom>
                 <a slot="activator" class="mr-1" @click="copySha(commit)">{{ commit.short_id }}</a>
-                <span>Click to copy</span>
+                <span>{{ $t("generic.click_to_copy") }}</span>
               </v-tooltip>
               <span>{{ commit.title }}</span>
             </v-list-tile-title>
@@ -52,7 +52,7 @@ export default {
     copySha(commit) {
       this.$copyText(commit.id)
         .then(() =>
-          this.$store.dispatch("displaySnackbarMessage", "SHA copied")
+          this.$store.dispatch("displaySnackbarMessage", this.$t("generic.sha_copied"))
         )
         .catch(() => {
           /* TODO */

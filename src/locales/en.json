@@ -17,7 +17,9 @@
     "copy_link": "Copy link",
     "show_more": "Show more...",
     "enabled": "Enabled",
-    "disabled": "Disabled"
+    "disabled": "Disabled",
+    "click_to_copy": "Click to copy",
+    "sha_copied": "SHA copied"
   },
   "stats": {
     "title": "My Stats",
