@@ -37,7 +37,8 @@
   },
   "issues": {
     "title": "Issues",
-    "last": "Last issue: {issue}"
+    "last": "Last issue: {issue}",
+    "no_issues": "Looks like you do not have created any issue..."
   },
   "pipelines": {
     "title": "Pipelines",
