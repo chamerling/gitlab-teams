@@ -166,19 +166,7 @@
         </v-container>
       </v-content>
       <snackbar/>
-      <v-dialog v-model="dialog" width="500">
-        <v-card>
-          <v-toolbar dark>
-            <v-btn icon dark @click="dialog = false">
-              <v-icon>close</v-icon>
-            </v-btn>
-            <v-toolbar-title class="white--text">Create a new team</v-toolbar-title>
-          </v-toolbar>
-          <v-card-text>
-            <CreateTeam @close="dialog = false" />
-          </v-card-text>
-        </v-card>
-      </v-dialog>
+      <create-team-dialog :show="dialog" @close="changeDialog"></create-team-dialog>
     </v-app>
   </div>
 </template>
@@ -187,7 +175,7 @@ import _ from "lodash";
 import { mapGetters } from "vuex";
 import Snackbar from "@/components/ui/Snackbar.vue";
 import Avatar from "@/components/Avatar.vue";
-import CreateTeam from "@/components/CreateTeam.vue";
+import CreateTeamDialog from "@/components/CreateTeamDialog.vue";
 
 export default {
   data: () => ({
@@ -204,6 +192,9 @@ export default {
     },
     goBack() {
       this.$router.go(-1);
+    },
+    changeDialog(dialog) {
+      this.dialog = dialog;
     }
   },
   computed: {
@@ -215,8 +206,8 @@ export default {
     },
     isAdmin() {
       return (
-          this.$store.getters.getConnectedUser &&
-          this.$store.getters.getConnectedUser.is_admin
+        this.$store.getters.getConnectedUser &&
+        this.$store.getters.getConnectedUser.is_admin
       );
     },
     teams() {
@@ -250,7 +241,7 @@ export default {
   components: {
     Snackbar,
     Avatar,
-    CreateTeam
+    CreateTeamDialog
   }
 };
 </script>
