@@ -1,7 +1,7 @@
 <template>
   <v-snackbar v-model="show" :timeout="ui.snackbar.timeout">
     {{ ui.snackbar.message }}
-    <v-btn dark flat @click="show = false">Close</v-btn>
+    <v-btn dark flat @click="show = false">{{ $t("generic.close") }}</v-btn>
   </v-snackbar>
 </template>
 

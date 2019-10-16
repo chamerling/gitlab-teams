@@ -1,0 +1,133 @@
+{
+  "generic": {
+    "open": "Open",
+    "close": "Close",
+    "closed": "Closed",
+    "updated": "Updated",
+    "last_updated": "Last updated",
+    "updated_at": "Updated at",
+    "created": "Created",
+    "created_date": "Created date",
+    "milestone": "Milestone",
+    "label": "Label",
+    "cancel": "Cancel",
+    "into": "into",
+    "assigned_to": "Assigned to {assignee}",
+    "view_on_gitlab": "View on GitLab",
+    "copy_link": "Copy link",
+    "show_more": "Show more...",
+    "enabled": "Enabled",
+    "disabled": "Disabled",
+    "click_to_copy": "Click to copy",
+    "sha_copied": "SHA copied",
+    "link_copied": "Link copied"
+  },
+  "stats": {
+    "title": "My Stats",
+    "pipelines": "Pipelines: {success} success, {failed} failed, {running} running"
+  },
+  "todos": {
+    "title": "Todos",
+    "last_todo": "Last todo",
+    "build_failed": "Build failed",
+    "create": "Create Todo",
+    "created": "Todo has been created",
+    "creation_error": "Can not create Todo",
+    "mark_all_as_done": "Mark all as done",
+    "no_todos": "Looks like you do not have anything to do...",
+    "issues": {
+      "assigned": "{user} assigned you the issue {issue}",
+      "mentioned": "{user} mentioned you in the issue {issue}",
+      "directly_addressed": "{user} directly addressed you in the issue {issue}"
+    },
+    "merge_requests": {
+      "assigned": "{user} assigned you the merge request {mergeRequest}",
+      "mentioned": "{user} mentioned you the merge request {mergeRequest}",
+      "requires_approval": "{user} require your approval in merge request {issue}",
+      "unmergeable": "{user} marked the merge request as unmergeable in {issue}",
+      "directly_addressed": "{user} directly addressed you in the merge request {issue}"
+    }
+  },
+  "issues": {
+    "title": "Issues",
+    "last": "Last issue: {issue}",
+    "no_issues": "Looks like you do not have created any issue..."
+  },
+  "pipelines": {
+    "title": "Pipelines",
+    "started": "Started",
+    "finished": "Finished",
+    "launch_again": "Launch again",
+    "run_stats": "{num_completed} out of {total} pipelines are successful ({ratio}%)",
+    "relaunched": "Pipeline has been relaunched",
+    "can_not_relaunch": "Can not relaunch pipeline",
+    "canceled": "Pipeline has been canceled",
+    "can_not_cancel": "Can not cancel pipeline"
+  },
+  "merge_requests": {
+    "title": "Merge Requests",
+    "no_merge_requests": "No merge requests.",
+    "merge_automatically": "Will be merged automatically",
+    "merge_it": "Merge it",
+    "merge": "Merge",
+    "merged": "Merged",
+    "close": "Close MR",
+    "close_error": "Error while closing MR"
+  },
+  "teams": {
+    "title": "Teams",
+    "search_users": "Search GitLab User...",
+    "save": "Create",
+    "reset": "Clear",
+    "labels": {
+      "team_name": "Name",
+      "avatar": "Avatar \uD83E\uDD16 \uD83E\uDD8A \uD83E\uDD21",
+      "members": "Members"
+    },
+    "validation": {
+      "name_required": "Name is required"
+    }
+  },
+  "projects": {
+    "title": "Projects",
+    "no_projects": "No projects to show...",
+    "owner": "Owner"
+  },
+  "about": {
+    "title": "This is an about page"
+  },
+  "runners": {
+    "no_rights": "Looks like you do not have enough rights to access the runners Gitlab API."
+  },
+  "settings": {
+    "api_configuration": {
+      "title": "GitLab API Configuration",
+      "description": "You must define the 'Personal Access Token' (with <b>api</b> scope) and the 'GitLab URL' you want to use. More information on how to set this is available <a href=\"https://docs.gitlab.com/ee/user/profile/personal_access_tokens.html\" target=\"_blank\">on the GitLab documentation</a>. Nothing is sent to any other server than the one you define here. Everything is stored locally, right in your browser.",
+      "access_token": "Personal Access Token",
+      "gitlab_url": "GitLab URL",
+      "save": "Go!",
+      "validation": {
+        "token_required": "Token is required",
+        "url_required": "URL is required",
+        "url_invalid": "URL is not valid"
+      }
+    },
+    "desktop_notifications": {
+      "title": "Desktop Notification",
+      "description": "Allows to be notified on your GitLab activity."
+    },
+    "theme": {
+      "title": "Theme",
+      "description": "Select light or dark mode.",
+      "themes": {
+        "dark": "Dark",
+        "light": "Light"
+      }
+    },
+    "clean_data": {
+      "title": "Clean data",
+      "description": "Everything which has been stored locally in this browser will be deleted. You will have to configure everything again in this case.",
+      "clean": "Clean"
+    }
+  }
+}

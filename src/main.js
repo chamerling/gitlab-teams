@@ -11,6 +11,7 @@ import store from "./store";
 import gitlab from "./gitlab";
 import style from "./style";
 import notification from "./notification";
+import i18n from "./i18n";
 
 Vue.config.productionTip = false;
 Vue.use(Vuetify, { theme: style });
@@ -30,5 +31,6 @@ notification.init(store);
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount("#app");

@@ -2,7 +2,7 @@
   <v-card height="250">
     <v-card-title>
       <v-icon large left>build</v-icon>
-      <span class="title font-weight-light ml-2">Pipelines</span>
+      <span class="title font-weight-light ml-2">{{ $t("pipelines.title") }}</span>
     </v-card-title>
     <v-card-text>
       <div id="count" class="ma-1">

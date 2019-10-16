@@ -2,7 +2,7 @@
   <v-card height="250">
     <v-card-title>
       <v-icon large left>lightbulb</v-icon>
-      <span class="title font-weight-light ml-2">Projects</span>
+      <span class="title font-weight-light ml-2">{{ $t("projects.title") }}</span>
     </v-card-title>
     <v-card-text>
       <div class="projects ma-1">

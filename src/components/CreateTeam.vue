@@ -3,14 +3,14 @@
     <v-form ref="form" v-model="valid" lazy-validation>
       <v-text-field
           v-model="name"
-          label="Name"
-          :rules="[v => !!v || 'Name is required']"
+          :label="$t('teams.labels.team_name')"
+          :rules="[v => !!v || $t('teams.validation.name_required')]"
           required
           autofocus
       ></v-text-field>
       <v-text-field
           v-model="icon"
-          label="Avatar 🤖 🦊 🤡"
+          :label="$t('teams.labels.avatar')"
           disabled
           required
       ></v-text-field>
@@ -22,7 +22,7 @@
           chips
           item-text="name"
           item-value="name"
-          label="Members"
+          :label="$t('teams.labels.members')"
           multiple
           cache-items
           return-object
@@ -30,7 +30,7 @@
           <template slot="no-data">
             <v-list-tile>
                 <v-list-tile-title>
-                Search GitLab User...
+                {{ $t('teams.search_users') }}
                 </v-list-tile-title>
             </v-list-tile>
           </template>
@@ -61,8 +61,8 @@
     </v-form>
     <v-card-actions>
         <v-spacer></v-spacer>
-        <v-btn :disabled="!valid" @click="create">Create</v-btn>
-        <v-btn @click="clear">Clear</v-btn>
+        <v-btn :disabled="!valid" @click="create">{{ $t('teams.save') }}</v-btn>
+        <v-btn @click="clear">{{ $t('teams.reset') }}</v-btn>
     </v-card-actions>
   </div>
 </template>

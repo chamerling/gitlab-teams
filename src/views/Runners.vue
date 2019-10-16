@@ -8,7 +8,7 @@
     </v-list>
     <v-layout v-else ma-4>
       <v-flex>
-        <span>Looks like you do not have enough rights to access the runners Gitlab API.</span>
+        <span>{{ $t("runners.no_rights") }}</span>
       </v-flex>
     </v-layout>
   </div>

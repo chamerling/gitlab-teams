@@ -8,7 +8,7 @@
     </v-list>
     <v-layout v-else ma-4>
       <v-flex>
-        <span>Looks like you do not have created any issue...</span>
+        <span>{{ $t("issues.no_issues") }}</span>
       </v-flex>
     </v-layout>
   </div>

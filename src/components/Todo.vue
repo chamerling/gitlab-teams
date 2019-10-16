@@ -8,29 +8,29 @@
       <v-list-tile-title>
         <template v-if="item.action_name === 'assigned'">
           <template v-if="item.target_type === 'Issue'">
-            {{ item.author.name || item.author.username }} assigned you the issue {{ getIssueAsText() }}
+            {{ $t("todos.issues.assigned", { user, issue }) }}
           </template>
           <template v-if="item.target_type === 'MergeRequest'">
-            {{ item.author.name || item.author.username }} assigned you the merge request {{ getMergeRequestAsText() }}
+            {{ $t("todos.merge_requests.assigned", { user, mergeRequest }) }}
           </template>
         </template>
         <template v-if="item.action_name === 'mentioned'">
           <template v-if="item.target_type === 'Issue'">
-            {{ item.author.name || item.author.username }} mentioned you in the issue {{ getIssueAsText() }}
+            {{ $t("todos.issues.mentioned", { user, issue }) }}
           </template>
           <template v-if="item.target_type === 'MergeRequest'">
-            {{ item.author.name || item.author.username }} mentioned you the merge request {{ getMergeRequestAsText() }}
+            {{ $t("todos.merge_requests.mentioned", { user, issue }) }}
           </template>
         </template>
         <template v-if="item.action_name === 'build_failed'">
-          Build failed
+          {{ $t("todos.build_failed") }}
         </template>
         <template v-if="item.action_name === 'marked'">
           ?
         </template>
         <template v-if="item.action_name === 'approval_required'">
           <template v-if="item.target_type === 'MergeRequest'">
-            {{ item.author.name || item.author.username }} require your approval in merge request {{ getMergeRequestAsText() }}
+            {{ $t("todos.merge_requests.requires_approval", { user, issue }) }}
           </template>
           <template v-else>
             ?
@@ -38,15 +38,16 @@
         </template>
         <template v-if="item.action_name === 'unmergeable'">
           <template v-if="item.target_type === 'MergeRequest'">
-            {{ item.author.name || item.author.username }} marked the merge request as unmergeable in {{ getMergeRequestAsText() }}
+            {{ $t("todos.merge_requests.unmergeable", { user, issue }) }}
           </template>
         </template>
         <template v-if="item.action_name === 'directly_addressed'">
           <template v-if="item.target_type === 'Issue'">
-            {{ item.author.name || item.author.username }} directly addressed you in the issue {{ getIssueAsText() }}
+            {{ $t("todos.issues.directly_addressed", { user, issue }) }}
+
           </template>
           <template v-if="item.target_type === 'MergeRequest'">
-            {{ item.author.name || item.author.username }} directly addressed you in the merge request {{ getMergeRequestAsText() }}
+            {{ $t("todos.merge_requests.directly_addressed", { user, issue }) }}
           </template>
         </template>
       </v-list-tile-title>
@@ -79,12 +80,17 @@ export default {
   methods: {
     markAsRead: function() {
       this.$store.dispatch("markTodoAsDone", this.item);
-    },
-    getMergeRequestAsText() {
-      return `${this.item.project.path}!${this.item.target.iid}`;
-    },
-    getIssueAsText() {
+    }
+  },
+  computed: {
+    issue() {
       return `${this.item.project.path}#${this.item.target.iid}`;
+    },
+    user() {
+      return this.item.author.name || this.item.author.username;
+    },
+    mergeRequest() {
+      return `${this.item.project.path}!${this.item.target.iid}`;
     }
   },
   components: {
@@ -95,11 +101,11 @@ export default {
 
 <style lang="stylus" scoped>
   #actions {
-    display: flex
-    align-items: center
+    display: flex;
+    align-items: center;
   }
 
   .v-icon {
-    padding-right: 3px
+    padding-right: 3px;
   }
 </style>

@@ -2,7 +2,7 @@
   <v-card height="250">
     <v-card-title>
       <v-icon large left>bug_report</v-icon>
-      <span class="title font-weight-light ml-2">Issues</span>
+      <span class="title font-weight-light ml-2">{{ $t('issues.title') }}</span>
     </v-card-title>
     <v-card-text>
       <div id="count" class="ma-1">
@@ -12,7 +12,7 @@
         <v-list slot="activator" v-if="issues.length" two-line dense>
           <issue :item="last" hide-actions/>
         </v-list>
-        <span v-if="last">Last issue: {{last.title}}</span>
+        <span v-if="last">{{ $t('issues.last', { issue: last.title}) }}</span>
       </v-tooltip>
     </v-card-text>
   </v-card>

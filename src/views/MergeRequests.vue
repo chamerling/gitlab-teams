@@ -2,13 +2,13 @@
   <div>
     <v-tabs v-model="activeTab" slider-color="orange">
       <v-tab key="open">
-        Open
+        {{ $t("generic.open") }}
       </v-tab>
       <v-tab key="merged" @click="fetchData('merged')">
-        Merged
+        {{ $t("merge_requests.merged") }}
       </v-tab>
       <v-tab key="closed" @click="fetchData('closed')">
-        Closed
+        {{ $t("generic.closed") }}
       </v-tab>
       <v-layout v-show="activeTab !== 0" justify-end>
         <item-order-select v-model="mergeRequestsOrder" :options="mergeRequestsOrderOptions"/>
@@ -57,11 +57,11 @@ export default {
       mergeRequests: null,
       mergeRequestsOrderOptions: [
         {
-          label: "Last updated",
+          label: this.$t("generic.last_updated"),
           field: "updated_at"
         },
         {
-          label: "Created date",
+          label: this.$t("generic.created_date"),
           field: "created_at"
         }
       ],

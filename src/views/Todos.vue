@@ -2,7 +2,7 @@
   <div class="todos">
     <v-layout align-center justify-end row fill-height ma-2>
       <v-btn v-if="todosSize" outline @click="markAllAsRead()">
-        Mark all as done
+        {{ $t("todos.mark_all_as_done") }}
         <v-icon right>done_all</v-icon>
       </v-btn>
     </v-layout>
@@ -14,7 +14,7 @@
     </v-list>
     <v-layout v-else ma-4>
       <v-flex>
-        <span>Looks like you do not have anything to do...</span>
+        <span>{{ $t("todos.no_todos") }}</span>
       </v-flex>
     </v-layout>
   </div>

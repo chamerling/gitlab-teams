@@ -38,7 +38,9 @@ export default {
       return STATUS_COLORS[this.item.status];
     },
     web_url: function() {
-      return `${this.$store.state.settings.apiEndpoint}/admin/runners/${this.item.id}`;
+      return `${this.$store.state.settings.apiEndpoint}/admin/runners/${
+        this.item.id
+      }`;
     }
   }
 };

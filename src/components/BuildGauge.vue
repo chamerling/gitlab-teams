@@ -8,7 +8,7 @@
       :color="stats.color"
       :value="stats.ratio"
     ></v-progress-linear>
-    <span>{{stats.success}} out of {{stats.pipelines}} pipelines are successful ({{stats.ratio}}%)</span>
+    <span>{{ $t('pipelines.run_stats', { num_completed: stats.success, total: stats.pipelines, ratio: stats.ratio }) }}</span>
     </v-tooltip>
   </div>
 </template>
