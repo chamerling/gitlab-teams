@@ -17,12 +17,14 @@ import user from "./modules/user";
 import settings from "./modules/settings";
 import notification from "./modules/notification";
 import project from "./modules/project";
+import dashboard from "./modules/dashboard";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
   modules: {
     ui,
+    dashboard,
     todo,
     issue,
     runner,

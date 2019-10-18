@@ -1,7 +1,7 @@
 <template>
   <v-container fluid>
     <div class="dashboard">
-      <dashboard-card-grid :cards="cards"/>
+      <dashboard-card-grid :cards="orderedCards" @order="setCardsOrder"/>
     </div>
   </v-container>
 </template>
@@ -22,6 +22,7 @@ export default {
   name: "home",
   computed: {
     ...mapGetters({
+      getDashboard: "dashboard/getDashboard",
       mergeRequests: "getMergeRequests",
       user: "getConnectedUser",
       issues: "getIssues",
@@ -47,8 +48,8 @@ export default {
       );
     },
     cards() {
-      return [
-        {
+      return {
+        mrs: {
           id: "mrs",
           title: "Merge Requests",
           icon: "merge_type",
@@ -56,49 +57,63 @@ export default {
           props: { mergeRequests: this.mergeRequests },
           columns: 3
         },
-        {
+        stats: {
           id: "stats",
           title: "My Stats",
           icon: "bar_chart",
           component: UserStatsCard,
           props: { user: this.user, mergeRequests: this.mergeRequests }
         },
-        {
+        todos: {
           id: "todos",
           title: "Todos",
           icon: "list",
           component: TodosCard,
           props: { todos: this.todos, todosSize: this.todosSize }
         },
-        {
+        issues: {
           id: "issues",
           title: "Issues",
           icon: "bug_report",
           component: IssuesCard,
           props: { issues: this.issues, total: this.issuesSize }
         },
-        {
+        pipelines: {
           id: "pipelines",
           title: "Pipelines",
           icon: "build",
           component: PipelinesCard,
           props: { pipelines: this.pipelines }
         },
-        {
+        teams: {
           id: "teams",
           title: "Teams",
           icon: "lightbulb",
           component: TeamsCard,
           props: { teams: this.teams }
         },
-        {
+        projects: {
           id: "projects",
           title: "Projects",
           icon: "people",
           component: ProjectsCard,
           props: { projects: this.projects }
         }
-      ];
+      };
+    },
+    orderedCards() {
+      const dashboard = this.getDashboard("home");
+
+      if (!dashboard || !dashboard.cards || !dashboard.cards.length) {
+        return Object.values(this.cards);
+      }
+
+      return dashboard.cards.map(e => this.cards[e]).filter(Boolean);
+    }
+  },
+  methods: {
+    setCardsOrder(cards) {
+      store.dispatch("dashboard/setCardsOrder", { name: "home", cards });
     }
   },
   beforeRouteEnter(to, from, next) {
