@@ -136,12 +136,6 @@
             </v-list-tile-action>
           </v-list-tile>
         </v-list>
-        <v-list-tile @click="openSettings">
-          <v-list-tile-action>
-            <v-icon color="grey darken-1">settings</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title class="grey--text text--darken-1">Settings</v-list-tile-title>
-        </v-list-tile>
         <v-list-tile href="https://github.com/chamerling/gitlab-teams/" target="_blank">
           <v-list-tile-action>
             <v-icon color="grey darken-1">info</v-icon>
@@ -154,9 +148,7 @@
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <v-toolbar-title>GitLab Teams</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn icon @click="goBack" v-if="isConfigured && $route.name === 'settings'">
-          <v-icon small>clear</v-icon>
-        </v-btn>
+        <user-menu v-if="connectedUser"/>
       </v-toolbar>
       <v-content>
         <v-container class="pa-0">
@@ -174,6 +166,7 @@
 import _ from "lodash";
 import { mapGetters } from "vuex";
 import Snackbar from "@/components/ui/Snackbar.vue";
+import UserMenu from "@/components/ui/UserMenu.vue";
 import Avatar from "@/components/Avatar.vue";
 import CreateTeamDialog from "@/components/CreateTeamDialog.vue";
 
@@ -189,9 +182,6 @@ export default {
     deleteTeam(team) {
       this.$store.dispatch("deleteTeam", team);
       this.$router.push({ name: "home" });
-    },
-    goBack() {
-      this.$router.go(-1);
     },
     changeDialog(dialog) {
       this.dialog = dialog;
@@ -231,6 +221,7 @@ export default {
     })
   },
   mounted() {
+    // TODO: Needs to be moved as nav guard
     if (!this.isConfigured) {
       this.openSettings();
     } else {
@@ -240,6 +231,7 @@ export default {
   },
   components: {
     Snackbar,
+    UserMenu,
     Avatar,
     CreateTeamDialog
   }
