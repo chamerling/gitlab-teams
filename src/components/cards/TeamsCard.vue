@@ -1,24 +1,16 @@
 <template>
-  <v-card height="250">
-    <v-card-title>
-      <v-icon large left>people</v-icon>
-      <span class="title font-weight-light ml-2">Teams</span>
-    </v-card-title>
-    <v-card-text>
-      <div class="teams ma-1">
-        <v-btn fab ripple @click="dialog = true" v-if="teams.length === 0">
-          <v-icon color="grey">add_circle_outline</v-icon>
-        </v-btn>
-        <div @click="goTo(team)" class="team ma-1" v-for="team in teams" :key="team.name">
-          <v-tooltip bottom>
-            <avatar slot="activator" :name="team.name" :size="60"/>
-            <span>{{team.name}}</span>
-          </v-tooltip>
-        </div>
-        <create-team-dialog :show="dialog" @close="changeDialog"></create-team-dialog>
-      </div>
-    </v-card-text>
-  </v-card>
+  <div class="teams ma-1">
+    <v-btn fab ripple @click="dialog = true" v-if="teams.length === 0">
+      <v-icon color="grey">add_circle_outline</v-icon>
+    </v-btn>
+    <div @click="goTo(team)" class="team ma-1" v-for="team in teams" :key="team.name">
+      <v-tooltip bottom>
+        <avatar slot="activator" :name="team.name" :size="60"/>
+        <span>{{team.name}}</span>
+      </v-tooltip>
+    </div>
+    <create-team-dialog :show="dialog" @close="changeDialog"></create-team-dialog>
+  </div>
 </template>
 
 <script>

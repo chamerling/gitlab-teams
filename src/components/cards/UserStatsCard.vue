@@ -1,15 +1,9 @@
 <template>
-  <v-card height="250">
-    <v-card-title>
-      <v-icon large left>bar_chart</v-icon>
-      <span class="title font-weight-light ml-2">My Stats</span>
-    </v-card-title>
-    <v-card-text>
-      <div id="gauge" class="ma-3">
-        <avatar-build-gauge :user="user" :merge-requests="mergeRequests" :size="92"/>
-      </div>
-    </v-card-text>
-  </v-card>
+  <div id="stats">
+    <div id="gauge" class="ma-3">
+      <avatar-build-gauge :user="user" :merge-requests="mergeRequests" :size="92"/>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -25,11 +19,12 @@ export default {
   }
 };
 </script>
+
 <style lang="stylus" scoped>
   #gauge {
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    display: flex
+    align-items: center
+    justify-content: center
     cursor: pointer
   }
 </style>

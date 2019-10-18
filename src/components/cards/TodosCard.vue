@@ -1,21 +1,15 @@
 <template>
-  <v-card height="250">
-    <v-card-title>
-      <v-icon large left>list</v-icon>
-      <span class="title font-weight-light ml-2">Todos</span>
-    </v-card-title>
-    <v-card-text>
-      <div id="count" class="ma-1">
-        <span class="font-weight-medium display-3">{{todosSize}}</span>
-      </div>
-      <v-tooltip bottom>
-        <v-list slot="activator" v-if="todos.length" two-line dense>
-          <todo :item="last"/>
-        </v-list>
-        <span v-if="last">Last todo: {{last.body}}</span>
-      </v-tooltip>
-    </v-card-text>
-  </v-card>
+  <div>
+    <div id="count" class="ma-1">
+      <span class="font-weight-medium display-3">{{todosSize}}</span>
+    </div>
+    <v-tooltip bottom>
+      <v-list slot="activator" v-if="todos.length" two-line dense>
+        <todo :item="last"/>
+      </v-list>
+      <span v-if="last">Last todo: {{last.body}}</span>
+    </v-tooltip>
+  </div>
 </template>
 
 <script>

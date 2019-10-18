@@ -1,20 +1,12 @@
 <template>
-  <v-card height="250">
-    <v-card-title>
-      <v-icon large left>lightbulb</v-icon>
-      <span class="title font-weight-light ml-2">Projects</span>
-    </v-card-title>
-    <v-card-text>
-      <div class="projects ma-1">
-        <div @click="goTo(project)" class="project ma-1" v-for="project in projects" :key="project.name">
-          <v-tooltip bottom>
-            <avatar slot="activator" :name="project.name" :icon="project.avatar_url" :size="60"/>
-            <span>{{project.name_with_namespace}}</span>
-          </v-tooltip>
-        </div>
-      </div>
-    </v-card-text>
-  </v-card>
+  <div class="projects ma-1">
+    <div @click="goTo(project)" class="project ma-1" v-for="project in projects" :key="project.name">
+      <v-tooltip bottom>
+        <avatar slot="activator" :name="project.name" :icon="project.avatar_url" :size="60"/>
+        <span>{{project.name_with_namespace}}</span>
+      </v-tooltip>
+    </div>
+  </div>
 </template>
 
 <script>
