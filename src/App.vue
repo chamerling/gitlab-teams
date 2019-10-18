@@ -136,12 +136,6 @@
             </v-list-tile-action>
           </v-list-tile>
         </v-list>
-        <v-list-tile @click="openSettings">
-          <v-list-tile-action>
-            <v-icon color="grey darken-1">settings</v-icon>
-          </v-list-tile-action>
-          <v-list-tile-title class="grey--text text--darken-1">Settings</v-list-tile-title>
-        </v-list-tile>
         <v-list-tile href="https://github.com/chamerling/gitlab-teams/" target="_blank">
           <v-list-tile-action>
             <v-icon color="grey darken-1">info</v-icon>
@@ -227,6 +221,7 @@ export default {
     })
   },
   mounted() {
+    // TODO: Needs to be moved as nav guard
     if (!this.isConfigured) {
       this.openSettings();
     } else {
