@@ -154,9 +154,7 @@
         <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
         <v-toolbar-title>GitLab Teams</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn icon @click="goBack" v-if="isConfigured && $route.name === 'settings'">
-          <v-icon small>clear</v-icon>
-        </v-btn>
+        <user-menu v-if="connectedUser"/>
       </v-toolbar>
       <v-content>
         <v-container class="pa-0">
@@ -174,6 +172,7 @@
 import _ from "lodash";
 import { mapGetters } from "vuex";
 import Snackbar from "@/components/ui/Snackbar.vue";
+import UserMenu from "@/components/ui/UserMenu.vue";
 import Avatar from "@/components/Avatar.vue";
 import CreateTeamDialog from "@/components/CreateTeamDialog.vue";
 
@@ -189,9 +188,6 @@ export default {
     deleteTeam(team) {
       this.$store.dispatch("deleteTeam", team);
       this.$router.push({ name: "home" });
-    },
-    goBack() {
-      this.$router.go(-1);
     },
     changeDialog(dialog) {
       this.dialog = dialog;
@@ -240,6 +236,7 @@ export default {
   },
   components: {
     Snackbar,
+    UserMenu,
     Avatar,
     CreateTeamDialog
   }
