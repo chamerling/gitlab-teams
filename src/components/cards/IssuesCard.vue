@@ -1,21 +1,15 @@
 <template>
-  <v-card height="250">
-    <v-card-title>
-      <v-icon large left>bug_report</v-icon>
-      <span class="title font-weight-light ml-2">Issues</span>
-    </v-card-title>
-    <v-card-text>
-      <div id="count" class="ma-1">
-        <span class="font-weight-medium display-3">{{total}}</span>
-      </div>
-      <v-tooltip bottom>
-        <v-list slot="activator" v-if="issues.length" two-line dense>
-          <issue :item="last" hide-actions/>
-        </v-list>
-        <span v-if="last">Last issue: {{last.title}}</span>
-      </v-tooltip>
-    </v-card-text>
-  </v-card>
+  <div>
+    <div id="count" class="ma-1">
+      <span class="font-weight-medium display-3">{{total}}</span>
+    </div>
+    <v-tooltip bottom>
+      <v-list slot="activator" v-if="issues.length" two-line dense>
+        <issue :item="last" hide-actions/>
+      </v-list>
+      <span v-if="last">Last issue: {{last.title}}</span>
+    </v-tooltip>
+  </div>
 </template>
 
 <script>

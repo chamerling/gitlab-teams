@@ -1,32 +1,15 @@
 <template>
-  <v-container fill-height fluid grid-list-xl>
-    <v-layout wrap>
-      <v-flex sm6 md6 lg3>
-        <user-stats-card :user="user" :merge-requests="mergeRequests"/>
-      </v-flex>
-      <v-flex sm6 md6 lg3>
-        <todos-card :todos="todos" :todosSize="todosSize"/>
-      </v-flex>
-      <v-flex sm6 md6 lg3>
-        <issues-card :issues="issues" :total="issuesSize"/>
-      </v-flex>
-      <v-flex sm6 md6 lg3>
-        <pipelines-card :pipelines="pipelines"/>
-      </v-flex>
-      <v-flex md12 sm12 lg12>
-        <merge-requests-card :merge-requests="mergeRequests"/>
-      </v-flex>
-      <v-flex sm6 md6 lg3>
-        <teams-card :teams="teams"/>
-      </v-flex>
-      <v-flex sm6 md6 lg3>
-        <projects-card :projects="projects"/>
-      </v-flex>
-    </v-layout>
+  <v-container fluid>
+    <div class="dashboard">
+      <dashboard-card-grid :cards="cards"/>
+    </div>
   </v-container>
 </template>
 
 <script>
+import { mapGetters } from "vuex";
+import store from "@/store";
+import DashboardCardGrid from "@/components/dashboard/DashboardCardGrid.vue";
 import MergeRequestsCard from "@/components/cards/MergeRequestsCard.vue";
 import UserStatsCard from "@/components/cards/UserStatsCard.vue";
 import TodosCard from "@/components/cards/TodosCard.vue";
@@ -34,8 +17,6 @@ import IssuesCard from "@/components/cards/IssuesCard.vue";
 import TeamsCard from "@/components/cards/TeamsCard.vue";
 import ProjectsCard from "@/components/cards/ProjectsCard.vue";
 import PipelinesCard from "@/components/cards/PipelinesCard.vue";
-import { mapGetters } from "vuex";
-import store from "@/store";
 
 export default {
   name: "home",
@@ -64,6 +45,60 @@ export default {
         [project => project.name.toLowerCase()],
         "asc"
       );
+    },
+    cards() {
+      return [
+        {
+          id: "mrs",
+          title: "Merge Requests",
+          icon: "merge_type",
+          component: MergeRequestsCard,
+          props: { mergeRequests: this.mergeRequests },
+          columns: 3
+        },
+        {
+          id: "stats",
+          title: "My Stats",
+          icon: "bar_chart",
+          component: UserStatsCard,
+          props: { user: this.user, mergeRequests: this.mergeRequests }
+        },
+        {
+          id: "todos",
+          title: "Todos",
+          icon: "list",
+          component: TodosCard,
+          props: { todos: this.todos, todosSize: this.todosSize }
+        },
+        {
+          id: "issues",
+          title: "Issues",
+          icon: "bug_report",
+          component: IssuesCard,
+          props: { issues: this.issues, total: this.issuesSize }
+        },
+        {
+          id: "pipelines",
+          title: "Pipelines",
+          icon: "build",
+          component: PipelinesCard,
+          props: { pipelines: this.pipelines }
+        },
+        {
+          id: "teams",
+          title: "Teams",
+          icon: "lightbulb",
+          component: TeamsCard,
+          props: { teams: this.teams }
+        },
+        {
+          id: "projects",
+          title: "Projects",
+          icon: "people",
+          component: ProjectsCard,
+          props: { projects: this.projects }
+        }
+      ];
     }
   },
   beforeRouteEnter(to, from, next) {
@@ -75,13 +110,7 @@ export default {
     next();
   },
   components: {
-    MergeRequestsCard,
-    UserStatsCard,
-    TodosCard,
-    IssuesCard,
-    PipelinesCard,
-    TeamsCard,
-    ProjectsCard
+    DashboardCardGrid
   }
 };
 </script>

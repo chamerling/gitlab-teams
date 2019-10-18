@@ -1,20 +1,14 @@
 <template>
-  <v-card height="250">
-    <v-card-title>
-      <v-icon large left>build</v-icon>
-      <span class="title font-weight-light ml-2">Pipelines</span>
-    </v-card-title>
-    <v-card-text>
-      <div id="count" class="ma-1">
-        <span class="font-weight-medium display-3">{{pipelines ? pipelines.length : 0}}</span>
+  <div>
+    <div id="count" class="ma-1">
+      <span class="font-weight-medium display-3">{{pipelines ? pipelines.length : 0}}</span>
+    </div>
+    <div v-if="pipelines.length" class="pipelines ma-1">
+      <div class="pipeline ma-1" v-for="pipeline in pipelines" :key="pipeline.id">
+        <pipeline :pipeline="pipeline" :mr="getMergeRequest(pipeline)" :size="getSize()"/>
       </div>
-      <div v-if="pipelines.length" class="pipelines ma-1">
-        <div class="pipeline ma-1" v-for="pipeline in pipelines" :key="pipeline.id">
-          <pipeline :pipeline="pipeline" :mr="getMergeRequest(pipeline)" :size="getSize()"/>
-        </div>
-      </div>
-    </v-card-text>
-  </v-card>
+    </div>
+  </div>
 </template>
 
 <script>

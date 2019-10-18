@@ -87,9 +87,9 @@ router.beforeEach((to, from, next) => {
 
 function isAdmin() {
   return (
-      store.state.user &&
-      store.state.user.connectedUser &&
-      store.state.user.connectedUser.is_admin
+    store.state.user &&
+    store.state.user.connectedUser &&
+    store.state.user.connectedUser.is_admin
   );
 }
 

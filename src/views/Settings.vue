@@ -115,7 +115,7 @@ export default {
       ],
       localApiToken: null,
       localApiEndpoint: null,
-      showToken: false,
+      showToken: false
     };
   },
   computed: {
