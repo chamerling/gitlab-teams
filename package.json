@@ -15,7 +15,7 @@
     "notifyjs": "^3.0.0",
     "resize-observer-polyfill": "^1.5.1",
     "rxjs": "^6.3.3",
-    "vue": "^2.5.17",
+    "vue": "^2.6.10",
     "vue-analytics": "^5.16.1",
     "vue-axios": "^2.1.4",
     "vue-clipboard2": "^0.2.1",
@@ -39,6 +39,6 @@
     "eslint-plugin-vue": "^5.0.0-beta.5",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.2",
-    "vue-template-compiler": "^2.5.17"
+    "vue-template-compiler": "^2.6.10"
   }
 }
