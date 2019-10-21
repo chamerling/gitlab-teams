@@ -1,8 +1,9 @@
 import Client from "./client";
-import { from, timer } from "rxjs";
+import { from, timer, combineLatest } from "rxjs";
 import {
   flatMap,
   switchMap,
+  take,
   pluck,
   distinct,
   share,
@@ -12,6 +13,7 @@ import {
   map,
   distinctUntilChanged
 } from "rxjs/operators";
+import { differenceBy } from "lodash";
 import EventEmitter from "eventemitter3";
 
 export default class Api extends EventEmitter {
@@ -26,6 +28,53 @@ export default class Api extends EventEmitter {
 
   watchMergeRequestsForUsers({ userIds }) {
     userIds.forEach(userId => this.watchMergeRequests({ userId }));
+  }
+
+  watchAssignedMergeRequests() {
+    const mr$ = timer(0, this.pollingInterval).pipe(
+      switchMap(() => from(this.client.fetchAssignedMergeRequests()))
+    );
+    const sharedMr$ = mr$.pipe(share());
+    const newMr$ = sharedMr$.pipe(
+      pluck("data"),
+      flatMap(mr => mr),
+      distinct(mr => mr.id)
+    );
+    const mrSize$ = sharedMr$.pipe(
+      pluck("headers"),
+      map(headers => headers["x-total"])
+    );
+    const lastMr$ = sharedMr$.pipe(pluck("data"));
+    const initialMr$ = sharedMr$.pipe(
+      pluck("data"),
+      take(1)
+    );
+    const newMRsNotifier$ = combineLatest(
+      initialMr$,
+      lastMr$,
+      (initialMr, lastMr) => differenceBy(lastMr, initialMr, "id")
+    ).pipe(
+      flatMap(mr => mr),
+      distinct(mr => mr.id)
+    );
+
+    const newMrsSubscription = newMr$.subscribe(mr =>
+      // will emit for each distinct MR
+      this.emit("new-assigned-mr", { mr })
+    );
+
+    const newAssignedNotifierSubscription = newMRsNotifier$.subscribe(mr =>
+      // will emit only for new assigned MR which were not assigned on first call
+      this.emit("new-assigned-mr", { mr, notify: true })
+    );
+
+    const newMrsSizeSubscription = mrSize$.subscribe(length =>
+      this.emit("new-assigned-mr-length", length)
+    );
+
+    this.userSubscriptions.push(newMrsSubscription);
+    this.userSubscriptions.push(newMrsSizeSubscription);
+    this.userSubscriptions.push(newAssignedNotifierSubscription);
   }
 
   watchMergeRequests({ userId }) {

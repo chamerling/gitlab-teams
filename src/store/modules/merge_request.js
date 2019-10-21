@@ -2,7 +2,9 @@ import Vue from "vue";
 import gitlab from "@/gitlab";
 
 const state = {
-  mergeRequests: {}
+  mergeRequests: {},
+  assignedMergeRequests: {},
+  assignedMergeRequestsSize: 0
 };
 
 const actions = {
@@ -42,6 +44,14 @@ const actions = {
 
   updateMergeRequest({ commit }, mr) {
     commit("updateMergeRequest", mr);
+  },
+
+  newAssignedMergeRequest({ commit }, mr) {
+    commit("addAssignedMergeRequest", mr);
+  },
+
+  setAssignedMergeRequestSize({ commit }, size) {
+    commit("setAssignedMergeRequestSize", size);
   }
 };
 
@@ -59,6 +69,10 @@ const getters = {
 
   getMergeRequests({ mergeRequests }) {
     return Object.values(mergeRequests);
+  },
+
+  getAssignedMergeRequests({ assignedMergeRequests }) {
+    return Object.values(assignedMergeRequests);
   }
 };
 
@@ -81,6 +95,14 @@ const mutations = {
 
   updateMergeRequest({ mergeRequests }, mergeRequest) {
     Vue.set(mergeRequests, mergeRequest.id, mergeRequest);
+  },
+
+  addAssignedMergeRequest({ assignedMergeRequests }, mergeRequest) {
+    Vue.set(assignedMergeRequests, mergeRequest.id, mergeRequest);
+  },
+
+  setAssignedMergeRequestSize(state, size) {
+    state.assignedMergeRequestsSize = parseInt(size);
   }
 };
 

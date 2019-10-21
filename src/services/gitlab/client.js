@@ -40,14 +40,22 @@ export default class Client {
   }
 
   fetchMergeRequests({ state = "opened", author_id }) {
-    // TODO: Use axios query params
-    let endpoint = `/api/v4/merge_requests?state=${state}`;
+    return this.client.get("/api/v4/merge_requests", {
+      params: {
+        state,
+        author_id,
+        scope: author_id ? "all" : undefined
+      }
+    });
+  }
 
-    if (author_id) {
-      endpoint = `${endpoint}&scope=all&author_id=${author_id}`;
-    }
-
-    return this.client.get(endpoint);
+  fetchAssignedMergeRequests({ state = "opened" } = {}) {
+    return this.client.get("/api/v4/merge_requests", {
+      params: {
+        state,
+        scope: "assigned_to_me"
+      }
+    });
   }
 
   fetchMergeRequest(projectId, iid) {
