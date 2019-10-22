@@ -33,6 +33,7 @@ export const launchUserWatchers = ({ dispatch }) => {
 
   dispatch("fetchConnectedUser");
   gl.watchTodos();
+  gl.watchAssignedMergeRequests();
   gl.watchIssues();
   gl.watchProjects();
   gl.watchRunners();

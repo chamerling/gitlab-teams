@@ -24,6 +24,7 @@ export default {
     ...mapGetters({
       getDashboard: "dashboard/getDashboard",
       mergeRequests: "getMergeRequests",
+      assignedMergeRequests: "getAssignedMergeRequests",
       user: "getConnectedUser",
       issues: "getIssues",
       issuesSize: "getIssuesSize",
@@ -56,6 +57,14 @@ export default {
           component: MergeRequestsCard,
           props: { mergeRequests: this.mergeRequests },
           columns: 3
+        },
+        "assigned-mrs": {
+          id: "assigned-mrs",
+          title: "Assigned Merge Requests",
+          icon: "merge_type",
+          component: MergeRequestsCard,
+          props: { mergeRequests: this.assignedMergeRequests },
+          columns: 2
         },
         stats: {
           id: "stats",
@@ -108,7 +117,12 @@ export default {
         return Object.values(this.cards);
       }
 
-      return dashboard.cards.map(e => this.cards[e]).filter(Boolean);
+      const allKeys = Object.keys(this.cards);
+      const remaining = allKeys.filter(x => !dashboard.cards.includes(x));
+
+      return [...dashboard.cards, ...remaining]
+        .map(e => this.cards[e])
+        .filter(Boolean);
     }
   },
   methods: {

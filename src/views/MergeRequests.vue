@@ -4,18 +4,29 @@
       <v-tab key="open">
         Open
       </v-tab>
+      <v-tab key="assigned">
+        <v-badge right>
+          <span slot="badge">{{assignedMergeRequestsSize}}</span>
+          <span>Assigned to me</span>
+        </v-badge>
+      </v-tab>
       <v-tab key="merged" @click="fetchData('merged')">
         Merged
       </v-tab>
       <v-tab key="closed" @click="fetchData('closed')">
         Closed
       </v-tab>
-      <v-layout v-show="activeTab !== 0" justify-end>
+      <v-layout v-show="activeTab > 1" justify-end>
         <item-order-select v-model="mergeRequestsOrder" :options="mergeRequestsOrderOptions"/>
       </v-layout>
       <v-tab-item key="open">
         <template>
           <merge-requests :merge-requests="computedMergeRequests"/>
+        </template>
+      </v-tab-item>
+      <v-tab-item key="assigned">
+        <template>
+          <merge-requests :merge-requests="assignedMergeRequests"/>
         </template>
       </v-tab-item>
       <v-tab-item key="merged">
@@ -43,7 +54,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapState } from "vuex";
 import gitlab from "@/gitlab";
 import store from "@/store";
 import ItemOrderSelect from "@/components/ItemOrderSelect.vue";
@@ -73,7 +84,11 @@ export default {
   },
   computed: {
     ...mapGetters({
-      computedMergeRequests: "getMergeRequests"
+      computedMergeRequests: "getMergeRequests",
+      assignedMergeRequests: "getAssignedMergeRequests"
+    }),
+    ...mapState({
+      assignedMergeRequestsSize: state => state.merge_request.assignedMergeRequestsSize
     })
   },
   // TODO: need to fetch the right ones on mount or route change because if you come from a team you will get the team ones displayed here

@@ -60,6 +60,21 @@ function init(store) {
   gitlabApi.on("new-runner", runner => {
     store.dispatch("addRunner", runner);
   });
+
+  gitlabApi.on("new-assigned-mr", ({ mr, notify = false }) => {
+    if (notify) {
+      notification.notify("mr-assigned", `New assigned MR - ${mr.title}`);
+    }
+    store.dispatch("newAssignedMergeRequest", mr);
+  });
+
+  gitlabApi.on("removed-assigned-mr", mr => {
+    store.dispatch("removeAssignedMergeRequest", mr);
+  });
+
+  gitlabApi.on("new-assigned-mr-length", size => {
+    store.dispatch("setAssignedMergeRequestSize", size);
+  });
 }
 
 function get() {
