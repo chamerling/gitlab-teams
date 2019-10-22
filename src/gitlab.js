@@ -68,6 +68,10 @@ function init(store) {
     store.dispatch("newAssignedMergeRequest", mr);
   });
 
+  gitlabApi.on("removed-assigned-mr", mr => {
+    store.dispatch("removeAssignedMergeRequest", mr);
+  });
+
   gitlabApi.on("new-assigned-mr-length", size => {
     store.dispatch("setAssignedMergeRequestSize", size);
   });

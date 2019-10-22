@@ -11,7 +11,8 @@ import {
   skip,
   startWith,
   map,
-  distinctUntilChanged
+  distinctUntilChanged,
+  pairwise
 } from "rxjs/operators";
 import { differenceBy } from "lodash";
 import EventEmitter from "eventemitter3";
@@ -58,6 +59,17 @@ export default class Api extends EventEmitter {
       distinct(mr => mr.id)
     );
 
+    const diffWithPrevious$ = lastMr$.pipe(
+      pairwise(),
+      map(([previous, last]) => differenceBy(previous, last, "id")),
+      flatMap(mr => mr)
+    );
+
+    const removedMrSubscription = diffWithPrevious$.subscribe(mr =>
+      // emits each time a mr is not assigned anymore to the current user
+      this.emit("removed-assigned-mr", mr)
+    );
+
     const newMrsSubscription = newMr$.subscribe(mr =>
       // will emit for each distinct MR
       this.emit("new-assigned-mr", { mr })
@@ -75,6 +87,7 @@ export default class Api extends EventEmitter {
     this.userSubscriptions.push(newMrsSubscription);
     this.userSubscriptions.push(newMrsSizeSubscription);
     this.userSubscriptions.push(newAssignedNotifierSubscription);
+    this.userSubscriptions.push(removedMrSubscription);
   }
 
   watchMergeRequests({ userId }) {

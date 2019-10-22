@@ -50,6 +50,10 @@ const actions = {
     commit("addAssignedMergeRequest", mr);
   },
 
+  removeAssignedMergeRequest({ commit }, mr) {
+    commit("removeAssignedMergeRequest", mr);
+  },
+
   setAssignedMergeRequestSize({ commit }, size) {
     commit("setAssignedMergeRequestSize", size);
   }
@@ -99,6 +103,10 @@ const mutations = {
 
   addAssignedMergeRequest({ assignedMergeRequests }, mergeRequest) {
     Vue.set(assignedMergeRequests, mergeRequest.id, mergeRequest);
+  },
+
+  removeAssignedMergeRequest({ assignedMergeRequests }, mergeRequest) {
+    Vue.delete(assignedMergeRequests, mergeRequest.id, mergeRequest);
   },
 
   setAssignedMergeRequestSize(state, size) {
