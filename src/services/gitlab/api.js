@@ -12,7 +12,8 @@ import {
   startWith,
   map,
   distinctUntilChanged,
-  pairwise
+  pairwise,
+  tap
 } from "rxjs/operators";
 import { differenceBy } from "lodash";
 import EventEmitter from "eventemitter3";
@@ -38,8 +39,8 @@ export default class Api extends EventEmitter {
     const sharedMr$ = mr$.pipe(share());
     const newMr$ = sharedMr$.pipe(
       pluck("data"),
-      flatMap(mr => mr),
-      distinct(mr => mr.id)
+      take(1),
+      flatMap(mr => mr)
     );
     const mrSize$ = sharedMr$.pipe(
       pluck("headers"),
@@ -58,14 +59,23 @@ export default class Api extends EventEmitter {
       flatMap(mr => mr),
       distinct(mr => mr.id)
     );
-
-    const diffWithPrevious$ = lastMr$.pipe(
+    const removedMr$ = lastMr$.pipe(
       pairwise(),
       map(([previous, last]) => differenceBy(previous, last, "id")),
       flatMap(mr => mr)
     );
+    const newAssignedMr$ = lastMr$.pipe(
+      pairwise(),
+      map(([previous, last]) => differenceBy(last, previous, "id")),
+      flatMap(mr => mr)
+    );
 
-    const removedMrSubscription = diffWithPrevious$.subscribe(mr =>
+    const addedMrSubscription = newAssignedMr$.subscribe(mr =>
+      // emits each time a mr is assigned to the current user
+      this.emit("new-assigned-mr", { mr })
+    );
+
+    const removedMrSubscription = removedMr$.subscribe(mr =>
       // emits each time a mr is not assigned anymore to the current user
       this.emit("removed-assigned-mr", mr)
     );
@@ -88,6 +98,7 @@ export default class Api extends EventEmitter {
     this.userSubscriptions.push(newMrsSizeSubscription);
     this.userSubscriptions.push(newAssignedNotifierSubscription);
     this.userSubscriptions.push(removedMrSubscription);
+    this.userSubscriptions.push(addedMrSubscription);
   }
 
   watchMergeRequests({ userId }) {
