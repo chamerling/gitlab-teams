@@ -12,8 +12,7 @@ import {
   startWith,
   map,
   distinctUntilChanged,
-  pairwise,
-  tap
+  pairwise
 } from "rxjs/operators";
 import { differenceBy } from "lodash";
 import EventEmitter from "eventemitter3";
