@@ -7,8 +7,22 @@
       </template>
     </v-list>
     <v-layout v-else ma-4>
-      <v-flex>
-        <span>Looks like you do not have created any issue...</span>
+      <v-flex xs12 md6 class="empty-message" style="margin:auto"  >
+        <v-layout
+           row fill-height
+        >
+        <v-flex xs12 >
+          <v-icon size="100"  :color="(darkMode) ? `grey darken-2` : `grey lighten-4`">bug_report</v-icon>
+        </v-flex> 
+        </v-layout>
+        <v-layout
+          row fill-height
+        >
+        <v-flex xs12 > 
+          <span class="text-xs-center display-1">Looks like you do not have created any issue...</span>
+        </v-flex> 
+        </v-layout>
+       
       </v-flex>
     </v-layout>
   </div>
@@ -32,3 +46,12 @@ export default {
   methods: {}
 };
 </script>
+<style lang="css" scoped>
+  .empty-message{
+    margin: auto;
+    text-align: center;
+    border: 3px solid currentColor;
+    border-style: dashed;
+    padding: 5%;
+  }
+</style>
