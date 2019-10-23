@@ -64,7 +64,7 @@ export default {
           icon: "merge_type",
           component: MergeRequestsCard,
           props: { mergeRequests: this.assignedMergeRequests },
-          columns: 2
+          columns: 3
         },
         stats: {
           id: "stats",
