@@ -13,23 +13,12 @@
       </template>
     </v-list>
     <v-layout v-else ma-4>
-       <v-flex xs12 md6 class="empty-message" style="margin:auto"  >
-        <v-layout
-           row fill-height
-        >
-        <v-flex xs12 >
-          <v-icon size="100"  :color="(darkMode) ? `grey darken-2` : `grey lighten-4`">list</v-icon>
-        </v-flex> 
-        </v-layout>
-        <v-layout
-          row fill-height
-        >
-        <v-flex xs12 > 
-          <span class="text-xs-center display-1">Looks like you do not have anything to do...</span>
-        </v-flex> 
-        </v-layout>
-       
-      </v-flex>
+      <empty-message
+        message="Looks like you do not have anything to do..."
+        icon="list"
+        icon-size="100"
+        font-size="display-1"
+      ></empty-message>
     </v-layout>
   </div>
 </template>
@@ -37,11 +26,13 @@
 <script>
 import { mapGetters } from "vuex";
 import Todo from "@/components/Todo.vue";
+import EmptyMessage from "@/components/EmptyMessage.vue";
 
 export default {
   name: "todos",
   components: {
-    Todo
+    Todo,
+    EmptyMessage
   },
   computed: {
     ...mapGetters({
@@ -56,12 +47,3 @@ export default {
   }
 };
 </script>
-<style lang="css" scoped>
-  .empty-message{
-    margin: auto;
-    text-align: center;
-    border: 3px solid currentColor;
-    border-style: dashed;
-    padding: 5%;
-  }
-</style>

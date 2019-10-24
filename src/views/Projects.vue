@@ -6,24 +6,13 @@
         <v-divider v-if="index + 1 < projects.length" :key="index"></v-divider>
       </template>
     </v-list>
-    <v-layout v-else ma-4> 
-      <v-flex xs12 md6 class="empty-message" style="margin:auto"  >
-        <v-layout
-           row fill-height
-        >
-        <v-flex xs12 >
-          <v-icon size="100"  :color="(darkMode) ? `grey darken-2` : `grey lighten-4`">lightbulb</v-icon>
-        </v-flex> 
-        </v-layout>
-        <v-layout
-          row fill-height
-        >
-        <v-flex xs12 > 
-          <span class="text-xs-center display-1">No projects to show...</span>
-        </v-flex> 
-        </v-layout>
-       
-      </v-flex>
+    <v-layout v-else ma-4>
+      <empty-message
+        message="No projects to show..."
+        icon="lightbulb"
+        icon-size="100"
+        font-size="display-1"
+      ></empty-message>
     </v-layout>
   </div>
 </template>
@@ -31,11 +20,13 @@
 <script>
 import { mapGetters } from "vuex";
 import Project from "@/components/Project.vue";
+import EmptyMessage from "@/components/EmptyMessage.vue";
 
 export default {
   name: "projects",
   components: {
-    Project
+    Project,
+    EmptyMessage
   },
   computed: {
     ...mapGetters({
@@ -45,12 +36,3 @@ export default {
   }
 };
 </script>
-<style lang="css" scoped>
-  .empty-message{
-    margin: auto;
-    text-align: center;
-    border: 3px solid currentColor;
-    border-style: dashed;
-    padding: 5%;
-  }
-</style>
