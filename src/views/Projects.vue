@@ -7,9 +7,12 @@
       </template>
     </v-list>
     <v-layout v-else ma-4>
-      <v-flex>
-        <span>No projects to show...</span>
-      </v-flex>
+      <empty-message
+        message="No projects to show..."
+        icon="lightbulb"
+        icon-size="100"
+        font-size="display-1"
+      ></empty-message>
     </v-layout>
   </div>
 </template>
@@ -17,11 +20,13 @@
 <script>
 import { mapGetters } from "vuex";
 import Project from "@/components/Project.vue";
+import EmptyMessage from "@/components/EmptyMessage.vue";
 
 export default {
   name: "projects",
   components: {
-    Project
+    Project,
+    EmptyMessage
   },
   computed: {
     ...mapGetters({

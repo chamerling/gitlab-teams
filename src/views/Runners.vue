@@ -7,9 +7,12 @@
       </template>
     </v-list>
     <v-layout v-else ma-4>
-      <v-flex>
-        <span>Looks like you do not have enough rights to access the runners Gitlab API.</span>
-      </v-flex>
+      <empty-message
+        message="Looks like you do not have enough rights to access the runners Gitlab API."
+        icon="directions_run"
+        iconSize="100"
+        fontSize="display-1"
+      ></empty-message>
     </v-layout>
   </div>
 </template>
@@ -17,11 +20,13 @@
 <script>
 import { mapGetters } from "vuex";
 import Runner from "@/components/Runner.vue";
+import EmptyMessage from "@/components/EmptyMessage.vue";
 
 export default {
   name: "runners",
   components: {
-    Runner
+    Runner,
+    EmptyMessage
   },
   computed: {
     ...mapGetters({

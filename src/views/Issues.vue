@@ -7,9 +7,12 @@
       </template>
     </v-list>
     <v-layout v-else ma-4>
-      <v-flex>
-        <span>Looks like you do not have created any issue...</span>
-      </v-flex>
+      <empty-message
+        message="Looks like you do not have created any issue..."
+        icon="bug_report"
+        icon-size="100"
+        font-size="display-1"
+      ></empty-message>
     </v-layout>
   </div>
 </template>
@@ -17,11 +20,13 @@
 <script>
 import { mapGetters } from "vuex";
 import Issue from "@/components/Issue.vue";
+import EmptyMessage from "@/components/EmptyMessage.vue";
 
 export default {
   name: "issues",
   components: {
-    Issue
+    Issue,
+    EmptyMessage
   },
   computed: {
     ...mapGetters({

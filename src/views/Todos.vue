@@ -13,9 +13,12 @@
       </template>
     </v-list>
     <v-layout v-else ma-4>
-      <v-flex>
-        <span>Looks like you do not have anything to do...</span>
-      </v-flex>
+      <empty-message
+        message="Looks like you do not have anything to do..."
+        icon="list"
+        icon-size="100"
+        font-size="display-1"
+      ></empty-message>
     </v-layout>
   </div>
 </template>
@@ -23,11 +26,13 @@
 <script>
 import { mapGetters } from "vuex";
 import Todo from "@/components/Todo.vue";
+import EmptyMessage from "@/components/EmptyMessage.vue";
 
 export default {
   name: "todos",
   components: {
-    Todo
+    Todo,
+    EmptyMessage
   },
   computed: {
     ...mapGetters({
