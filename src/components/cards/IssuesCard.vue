@@ -11,7 +11,6 @@
     </v-tooltip>
   </div>
 </template>
-
 <script>
 import Issue from "@/components/Issue.vue";
 export default {
