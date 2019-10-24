@@ -38,7 +38,7 @@
       </v-list>
 
       <v-list dense>
-        <v-list-tile  active-class="v-list__tile--active" :class="$route.name === 'home' ? 'v-list__tile--active' : ''" v-if="isConfigured" @click="$router.push({ name: 'home' })">
+        <v-list-tile to="/home" :active-class="(darkMode) ? `grey darken-2` : `grey lighten-4`" v-if="isConfigured">
           <v-list-tile-action>
             <v-icon>dashboard</v-icon>
           </v-list-tile-action>
@@ -48,7 +48,7 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile  active-class="v-list__tile--active" :class="$route.name === 'mrs' ? 'v-list__tile--active' : ''" v-if="isConfigured" @click="$router.push({ name: 'mrs' })">
+        <v-list-tile to="/mrs" :active-class="(darkMode) ? `grey darken-2` : `grey lighten-4`" v-if="isConfigured">
           <v-list-tile-action>
             <v-icon>merge_type</v-icon>
           </v-list-tile-action>
@@ -58,7 +58,7 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile  active-class="v-list__tile--active" :class="$route.name === 'issues' ? 'v-list__tile--active' : ''" v-if="isConfigured" @click="$router.push({ name: 'issues' })">
+        <v-list-tile  to="/issues" :active-class="(darkMode) ? `grey darken-2` : `grey lighten-4`" v-if="isConfigured">
           <v-list-tile-action>
             <v-icon>bug_report</v-icon>
           </v-list-tile-action>
@@ -68,7 +68,7 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile  active-class="v-list__tile--active" :class="$route.name === 'todo' ? 'v-list__tile--active' : ''" v-if="isConfigured" @click="$router.push({ name: 'todo' })">
+        <v-list-tile  to="/todo" :active-class="(darkMode) ? `grey darken-2` : `grey lighten-4`" v-if="isConfigured">
           <v-list-tile-action>
             <v-badge v-if="miniDrawer" right overlap>
               <span slot="badge">{{todosSize}}</span>
@@ -84,7 +84,7 @@
             </v-list-tile-title>
           </v-list-tile-content>
         </v-list-tile>
-        <v-list-tile  active-class="v-list__tile--active" :class="$route.name === 'projects' ? 'v-list__tile--active' : ''" v-if="isConfigured" @click="$router.push({ name: 'projects' })">
+        <v-list-tile   to="/projects" :active-class="(darkMode) ? `grey darken-2` : `grey lighten-4`" v-if="isConfigured">
           <v-list-tile-action>
             <v-icon>lightbulb</v-icon>
           </v-list-tile-action>
@@ -256,10 +256,5 @@ export default {
 .v-chip {
   margin-top: 0;
   margin-bottom: 0;
-}
-
-.v-list__tile--active{
-  background-color: rgba(230, 81, 0, 0.37);
-  color: rgb(230, 81, 0);
 }
 </style>
