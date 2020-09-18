@@ -7,7 +7,7 @@
     offset-y
     bottom
   >
-    <v-icon :size="size" :class="{ running: pipeline.status === 'running' }" slot="activator" :color="getPipelineColor()" @click.native.prevent>{{getPipelineIcon()}}</v-icon>
+    <v-icon @click="open" :size="size" :class="{ running: pipeline.status === 'running' }" slot="activator" :color="getPipelineColor()" @click.native.prevent>{{getPipelineIcon()}}</v-icon>
     <v-card>
       <v-card-text id="card-text">
         <v-icon :class="{ running: pipeline.status === 'running' }" :color="getPipelineColor()" class="mr-1">{{getPipelineIcon()}}</v-icon>
@@ -55,6 +55,11 @@ export default {
     }
   },
   methods: {
+    open() {
+      if (this.pipeline.web_url) {
+        window.open(this.pipeline.web_url, "_blank");
+      }
+    },
     retry() {
       gitlab
         .get()
