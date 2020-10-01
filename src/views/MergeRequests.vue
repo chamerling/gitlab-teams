@@ -16,6 +16,9 @@
       <v-tab key="closed" @click="fetchData('closed')">
         Closed
       </v-tab>
+      <v-btn v-show="activeTab < 2" class="ml-auto" color="red" @click="mergeAll(activeTab)" :loading="merging">
+        Merge All
+      </v-btn>
       <v-layout v-show="activeTab > 1" justify-end>
         <item-order-select v-model="mergeRequestsOrder" :options="mergeRequestsOrderOptions"/>
       </v-layout>
@@ -65,6 +68,7 @@ export default {
     return {
       activeTab: null,
       loaded: false,
+      merging: false,
       mergeRequests: null,
       mergeRequestsOrderOptions: [
         {
@@ -110,6 +114,22 @@ export default {
         .client.fetchMergeRequests({ state })
         .then(mrs => (this.mergeRequests = mrs.data))
         .finally(() => (this.loaded = true));
+    },
+
+    mergeAll(activeTab) {
+      const currMRs = activeTab === 0 ? this.computedMergeRequests : this.assignedMergeRequests;
+      const canBeMerged = (currMRs || []).filter(mr => mr.merge_status === "can_be_merged");
+
+      this.merging = true;
+      Promise.all([
+          canBeMerged.reduce((promise, mr) =>
+          promise.then(() =>
+            this.$store
+              .dispatch("merge", mr)
+              .then(() => {})
+              .catch(() => {})
+        ), Promise.resolve())
+      ]).finally(() => (this.merging = false));
     }
   },
   components: {
