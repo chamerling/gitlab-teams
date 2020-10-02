@@ -1,5 +1,5 @@
 # gitlab-teams
-
+it is an amazing project
 [![Build Status](https://travis-ci.com/chamerling/gitlab-teams.svg?branch=master)](https://travis-ci.com/chamerling/gitlab-teams)
 [![Netlify Status](https://api.netlify.com/api/v1/badges/db5f01da-0959-4e96-b9f2-f7a00cfb5591/deploy-status)](https://gitlab-teams.netlify.com)
 
@@ -51,3 +51,4 @@ Then open http://localhost:8888 and enjoy.
 ## License
 
 MIT
+# thanx for choosing our website
