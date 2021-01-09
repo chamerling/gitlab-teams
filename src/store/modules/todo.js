@@ -4,10 +4,32 @@ import gitlab from "@/gitlab";
 
 const state = {
   todos: {},
+  lastLoadedPage: 1,
+  isDataLoading: false,
   todoSize: 0
 };
 
 const actions = {
+  loadNexPageTodos({ state, commit }){
+    if(state.todos.length === 0){
+      commit("setLastLoadedPage", 1);
+    }
+    commit("setIsDataLoading", true);
+    gitlab
+      .get()
+      .client.fetchTodos(state.lastLoadedPage + 1)
+      .then(nextPageTodos => {
+        if(nextPageTodos.data.length > 0){
+          nextPageTodos.data.forEach(todo => {
+            commit("addTodo", todo);
+          });
+          commit("setLastLoadedPage", state.lastLoadedPage + 1);
+        }
+      }).finally(() => {
+        commit("setIsDataLoading", false);
+    });
+  },
+
   addTodo({ commit }, todo) {
     commit("addTodo", todo);
   },
@@ -58,6 +80,14 @@ const mutations = {
 
   setTodoSize(state, size) {
     state.todoSize = parseInt(size);
+  },
+
+  setIsDataLoading(state, value){
+    state.isDataLoading = value;
+  },
+
+  setLastLoadedPage(state, value){
+    state.lastLoadedPage = value;
   }
 };
 

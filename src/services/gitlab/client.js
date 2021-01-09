@@ -135,8 +135,8 @@ export default class Client {
       .then(result => result.data);
   }
 
-  fetchTodos() {
-    return this.client.get("/api/v4/todos");
+  fetchTodos(page = 1) {
+    return this.client.get(`/api/v4/todos?page=${page}`);
   }
 
   fetchIssues() {
