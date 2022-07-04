@@ -216,10 +216,11 @@ export default {
       this.merging = true;
       this.$store
         .dispatch("merge", this.mr)
-        .then(() => {})
-        .catch(err => {
-          // TODO: MR can not be merged
-          console.log(err);
+        .then(() => {
+          this.$store.dispatch("displaySnackbarMessage", "MR successfully merged")
+        })
+        .catch(() => {
+          this.$store.dispatch("displaySnackbarMessage", "Error while merging MR")
         })
         .finally(() => {
           this.merging = false;
